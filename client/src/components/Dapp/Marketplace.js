@@ -1,4 +1,5 @@
 import React from 'react';
+import axios from 'axios';
 import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardActionArea from '@material-ui/core/CardActionArea';
@@ -13,8 +14,9 @@ const Marketplace = () => {
   const useStyles = makeStyles({
     root: {
       maxWidth: 345,
+      marginLeft: '10em',
+      marginTop: '4em',
     },
-    
     media: {
       height: 140,
     },
@@ -22,8 +24,17 @@ const Marketplace = () => {
 
   const classes = useStyles();
 
+  const handleBuy = () => {
+    console.log('buy');
+    axios.post('http', 1000)
+      .then((res) => {
+        console.log(res);
+        console.log(res.data);
+      });
+  };
+
   return (
-    <Card className={classes.root}>
+    <Card raised className={classes.root}>
       <CardActionArea>
         <CardMedia
           className={classes.media}
@@ -32,20 +43,19 @@ const Marketplace = () => {
         />
         <CardContent>
           <Typography gutterBottom variant="h5" component="h2">
-            Lizard
+            Audio Book Reader
           </Typography>
           <Typography variant="body2" color="textSecondary" component="p">
-            Lizards are a widespread group of squamate reptiles, with over 6,000 species, ranging
-            across all continents except Antarctica
+            Some text about product details
           </Typography>
         </CardContent>
       </CardActionArea>
       <CardActions>
-        <Button size="small" color="primary">
+        <Button size="small" color="primary" onClick={handleBuy}>
           Buy
         </Button>
         <Button size="small" color="primary">
-          Learn More
+          Show details
         </Button>
       </CardActions>
     </Card>

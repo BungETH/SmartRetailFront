@@ -1,1 +1,7 @@
 
+.MuiPaper-root{
+    transition: all .1s ease-in-out !important;
+    &:hover {
+        transform: scale(1.01) ;
+      }
+}
