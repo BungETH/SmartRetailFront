@@ -97,7 +97,8 @@
         }
       ],
       "stateMutability": "view",
-      "type": "function"
+      "type": "function",
+      "constant": true
     },
     {
       "inputs": [
@@ -140,7 +141,8 @@
         }
       ],
       "stateMutability": "view",
-      "type": "function"
+      "type": "function",
+      "constant": true
     },
     {
       "inputs": [],
@@ -153,7 +155,8 @@
         }
       ],
       "stateMutability": "view",
-      "type": "function"
+      "type": "function",
+      "constant": true
     },
     {
       "inputs": [
@@ -214,7 +217,8 @@
         }
       ],
       "stateMutability": "view",
-      "type": "function"
+      "type": "function",
+      "constant": true
     },
     {
       "inputs": [],
@@ -227,7 +231,8 @@
         }
       ],
       "stateMutability": "view",
-      "type": "function"
+      "type": "function",
+      "constant": true
     },
     {
       "inputs": [],
@@ -247,7 +252,8 @@
         }
       ],
       "stateMutability": "view",
-      "type": "function"
+      "type": "function",
+      "constant": true
     },
     {
       "inputs": [],
@@ -260,7 +266,8 @@
         }
       ],
       "stateMutability": "view",
-      "type": "function"
+      "type": "function",
+      "constant": true
     },
     {
       "inputs": [
@@ -1158,15 +1165,35 @@
           ],
           "name": "Transfer",
           "type": "event"
+        },
+        "0x8be0079c531659141344cd1fd0a4f28419497f9722a3daafe3b4186f6b6457e0": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": true,
+              "internalType": "address",
+              "name": "previousOwner",
+              "type": "address"
+            },
+            {
+              "indexed": true,
+              "internalType": "address",
+              "name": "newOwner",
+              "type": "address"
+            }
+          ],
+          "name": "OwnershipTransferred",
+          "type": "event"
         }
       },
       "links": {},
-      "address": "0x48C436f83FD8520133b105746dA1F519E45e1170",
-      "transactionHash": "0xf965703fd777145717e43f8ff07b37e8bc4603dc8d172d8c58fbdbd3b1591437"
+      "address": "0xE8dA26bb9FA4E0434c36dE799855449771cC46bc",
+      "transactionHash": "0x20d6fa9402b93d3fcdf31cf30e46619e490f8e0a5a361fc55dc3806421faf148"
     }
   },
   "schemaVersion": "3.3.2",
-  "updatedAt": "2020-12-18T15:44:31.697Z",
+  "updatedAt": "2020-12-18T16:02:26.500Z",
+  "networkType": "ethereum",
   "devdoc": {
     "kind": "dev",
     "methods": {
