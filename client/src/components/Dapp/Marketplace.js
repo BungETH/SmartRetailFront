@@ -11,6 +11,7 @@ import Typography from '@material-ui/core/Typography';
 import testImg from '../../assets/citation_NH_mindPower.jpg';
 
 const Marketplace = () => {
+  const price = 1000;
   const useStyles = makeStyles({
     root: {
       maxWidth: 345,
@@ -20,13 +21,20 @@ const Marketplace = () => {
     media: {
       height: 140,
     },
+    price: {
+      paddingLeft: '1em',
+    },
   });
 
   const classes = useStyles();
 
-  const handleBuy = () => {
+  const handleBuy = async () => {
+    const headers = {
+      'Content-Type': 'text/plain',
+      'Access-Control-Allow-Origin': '*',
+    };
     console.log('buy');
-    axios.post('http', 1000)
+    await axios.post(`https://cors-anywhere.herokuapp.com/https://salty-citadel-63624.herokuapp.com/base?score=${price}`, { headers }, { price })
       .then((res) => {
         console.log(res);
         console.log(res.data);
@@ -57,6 +65,14 @@ const Marketplace = () => {
         <Button size="small" color="primary">
           Show details
         </Button>
+        <Typography
+          className={classes.price}
+          variant="h4"
+          color="primary"
+          component="p"
+        >
+          {price} $
+        </Typography>
       </CardActions>
     </Card>
   );

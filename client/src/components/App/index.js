@@ -7,7 +7,7 @@ import './app.scss';
 
 // It instanciate new drizzle object with our drizzleOptions
 const drizzle = new Drizzle(drizzleOptions);
-// console.log(drizzle);
+console.log(drizzle);
 
 const App = () => {
   // We create an local state in order to set the current account using react hook useState
