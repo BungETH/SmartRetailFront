@@ -12,7 +12,7 @@ import './dapp.scss';
 
 const Dapp = ({ drizzle, drizzleState, account }) => {
   // console.log(drizzle);
-  console.log(drizzleState);
+  // console.log(drizzleState);
   // console.log(account);
   const useStyles = makeStyles((theme) => ({
     root: {
@@ -44,7 +44,10 @@ const Dapp = ({ drizzle, drizzleState, account }) => {
           </Toolbar>
         </AppBar>
       </div>
-      <Marketplace />
+      <Marketplace
+        drizzle={drizzle}
+        account={account}
+      />
     </div>
   );
 };
