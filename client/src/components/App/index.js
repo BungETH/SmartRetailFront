@@ -1,13 +1,16 @@
 import React, { useEffect, useState } from 'react';
 import { DrizzleContext } from '@drizzle/react-plugin';
 import { Drizzle } from '@drizzle/store';
+import store from '../../store';
+import { Provider } from 'react-redux';
 import drizzleOptions from '../../drizzleOptions';
 import Dapp from '../Dapp';
 import './app.scss';
 
 // It instanciate new drizzle object with our drizzleOptions
-const drizzle = new Drizzle(drizzleOptions);
-console.log(drizzle);
+//const drizzleStore = generateStore(drizzleOptions);
+const drizzle = new Drizzle(drizzleOptions, store);
+console.log(store.getState());
 
 const App = () => {
   // We create an local state in order to set the current account using react hook useState
@@ -32,23 +35,26 @@ const App = () => {
   return (
     // Here is native drizzle components who helps to Dapp initialisation
     <DrizzleContext.Provider drizzle={drizzle}>
-      <DrizzleContext.Consumer>
-        {(drizzleContext) => {
-          const { drizzleState, initialized } = drizzleContext;
-          if (!initialized) {
-            return 'Loading...';
-          }
-          return (
-            <div className="app">
-              <Dapp
-                drizzle={drizzle}
-                account={currentAccount}
-                drizzleState={drizzleState}
-              />
-            </div>
-          );
-        }}
-      </DrizzleContext.Consumer>
+      <Provider store={store}>
+        <DrizzleContext.Consumer>
+          {(drizzleContext) => {
+            const { drizzleState, initialized } = drizzleContext;
+            console.log(drizzleState);
+            if (!initialized) {
+              return 'Loading...';
+            }
+            return (
+              <div className="app">
+                <Dapp
+                  drizzle={drizzle}
+                  account={currentAccount}
+                  drizzleState={drizzleState}
+                />
+              </div>
+            );
+          }}
+        </DrizzleContext.Consumer>
+      </Provider>
     </DrizzleContext.Provider>
   );
 };

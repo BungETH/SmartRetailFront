@@ -9,16 +9,23 @@ import CardMedia from '@material-ui/core/CardMedia';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import testImg from '../../assets/citation_NH_mindPower.jpg';
+import {getFidelityTokens} from '../../actions/fidelity';
 
-const Marketplace = ({drizzle, account}) => {
-  console.log(drizzle);
-  const [rewards,setRewards] = useState(0);
+
+const Marketplace = ({
+  drizzle,
+  account,
+  tokenAmount,
+  // getFidelityTokens,
+}) => {
+  console.log(tokenAmount);
+  // const [rewards,setRewards] = useState(0);
   const contract = drizzle.contracts.FidelityToken; 
   const price = 1000;
   const claimToken = async (price) => {
     const getToken = await contract.methods.claim(price*0.05).send({gas: 900000, from: account });
     console.log(getToken);
-    setRewards(getToken.events.Transfer.returnValues.value)
+    getFidelityTokens(getToken.events.Transfer.returnValues.value)
   }
   const useStyles = makeStyles({
     root: {
@@ -52,7 +59,7 @@ const Marketplace = ({drizzle, account}) => {
     claimToken(price);
   }
 
-  console.log(rewards);
+  
   return (
     <div>
       <Card raised className={classes.root}>
@@ -89,7 +96,7 @@ const Marketplace = ({drizzle, account}) => {
         </CardActions>
       </Card>
       <Typography gutterBottom variant="h5" component="h2">
-        {rewards}
+        {tokenAmount}
       </Typography>
     </div>
   );
