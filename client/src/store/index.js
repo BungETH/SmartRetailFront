@@ -4,14 +4,15 @@ import FidelityMiddleware from '../middleware/FidelityMiddleware';
 import fidelityReducer from '../reducers/fidelityReducer';
 
 // const appMiddlewares = [ FidelityMiddleware ];
-const appReducers = { fidelity: fidelityReducer.getState() }
-// console.log(fidelityReducer.getState());
+
+const appReducers = { fidelity: fidelityReducer }
+
 // create the store
 const store = generateStore({
  drizzleOptions,
  appReducers,
  disableReduxDevTools: false  // enable ReduxDevTools!
 });
-// console.log(store.getState());
+
 
 export default store;

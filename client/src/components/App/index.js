@@ -5,12 +5,12 @@ import store from '../../store';
 import { Provider } from 'react-redux';
 import drizzleOptions from '../../drizzleOptions';
 import Dapp from '../Dapp';
+
 import './app.scss';
 
 // It instanciate new drizzle object with our drizzleOptions
-//const drizzleStore = generateStore(drizzleOptions);
+// const drizzleStore = generateStore(drizzleOptions,fidelityReducer);
 const drizzle = new Drizzle(drizzleOptions, store);
-console.log(store.getState());
 
 const App = () => {
   // We create an local state in order to set the current account using react hook useState
@@ -30,8 +30,7 @@ const App = () => {
     getAccount();
   }, [currentAccount]);
 
-  // console.log(currentAccount);
-
+  
   return (
     // Here is native drizzle components who helps to Dapp initialisation
     <DrizzleContext.Provider drizzle={drizzle}>
@@ -39,7 +38,6 @@ const App = () => {
         <DrizzleContext.Consumer>
           {(drizzleContext) => {
             const { drizzleState, initialized } = drizzleContext;
-            console.log(drizzleState);
             if (!initialized) {
               return 'Loading...';
             }

@@ -15,6 +15,7 @@ const options = {
   events: {
     SimpleStorage: ['StorageSet'],
   },
+  syncAlways:true,
 };
 
 export default options;

@@ -12,18 +12,12 @@ const fidelityReducer = (state = initialState, action = {}) => {
     case GET_FIDELITY_TOKENS:
       return {
         ...state,
-        fidelityTokenAmount: action.price,
+        fidelityTokenAmount: action.amount,
 			};
 		default: return state;
 	};
 };
 
-const appReducers = { fidelity: fidelityReducer }
 
 
-const store = generateStore({
- drizzleOptions,
- appReducers,
-})
-
-export default store;
+export default fidelityReducer;
