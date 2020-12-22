@@ -6,11 +6,11 @@ import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
-import Marketplace from '../../containers/Marketplace';
+import PlaceMarket from '../../containers/Marketplace/PlaceMarket';
 
 import './dapp.scss';
 
-const Dapp = ({ drizzle, drizzleState, account }) => {
+const Dapp = ({ drizzle, account, handleBuy }) => {
   // console.log(drizzle);
   // console.log(drizzleState);
   // console.log(account);
@@ -47,6 +47,7 @@ const Dapp = ({ drizzle, drizzleState, account }) => {
       <Marketplace
         drizzle={drizzle}
         account={account}
+        onClick={handleBuy}
       />
     </div>
   );

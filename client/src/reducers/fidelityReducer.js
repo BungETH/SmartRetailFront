@@ -1,4 +1,4 @@
-import { GET_FIDELITY_TOKENS } from '../actions/fidelity';
+import { getFidelityTokens } from '../actions';
 import { generateStore } from '@drizzle/store'
 import drizzleOptions from '../drizzleOptions'
 
@@ -9,7 +9,7 @@ const initialState = {
 
 const fidelityReducer = (state = initialState, action = {}) => {
   switch (action.type) {
-    case GET_FIDELITY_TOKENS:
+    case 'GET_FIDELITY_TOKENS':
       return {
         ...state,
         fidelityTokenAmount: action.price,

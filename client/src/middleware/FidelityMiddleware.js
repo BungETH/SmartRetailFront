@@ -1,10 +1,10 @@
 
-import { GET_FIDELITY_TOKENS } from '../actions/fidelity';
+/*import { getFidelityTokens } from '../actions/fidelity';
 
 const FidelityMiddleware = (store) => (next) => (action) => {
 
   switch (action.type) {
-    case GET_FIDELITY_TOKENS: {
+    case 'GET_FIDELITY_TOKENS': {
       const price = store.getState().fidelity;
    
       // interact with your service
@@ -15,4 +15,4 @@ const FidelityMiddleware = (store) => (next) => (action) => {
 		default: next(action);
 	}
 };
-export default FidelityMiddleware;
+export default FidelityMiddleware;*/

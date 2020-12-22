@@ -1,11 +1,11 @@
-import React, { useEffect, useState } from 'react';
-import { DrizzleContext } from '@drizzle/react-plugin';
-import { Drizzle } from '@drizzle/store';
-import store from '../../store';
-import { Provider } from 'react-redux';
-import drizzleOptions from '../../drizzleOptions';
-import Dapp from '../Dapp';
-import './app.scss';
+import React, { useEffect, useState } from "react";
+import { DrizzleContext } from "@drizzle/react-plugin";
+import { Drizzle } from "@drizzle/store";
+import store from "../../store";
+import { Provider } from "react-redux";
+import drizzleOptions from "../../drizzleOptions";
+import Dapp from "../Dapp/index";
+import "./app.scss";
 
 // It instanciate new drizzle object with our drizzleOptions
 //const drizzleStore = generateStore(drizzleOptions);
@@ -15,12 +15,12 @@ console.log(store.getState());
 const App = () => {
   // We create an local state in order to set the current account using react hook useState
   // Learn more at https://fr.reactjs.org/docs/hooks-state.html
-  const [currentAccount, setCurrentAccount] = useState('');
-  async function getAccount() {
+  const [currentAccount, setCurrentAccount] = useState("");
+  const getAccount = async () => {
     const accounts = await window.ethereum.enable();
     setCurrentAccount(accounts[0]);
-  }
-  window.ethereum.on('accountsChanged', () => {
+  };
+  window.ethereum.on("accountsChanged", () => {
     getAccount();
   });
 
@@ -41,7 +41,7 @@ const App = () => {
             const { drizzleState, initialized } = drizzleContext;
             console.log(drizzleState);
             if (!initialized) {
-              return 'Loading...';
+              return "Loading...";
             }
             return (
               <div className="app">
