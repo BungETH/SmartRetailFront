@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import axios from 'axios';
 import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardActionArea from '@material-ui/core/CardActionArea';
@@ -10,19 +11,25 @@ import Typography from '@material-ui/core/Typography';
 import testImg from '../../assets/citation_NH_mindPower.jpg';
 
 const Marketplace = ({
-  drizzle,
-  account,
   tokenAmount,
-  getFidelityTokens,
+  fetchPrice,
+  fetchFidelityTokens,
 }) => {
-  
-  const contract = drizzle.contracts.FidelityToken; 
-  const price = 1000;
-  const claimToken = async (price) => {
-    const getToken = await contract.methods.claim(price*0.05).send({gas: 900000, from: account });
-    console.log(getToken.events.Transfer.returnValues.value);
-    getFidelityTokens(getToken.events.Transfer.returnValues.value)
+  const fetchProducts = async () => {
+    await axios.get(`https://salty-citadel-63624.herokuapp.com/api/products?page=1`)
+        .then((res) => {
+          console.log(res);
+          console.log(res.data);
+        });
   }
+
+  // const contract = drizzle.contracts.FidelityToken; 
+  const price = 1000;
+  // const claimToken = async (price) => {
+  //   const getToken = await contract.methods.claim(price*0.05).send({gas: 900000, from: account });
+  //   console.log(getToken.events.Transfer.returnValues.value);
+  //   getFidelityTokens(getToken.events.Transfer.returnValues.value)
+  // }
   const useStyles = makeStyles({
     root: {
       maxWidth: 345,
@@ -52,8 +59,12 @@ const Marketplace = ({
   //     });
   // };
   const handleBuy = () => {
-    claimToken(price);
+    fetchPrice(price);
+    fetchFidelityTokens();
   }
+  useEffect(() => {
+    fetchProducts();
+  }, []);
 
   return (
     <div>

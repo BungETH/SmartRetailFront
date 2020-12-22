@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import React from 'react';
+import React, { useEffect } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
@@ -10,10 +10,13 @@ import Marketplace from '../../containers/Marketplace';
 
 import './dapp.scss';
 
-const Dapp = ({ drizzle, drizzleState, account }) => {
-  // console.log(drizzle);
-  // console.log(drizzleState);
-  // console.log(account);
+const Dapp = ({
+  drizzle,
+  currentAccount,
+  fetchFidelityContract
+}) => {
+  const contract = drizzle.contracts.FidelityToken;
+
   const useStyles = makeStyles((theme) => ({
     root: {
       flexGrow: 1,
@@ -30,6 +33,10 @@ const Dapp = ({ drizzle, drizzleState, account }) => {
   }));
   const classes = useStyles();
 
+  useEffect(() => {
+    fetchFidelityContract(contract);
+  }, []);
+
   return (
     <div className="dapp">
       <div className={classes.root}>
@@ -39,14 +46,12 @@ const Dapp = ({ drizzle, drizzleState, account }) => {
               <MenuIcon />
             </IconButton>
             <Typography variant="h6" align="right" className={classes.title}>
-              {account}
+              {currentAccount}
             </Typography>
           </Toolbar>
         </AppBar>
       </div>
       <Marketplace
-        drizzle={drizzle}
-        account={account}
       />
     </div>
   );

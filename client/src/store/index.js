@@ -3,7 +3,7 @@ import drizzleOptions from '../drizzleOptions';
 import FidelityMiddleware from '../middleware/FidelityMiddleware';
 import fidelityReducer from '../reducers/fidelityReducer';
 
-// const appMiddlewares = [ FidelityMiddleware ];
+const appMiddlewares = [ FidelityMiddleware ];
 
 const appReducers = { fidelity: fidelityReducer }
 
@@ -11,8 +11,8 @@ const appReducers = { fidelity: fidelityReducer }
 const store = generateStore({
  drizzleOptions,
  appReducers,
+ appMiddlewares,
  disableReduxDevTools: false  // enable ReduxDevTools!
 });
-
 
 export default store;
