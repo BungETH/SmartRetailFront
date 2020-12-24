@@ -14,17 +14,20 @@ const Marketplace = ({
   tokenAmount,
   fetchPrice,
   fetchFidelityTokens,
+  title,
+  description,
+  price
 }) => {
-  const fetchProducts = async () => {
+  /*const fetchProducts = async () => {
     await axios.get(`https://salty-citadel-63624.herokuapp.com/api/products?page=1`)
         .then((res) => {
           console.log(res);
           console.log(res.data);
         });
-  }
+  }*/
 
   // const contract = drizzle.contracts.FidelityToken; 
-  const price = 1000;
+  //const price = 1000;
   // const claimToken = async (price) => {
   //   const getToken = await contract.methods.claim(price*0.05).send({gas: 900000, from: account });
   //   console.log(getToken.events.Transfer.returnValues.value);
@@ -62,9 +65,9 @@ const Marketplace = ({
     fetchPrice(price);
     fetchFidelityTokens();
   }
-  useEffect(() => {
+  /*useEffect(() => {
     fetchProducts();
-  }, []);
+  }, []);*/
 
   return (
     <div>
@@ -77,10 +80,10 @@ const Marketplace = ({
           />
           <CardContent>
             <Typography gutterBottom variant="h5" component="h2">
-              Audio Book Reader
+              {title}
             </Typography>
             <Typography variant="body2" color="textSecondary" component="p">
-              Some text about product details
+              {description}
             </Typography>
           </CardContent>
         </CardActionArea>
