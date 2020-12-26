@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import { fetchFidelityContract  } from '../../actions/fidelity';
+import { fetchFidelityContract, fetchProducts  } from '../../actions/fidelity';
 import Dapp from '../../components/Dapp';
 
 const mapStateToProps = (state) => ({
@@ -11,6 +11,9 @@ const mapDispatchToProps = (dispatch) => ({
   fetchFidelityContract: (contract) => {
     dispatch(fetchFidelityContract(contract));
 },
+  fetchProducts: () => {
+    dispatch(fetchProducts());
+  }
 });
 
 export default connect(
