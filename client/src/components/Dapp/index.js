@@ -11,28 +11,28 @@ import MenuIcon from "@material-ui/icons/Menu";
 
 //local import
 import Marketplace from "../../containers/Marketplace";
-import { fetchProductsSucces, fetchProductsError, fetchProductsPending } from "../../actions/fidelity";
+// import { fetchProductsSucces, fetchProductsError, fetchProductsPending } from "../../actions/fidelity";
 
 import "./dapp.scss";
 
-const Dapp = ({ drizzle, currentAccount, fetchFidelityContract, products}) => {
+const Dapp = ({ drizzle, currentAccount, fetchFidelityContract, fetchProducts,  products}) => {
   const contract = drizzle.contracts.FidelityToken;
-  const [productsList, setProductsList] = useState([]);
-  const test = async () => {
-    await axios.get(`https://cors-anywhere.herokuapp.com/https://salty-citadel-63624.herokuapp.com/api/products?page=${1}`)
-  .then(
-    json => {
-      const { data } = json;
-      const products = data["hydra:member"];
-      fetchProductsSucces(products)
-      console.log(products)
-      setProductsList(products)
-    }
-  )
-  .catch( error => {
-    fetchProductsError(error)
-    console.log(error)
-  })}
+  // const [productsList, setProductsList] = useState([]);
+  // const test = async () => {
+  //   await axios.get(`https://cors-anywhere.herokuapp.com/https://salty-citadel-63624.herokuapp.com/api/products?page=${1}`)
+  // .then(
+  //   json => {
+  //     const { data } = json;
+  //     const products = data["hydra:member"];
+  //     fetchProductsSucces(products)
+  //     console.log(products)
+  //     setProductsList(products)
+  //   }
+  // )
+  // .catch( error => {
+  //   fetchProductsError(error)
+  //   console.log(error)
+  // })}
 
   const useStyles = makeStyles((theme) => ({
     root: {
@@ -52,7 +52,7 @@ const Dapp = ({ drizzle, currentAccount, fetchFidelityContract, products}) => {
 
   useEffect(() => {
     fetchFidelityContract(contract);
-    test();
+    fetchProducts();
     
     
   }, []);
@@ -76,7 +76,7 @@ const Dapp = ({ drizzle, currentAccount, fetchFidelityContract, products}) => {
           </Toolbar>
         </AppBar>
       </div>
-      {productsList.map((product) => (
+      {products.map((product) => (
         <Marketplace
           key={product.id}
           title={product.title}

@@ -1,6 +1,6 @@
 //npm import
 import axios from 'axios'
-import { trackPromise } from 'react-promise-tracker';
+// import { trackPromise } from 'react-promise-tracker';
 
 //local import
 import {
@@ -17,8 +17,8 @@ export const productsMiddleware = (store) => (next) => (action) => {
 
       async  function fetchProducts() {
         await axios.get(`https://cors-anywhere.herokuapp.com/https://salty-citadel-63624.herokuapp.com/api/products?page=${1}`)
-          .then(
-            json => {
+          .then((
+            json) => {
               const { data } = json;
               const products = data["hydra:member"];
               store.dispatch(fetchProductsSucces(products))
