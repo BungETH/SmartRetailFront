@@ -89,9 +89,8 @@ const Dapp = ({ drizzle, currentAccount, fetchFidelityContract, fetchProducts,  
 };
 
 Dapp.propTypes = {
-  account: PropTypes.any.isRequired,
+  currentAccount: PropTypes.any.isRequired,
   drizzle: PropTypes.any.isRequired,
-  drizzleState: PropTypes.any.isRequired,
 };
 
 export default Dapp;
