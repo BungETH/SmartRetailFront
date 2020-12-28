@@ -1,8 +1,8 @@
 import {
   FETCH_FIDELITY_CONTRACT,
   FETCH_CURRENT_ACCOUNT,
-  STORE_FIDELITY_TOKENS,
-  FETCH_PRICE,
+  // STORE_FIDELITY_TOKENS,
+  FETCH_PRODUCT_PRICE,
 } from '../actions/fidelity';
 
 const initialState = {
@@ -26,17 +26,17 @@ const fidelityReducer = (state = initialState, action = {}) => {
         account: action.account,
       };
       
-    case FETCH_PRICE:
+    case FETCH_PRODUCT_PRICE:
       return {
         ...state,
         productPrice: action.productPrice,
       };
       
-    case STORE_FIDELITY_TOKENS:
-      return {
-        ...state,
-        fidelityTokenAmount: action.amount,
-			};
+    // case STORE_FIDELITY_TOKENS:
+    //   return {
+    //     ...state,
+    //     fidelityTokenAmount: action.amount,
+		// 	};
 		default: return state;
 	};
 };

@@ -5,18 +5,18 @@ export const FETCH_PRODUCTS_SUCCES = 'FETCH_PRODUCTS_SUCCES';
 export const FETCH_PRODUCTS_ERROR = 'FETCH_PRODUCTS_ERROR';
 
 const fetchProductsPending = () => ({
-type: FETCH_PRODUCTS_PENDING
+  type: FETCH_PRODUCTS_PENDING
 });
 
 const fetchProductsSucces = (products) => ({
-type: FETCH_PRODUCTS_SUCCES,
-products
+  type: FETCH_PRODUCTS_SUCCES,
+  products,
 });
 
 const fetchProductsError = (error) => ({
-type: FETCH_PRODUCTS_ERROR,
-error
-})
+  type: FETCH_PRODUCTS_ERROR,
+  error,
+});
 
 //Asynchronous actions
 export const fetchProducts = () => {
