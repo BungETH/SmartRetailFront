@@ -1243,12 +1243,21 @@
         }
       },
       "links": {},
+<<<<<<< HEAD
       "address": "0xE4E659CFA1F6d8f0c5373fC832308011915Fcc70",
       "transactionHash": "0x0a7d7dede5b3a149503cea30b83c8ec7e5d069415fc66efda1bf72c634120fe2"
     }
   },
   "schemaVersion": "3.3.3",
   "updatedAt": "2020-12-22T17:09:34.572Z",
+=======
+      "address": "0x81eA0E94839ABaA4F2CD38450F64ce7eA90222c1",
+      "transactionHash": "0x386c25ca5fbb3f020933e163ead5f10f21d111d4ae01fd2c47c723685d754490"
+    }
+  },
+  "schemaVersion": "3.3.3",
+  "updatedAt": "2020-12-26T18:06:58.366Z",
+>>>>>>> dev
   "networkType": "ethereum",
   "devdoc": {
     "kind": "dev",

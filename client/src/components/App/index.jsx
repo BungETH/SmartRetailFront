@@ -1,3 +1,4 @@
+<<<<<<< HEAD:client/src/components/App/index.jsx
 import React, { useEffect, useState } from "react";
 import { DrizzleContext } from "@drizzle/react-plugin";
 import { Drizzle } from "@drizzle/store";
@@ -6,12 +7,21 @@ import { Provider } from "react-redux";
 import drizzleOptions from "../../drizzleOptions";
 import Dapp from "../Dapp/index";
 import "./app.scss";
+=======
+import React, { useEffect, useState } from 'react';
+import { DrizzleContext } from '@drizzle/react-plugin';
+import { Drizzle } from '@drizzle/store';
+import store from '../../store';
+import drizzleOptions from '../../drizzleOptions';
+import Dapp from '../../containers/Dapp';
+import './app.scss';
+>>>>>>> dev:client/src/components/App/index.js
 
 // It instanciate new drizzle object with our drizzleOptions
-//const drizzleStore = generateStore(drizzleOptions);
-const drizzle = new Drizzle(drizzleOptions, store);
-console.log(store.getState());
 
+const drizzle = new Drizzle(drizzleOptions, store);
+
+<<<<<<< HEAD:client/src/components/App/index.jsx
 const App = () => {
   // We create an local state in order to set the current account using react hook useState
   // Learn more at https://fr.reactjs.org/docs/hooks-state.html
@@ -21,6 +31,16 @@ const App = () => {
     setCurrentAccount(accounts[0]);
   };
   window.ethereum.on("accountsChanged", () => {
+=======
+const App = ({ fetchCurrentAccount, currentAccount }) => {
+  
+  
+  async function getAccount() {
+    const accounts = await window.ethereum.enable();
+    fetchCurrentAccount(accounts[0]);
+  }
+  window.ethereum.on('accountsChanged', () => {
+>>>>>>> dev:client/src/components/App/index.js
     getAccount();
   });
 
@@ -30,31 +50,26 @@ const App = () => {
     getAccount();
   }, [currentAccount]);
 
-  // console.log(currentAccount);
-
+  
   return (
     // Here is native drizzle components who helps to Dapp initialisation
     <DrizzleContext.Provider drizzle={drizzle}>
-      <Provider store={store}>
         <DrizzleContext.Consumer>
           {(drizzleContext) => {
             const { drizzleState, initialized } = drizzleContext;
-            console.log(drizzleState);
             if (!initialized) {
               return "Loading...";
             }
+            
             return (
               <div className="app">
                 <Dapp
                   drizzle={drizzle}
-                  account={currentAccount}
-                  drizzleState={drizzleState}
                 />
               </div>
             );
           }}
         </DrizzleContext.Consumer>
-      </Provider>
     </DrizzleContext.Provider>
   );
 };

@@ -1,6 +1,11 @@
+<<<<<<< HEAD:client/src/components/Dapp/Marketplace.jsx
 import React, { useState }from 'react';
 import PropTypes from 'prop-types'
 // import axios from 'axios';
+=======
+import React, { useEffect } from 'react';
+import axios from 'axios';
+>>>>>>> dev:client/src/components/Dapp/Marketplace.js
 import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardActionArea from '@material-ui/core/CardActionArea';
@@ -10,13 +15,15 @@ import CardMedia from '@material-ui/core/CardMedia';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import testImg from '../../assets/citation_NH_mindPower.jpg';
+<<<<<<< HEAD:client/src/components/Dapp/Marketplace.jsx
 import { getFidelityTokens } from '../../actions';
 
+=======
+>>>>>>> dev:client/src/components/Dapp/Marketplace.js
 
 const Marketplace = ({
-  drizzle,
-  account,
   tokenAmount,
+<<<<<<< HEAD:client/src/components/Dapp/Marketplace.jsx
   onClick
   // getFidelityTokens,
 }) => {
@@ -29,6 +36,29 @@ const Marketplace = ({
     console.log(getToken);
     dispatch(getFidelityTokens(getToken.events.Transfer.returnValues.value))
   }*/
+=======
+  fetchPrice,
+  fetchFidelityTokens,
+  title,
+  description,
+  price
+}) => {
+  /*const fetchProducts = async () => {
+    await axios.get(`https://salty-citadel-63624.herokuapp.com/api/products?page=1`)
+        .then((res) => {
+          console.log(res);
+          console.log(res.data);
+        });
+  }*/
+
+  // const contract = drizzle.contracts.FidelityToken; 
+  //const price = 1000;
+  // const claimToken = async (price) => {
+  //   const getToken = await contract.methods.claim(price*0.05).send({gas: 900000, from: account });
+  //   console.log(getToken.events.Transfer.returnValues.value);
+  //   getFidelityTokens(getToken.events.Transfer.returnValues.value)
+  // }
+>>>>>>> dev:client/src/components/Dapp/Marketplace.js
   const useStyles = makeStyles({
     root: {
       maxWidth: 345,
@@ -57,11 +87,20 @@ const Marketplace = ({
   //       console.log(res.data);
   //     });
   // };
+<<<<<<< HEAD:client/src/components/Dapp/Marketplace.jsx
   /*const handleBuy = () => {
     claimToken(price);
   }*/
+=======
+  const handleBuy = () => {
+    fetchPrice(price);
+    fetchFidelityTokens();
+  }
+  /*useEffect(() => {
+    fetchProducts();
+  }, []);*/
+>>>>>>> dev:client/src/components/Dapp/Marketplace.js
 
-  
   return (
     <div>
       <Card raised className={classes.root}>
@@ -73,10 +112,10 @@ const Marketplace = ({
           />
           <CardContent>
             <Typography gutterBottom variant="h5" component="h2">
-              Audio Book Reader
+              {title}
             </Typography>
             <Typography variant="body2" color="textSecondary" component="p">
-              Some text about product details
+              {description}
             </Typography>
           </CardContent>
         </CardActionArea>

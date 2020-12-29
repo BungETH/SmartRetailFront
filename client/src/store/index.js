@@ -1,17 +1,24 @@
+//npm import
 import { generateStore } from '@drizzle/store';
 import drizzleOptions from '../drizzleOptions';
-import FidelityMiddleware from '../middleware/FidelityMiddleware';
-import fidelityReducer from '../reducers/fidelityReducer';
+import thunk from 'redux-thunk'
 
-// const appMiddlewares = [ FidelityMiddleware ];
-const appReducers = { fidelity: fidelityReducer.getState() }
-// console.log(fidelityReducer.getState());
+//local import
+import FidelityMiddleware from '../middleware/FidelityMiddleware';
+import ProductsMiddleware from '../middleware/ProductsMiddleware';
+import fidelityReducer from '../reducers/fidelityReducer';
+import productsReducer from '../reducers/productsReducer';
+
+const appMiddlewares = [ FidelityMiddleware, thunk ];
+
+const appReducers = { fidelity: fidelityReducer, products: productsReducer  }
+
 // create the store
 const store = generateStore({
  drizzleOptions,
  appReducers,
+ appMiddlewares,
  disableReduxDevTools: false  // enable ReduxDevTools!
 });
-// console.log(store.getState());
 
 export default store;

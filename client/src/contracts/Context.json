@@ -586,7 +586,11 @@
   },
   "networks": {},
   "schemaVersion": "3.3.3",
+<<<<<<< HEAD
   "updatedAt": "2020-12-21T11:31:13.651Z",
+=======
+  "updatedAt": "2020-12-23T00:12:06.843Z",
+>>>>>>> dev
   "devdoc": {
     "kind": "dev",
     "methods": {},
