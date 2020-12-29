@@ -1,39 +1,26 @@
-//npm import
-import PropTypes from "prop-types";
-import React, { useState, useEffect } from "react";
-import axios from 'axios'
-import { makeStyles } from "@material-ui/core/styles";
-import AppBar from "@material-ui/core/AppBar";
-import Toolbar from "@material-ui/core/Toolbar";
-import Typography from "@material-ui/core/Typography";
-import IconButton from "@material-ui/core/IconButton";
-import MenuIcon from "@material-ui/icons/Menu";
+import PropTypes from 'prop-types';
+import React, { useEffect } from 'react';
+import { Link } from 'react-router-dom';
+import { makeStyles } from '@material-ui/core/styles';
+import AppBar from '@material-ui/core/AppBar';
+import Toolbar from '@material-ui/core/Toolbar';
+import Typography from '@material-ui/core/Typography';
+import IconButton from '@material-ui/core/IconButton';
+import MenuIcon from '@material-ui/icons/Menu';
 
-//local import
-import Marketplace from "../../containers/Marketplace";
-// import { fetchProductsSucces, fetchProductsError, fetchProductsPending } from "../../actions/fidelity";
+// local import
+import Marketplace from '../../containers/Marketplace';
+import './dapp.scss';
 
-import "./dapp.scss";
-
-const Dapp = ({ drizzle, currentAccount, fetchFidelityContract, fetchProducts,  products}) => {
-  const contract = drizzle.contracts.FidelityToken;
-  // const [productsList, setProductsList] = useState([]);
-  // const test = async () => {
-  //   await axios.get(`https://cors-anywhere.herokuapp.com/https://salty-citadel-63624.herokuapp.com/api/products?page=${1}`)
-  // .then(
-  //   json => {
-  //     const { data } = json;
-  //     const products = data["hydra:member"];
-  //     fetchProductsSucces(products)
-  //     console.log(products)
-  //     setProductsList(products)
-  //   }
-  // )
-  // .catch( error => {
-  //   fetchProductsError(error)
-  //   console.log(error)
-  // })}
-
+const Dapp = ({
+  drizzle,
+  currentAccount,
+  fetchFidelityContract,
+  fetchProducts,
+  products
+}) => {
+  console.log(drizzle);
+  const contract = drizzle.drizzle.contracts.FidelityToken;
   const useStyles = makeStyles((theme) => ({
     root: {
       flexGrow: 1,
@@ -53,8 +40,6 @@ const Dapp = ({ drizzle, currentAccount, fetchFidelityContract, fetchProducts,  
   useEffect(() => {
     fetchFidelityContract(contract);
     fetchProducts();
-    
-    
   }, []);
 
   return (
@@ -71,7 +56,7 @@ const Dapp = ({ drizzle, currentAccount, fetchFidelityContract, fetchProducts,  
               <MenuIcon />
             </IconButton>
             <Typography variant="h6" align="right" className={classes.title}>
-              {currentAccount}
+              <Link to="/account">{currentAccount}</Link>
             </Typography>
           </Toolbar>
         </AppBar>
@@ -88,7 +73,6 @@ const Dapp = ({ drizzle, currentAccount, fetchFidelityContract, fetchProducts,  
     </div>
   );
 };
-
 Dapp.propTypes = {
   currentAccount: PropTypes.any.isRequired,
   drizzle: PropTypes.any.isRequired,

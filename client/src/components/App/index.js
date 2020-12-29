@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { DrizzleContext } from '@drizzle/react-plugin';
 import { Drizzle } from '@drizzle/store';
 import store from '../../store';
 import drizzleOptions from '../../drizzleOptions';
-import Dapp from '../../containers/Dapp';
+import DappRouter from '../../utils/DappRouter';
 import './app.scss';
 
 // It instanciate new drizzle object with our drizzleOptions
@@ -11,8 +11,6 @@ import './app.scss';
 const drizzle = new Drizzle(drizzleOptions, store);
 
 const App = ({ fetchCurrentAccount, currentAccount }) => {
-  
-  
   async function getAccount() {
     const accounts = await window.ethereum.enable();
     fetchCurrentAccount(accounts[0]);
@@ -27,26 +25,24 @@ const App = ({ fetchCurrentAccount, currentAccount }) => {
     getAccount();
   }, [currentAccount]);
 
-  
   return (
     // Here is native drizzle components who helps to Dapp initialisation
     <DrizzleContext.Provider drizzle={drizzle}>
-        <DrizzleContext.Consumer>
-          {(drizzleContext) => {
-            const { drizzleState, initialized } = drizzleContext;
-            if (!initialized) {
-              return 'Loading...';
-            }
-            
-            return (
-              <div className="app">
-                <Dapp
-                  drizzle={drizzle}
-                />
-              </div>
-            );
-          }}
-        </DrizzleContext.Consumer>
+      <DrizzleContext.Consumer>
+        {(drizzleContext) => {
+          const { drizzleState, initialized } = drizzleContext;
+          if (!initialized) {
+            return 'Loading...';
+          }
+          return (
+            <div className="app">
+              <DappRouter
+                drizzle={drizzle}
+              />
+            </div>
+          );
+        }}
+      </DrizzleContext.Consumer>
     </DrizzleContext.Provider>
   );
 };
