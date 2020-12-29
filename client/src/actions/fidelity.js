@@ -1,15 +1,12 @@
-//npm import
 import axios from 'axios';
-//local import
 
 export const FETCH_FIDELITY_CONTRACT = 'FETCH_FIDELITY_CONTRACT';
 export const FETCH_CURRENT_ACCOUNT = 'FETCH_CURRENT_ACCOUNT';
-export const FETCH_PRICE = 'FETCH_PRICE';
-export const FETCH_FIDELITY_TOKENS = 'FETCH_FIDELITY_TOKENS';
-export const STORE_FIDELITY_TOKENS = 'STORE_FIDELITY_TOKENS';
-export const FETCH_PRODUCTS_PENDING = 'FETCH_PRODUCTS_PENDING';
-export const FETCH_PRODUCTS_SUCCES = 'FETCH_PRODUCTS_SUCCES';
-export const FETCH_PRODUCTS_ERROR = 'FETCH_PRODUCTS_ERROR';
+export const FETCH_PRODUCT_PRICE = 'FETCH_PRODUCT_PRICE';
+export const SEND_PRODUCT_PRICE_PENDING = 'SEND_PRODUCT_PRICE_PENDING';
+export const STORE_TOKEN_AMOUNT = 'STORE_TOKEN_AMOUNT';
+export const SEND_PRICE_ERROR = 'SEND_PRICE_ERROR';
+
 
 //Plain object actions
 export const fetchFidelityContract = (contract) => ({
@@ -22,53 +19,48 @@ export const fetchCurrentAccount = (account) => ({
   account,
 });
 
-export const fetchPrice = (productPrice) => ({
-  type: FETCH_PRICE,
+export const fetchProductPrice = (productPrice) => ({
+  type: FETCH_PRODUCT_PRICE,
   productPrice,
 });
 
-export const fetchFidelityTokens = () => ({
-  type: FETCH_FIDELITY_TOKENS,
+export const sendProductPricePending = () => ({
+  type: SEND_PRODUCT_PRICE_PENDING,
 });
 
-export const storeFidelityTokens = (amount) => ({
-    type: STORE_FIDELITY_TOKENS,
+export const storeTokenAmount = (amount) => ({
+    type: STORE_TOKEN_AMOUNT,
     amount,
   });
 
-export const fetchProductsPending = () => ({
-  type: FETCH_PRODUCTS_PENDING
+export const sendPriceError = (error) => ({
+  type: SEND_PRICE_ERROR,
+  error,
 });
 
-export const fetchProductsSucces = (products) => ({
-  type: FETCH_PRODUCTS_SUCCES,
-  products
-});
+  export const sendProductPrice = (productId) => {
+    return (dispatch) => {
+        dispatch(sendProductPricePending());
+        // dispatch(fetchProductPrice(productId));
+        // const price = getState().fidelity.productPrice;
+        console.log(productId);
+        // return axios.put(`https://cors-anywhere.herokuapp.com/https://salty-citadel-63624.herokuapp.com/api/users/33`,{
+        return axios.get(`https://cors-anywhere.herokuapp.com/https://salty-citadel-63624.herokuapp.com/base?idProduct=${productId}`)
+        .then(
+            response => {
+              console.log(response);
+              const tokenAmount=response.data.result;
+              dispatch(storeTokenAmount(tokenAmount))
+            
+            }
+        )
+        .catch(
+        error => {
+            dispatch(sendPriceError(error))
+            console.log(error)
+        })}
+    }
 
-export const fetchProductsError = (error) => ({
-  type: FETCH_PRODUCTS_ERROR,
-  error
-})
-
-//Asynchronous actions
-export const fetchProducts = () => {
-  return (dispatch) => {
-    dispatch(fetchProductsPending())
-    return axios.get(`https://cors-anywhere.herokuapp.com/https://salty-citadel-63624.herokuapp.com/api/products?page=${1}`)
-      .then(
-        json => {
-          const { data } = json;
-          const products = data["hydra:member"];
-          dispatch(fetchProductsSucces(products))
-          console.log(products)
-        }
-      )
-    .catch(
-      error => {
-        dispatch(fetchProductsError(error))
-        console.log(error)
-    })}
-  }
   
   
   

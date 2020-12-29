@@ -9,7 +9,7 @@ contract FidelityToken is ERC20, Ownable{
   
     }
 
-    function claim(uint _amount) public onlyOwner {
+    function claim(uint128 _amount) public onlyOwner {
         _mint(msg.sender, _amount);
     }
 }

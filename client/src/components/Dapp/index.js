@@ -10,27 +10,28 @@ import MenuIcon from "@material-ui/icons/Menu";
 
 //local import
 import Marketplace from "../../containers/Marketplace";
+// import { fetchProductsSucces, fetchProductsError, fetchProductsPending } from "../../actions/fidelity";
 
 import "./dapp.scss";
 
-const Dapp = ({ drizzle, currentAccount, fetchFidelityContract, fetchProducts, products}) => {
+const Dapp = ({ drizzle, currentAccount, fetchFidelityContract, fetchProducts,  products}) => {
   const contract = drizzle.contracts.FidelityToken;
-  /*const [productsList, setProductsList] = useState([]);
-  const test = async () => {
-    await axios.get(`https://cors-anywhere.herokuapp.com/https://salty-citadel-63624.herokuapp.com/api/products?page=${1}`)
-  .then(
-    json => {
-      const { data } = json;
-      const products = data["hydra:member"];
-      fetchProductsSucces(products)
-      console.log(products)
-      setProductsList(products)
-    }
-  )
-  .catch( error => {
-    fetchProductsError(error)
-    console.log(error)
-  })}*/
+  // const [productsList, setProductsList] = useState([]);
+  // const test = async () => {
+  //   await axios.get(`https://cors-anywhere.herokuapp.com/https://salty-citadel-63624.herokuapp.com/api/products?page=${1}`)
+  // .then(
+  //   json => {
+  //     const { data } = json;
+  //     const products = data["hydra:member"];
+  //     fetchProductsSucces(products)
+  //     console.log(products)
+  //     setProductsList(products)
+  //   }
+  // )
+  // .catch( error => {
+  //   fetchProductsError(error)
+  //   console.log(error)
+  // })}
 
   const useStyles = makeStyles((theme) => ({
     root: {
@@ -50,7 +51,9 @@ const Dapp = ({ drizzle, currentAccount, fetchFidelityContract, fetchProducts, p
 
   useEffect(() => {
     fetchFidelityContract(contract);
-    fetchProducts();  
+    fetchProducts();
+    
+    
   }, []);
 
   return (
@@ -75,6 +78,7 @@ const Dapp = ({ drizzle, currentAccount, fetchFidelityContract, fetchProducts, p
       {products.map((product) => (
         <Marketplace
           key={product.id}
+          productId={product.id}
           title={product.title}
           description={product.description}
           price={product.unitPrice}
@@ -85,9 +89,8 @@ const Dapp = ({ drizzle, currentAccount, fetchFidelityContract, fetchProducts, p
 };
 
 Dapp.propTypes = {
-  account: PropTypes.any.isRequired,
+  currentAccount: PropTypes.any.isRequired,
   drizzle: PropTypes.any.isRequired,
-  drizzleState: PropTypes.any.isRequired,
 };
 
 export default Dapp;
