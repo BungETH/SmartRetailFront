@@ -4,8 +4,11 @@ import PropTypes from 'prop-types'
 // import axios from 'axios';
 =======
 import React, { useEffect } from 'react';
+<<<<<<< HEAD:client/src/components/Dapp/Marketplace.jsx
 import axios from 'axios';
 >>>>>>> dev:client/src/components/Dapp/Marketplace.js
+=======
+>>>>>>> a7bb1db378f4e18fa3f29ad4df1e6e817346687b:client/src/components/Dapp/Marketplace.js
 import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardActionArea from '@material-ui/core/CardActionArea';
@@ -22,6 +25,7 @@ import { getFidelityTokens } from '../../actions';
 >>>>>>> dev:client/src/components/Dapp/Marketplace.js
 
 const Marketplace = ({
+<<<<<<< HEAD:client/src/components/Dapp/Marketplace.jsx
   tokenAmount,
 <<<<<<< HEAD:client/src/components/Dapp/Marketplace.jsx
   onClick
@@ -39,9 +43,14 @@ const Marketplace = ({
 =======
   fetchPrice,
   fetchFidelityTokens,
+=======
+  sendProductPrice,
+>>>>>>> a7bb1db378f4e18fa3f29ad4df1e6e817346687b:client/src/components/Dapp/Marketplace.js
   title,
   description,
-  price
+  price,
+  tokenBalance,
+  productId,
 }) => {
   /*const fetchProducts = async () => {
     await axios.get(`https://salty-citadel-63624.herokuapp.com/api/products?page=1`)
@@ -93,8 +102,8 @@ const Marketplace = ({
   }*/
 =======
   const handleBuy = () => {
-    fetchPrice(price);
-    fetchFidelityTokens();
+    // fetchProductPrice(price);
+    sendProductPrice(productId);
   }
   /*useEffect(() => {
     fetchProducts();
@@ -137,7 +146,7 @@ const Marketplace = ({
         </CardActions>
       </Card>
       <Typography gutterBottom variant="h5" component="h2">
-        {tokenAmount}
+        {tokenBalance}
       </Typography>
     </div>
   );

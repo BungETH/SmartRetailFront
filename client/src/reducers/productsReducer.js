@@ -3,7 +3,7 @@
 //local import
 import {
   FETCH_PRODUCTS_SUCCES
-} from '../actions/fidelity';
+} from '../actions/products';
 const initialState = [];
 
 const productsReducer = (state = initialState, action) => {
