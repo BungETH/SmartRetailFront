@@ -38,19 +38,18 @@ export const sendPriceError = (error) => ({
   error,
 });
 
-  export const sendProductPrice = (productPrice) => {
+  export const sendProductPrice = (productId) => {
     return (dispatch) => {
         dispatch(sendProductPricePending());
-        dispatch(fetchProductPrice(productPrice));
+        // dispatch(fetchProductPrice(productId));
         // const price = getState().fidelity.productPrice;
-        console.log(productPrice);
-        return axios.put(`https://cors-anywhere.herokuapp.com/https://salty-citadel-63624.herokuapp.com/api/users/33`,{
-          "balance": productPrice,
-        })
+        console.log(productId);
+        // return axios.put(`https://cors-anywhere.herokuapp.com/https://salty-citadel-63624.herokuapp.com/api/users/33`,{
+        return axios.get(`https://cors-anywhere.herokuapp.com/https://salty-citadel-63624.herokuapp.com/base?idProduct=${productId}`)
         .then(
-            json => {
-              console.log(json.data);
-              const tokenAmount=json.data;
+            response => {
+              console.log(response);
+              const tokenAmount=response.data.result;
               dispatch(storeTokenAmount(tokenAmount))
             
             }

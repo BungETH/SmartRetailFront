@@ -1,5 +1,4 @@
 import React, { useEffect } from 'react';
-import axios from 'axios';
 import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardActionArea from '@material-ui/core/CardActionArea';
@@ -11,12 +10,12 @@ import Typography from '@material-ui/core/Typography';
 import testImg from '../../assets/citation_NH_mindPower.jpg';
 
 const Marketplace = ({
-  fetchProductPrice,
   sendProductPrice,
   title,
   description,
   price,
-  productPrice,
+  tokenBalance,
+  productId,
 }) => {
   /*const fetchProducts = async () => {
     await axios.get(`https://salty-citadel-63624.herokuapp.com/api/products?page=1`)
@@ -63,7 +62,7 @@ const Marketplace = ({
   // };
   const handleBuy = () => {
     // fetchProductPrice(price);
-    sendProductPrice(price);
+    sendProductPrice(productId);
   }
   /*useEffect(() => {
     fetchProducts();
@@ -105,7 +104,7 @@ const Marketplace = ({
         </CardActions>
       </Card>
       <Typography gutterBottom variant="h5" component="h2">
-        {productPrice}
+        {tokenBalance}
       </Typography>
     </div>
   );

@@ -6,7 +6,7 @@ import {
 import Marketplace from '../../components/Dapp/Marketplace';
 
 const mapStateToProps = (state) => ({
-    productPrice: state.fidelity.productPrice,
+    tokenBalance: state.fidelity.fidelityTokenAmount,
   });
 
 const mapDispatchToProps = (dispatch) => ({
