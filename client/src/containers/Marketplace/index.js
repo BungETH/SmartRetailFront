@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 import {
-  // fetchProductPrice,
-  sendProductPrice,
+  sendProduct,
+  sendBalance,
 } from '../../actions/fidelity';
 import Marketplace from '../../components/Dapp/Marketplace';
 
@@ -10,12 +10,12 @@ const mapStateToProps = (state) => ({
   });
 
 const mapDispatchToProps = (dispatch) => ({
-  // fetchProductPrice: (productPrice) => {
-  //   dispatch(fetchProductPrice(productPrice));
-  // },
-
-  sendProductPrice: (productPrice) => {
-    dispatch(sendProductPrice(productPrice));
+ 
+  sendProduct: (productPrice) => {
+    dispatch(sendProduct(productPrice));
+  },
+  sendBalance: (id) => {
+    dispatch(sendBalance(id));
   },
 });
 

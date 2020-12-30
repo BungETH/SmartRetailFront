@@ -2,10 +2,9 @@ import axios from 'axios';
 
 export const FETCH_FIDELITY_CONTRACT = 'FETCH_FIDELITY_CONTRACT';
 export const FETCH_CURRENT_ACCOUNT = 'FETCH_CURRENT_ACCOUNT';
-export const FETCH_PRODUCT_PRICE = 'FETCH_PRODUCT_PRICE';
-export const SEND_PRODUCT_PRICE_PENDING = 'SEND_PRODUCT_PRICE_PENDING';
+export const PENDING = 'PENDING';
 export const STORE_TOKEN_AMOUNT = 'STORE_TOKEN_AMOUNT';
-export const SEND_PRICE_ERROR = 'SEND_PRICE_ERROR';
+export const ERROR = 'ERROR';
 
 
 //Plain object actions
@@ -19,13 +18,9 @@ export const fetchCurrentAccount = (account) => ({
   account,
 });
 
-export const fetchProductPrice = (productPrice) => ({
-  type: FETCH_PRODUCT_PRICE,
-  productPrice,
-});
 
-export const sendProductPricePending = () => ({
-  type: SEND_PRODUCT_PRICE_PENDING,
+export const pending = () => ({
+  type: PENDING,
 });
 
 export const storeTokenAmount = (amount) => ({
@@ -33,33 +28,50 @@ export const storeTokenAmount = (amount) => ({
     amount,
   });
 
-export const sendPriceError = (error) => ({
-  type: SEND_PRICE_ERROR,
+export const error = (error) => ({
+  type: ERROR,
   error,
 });
 
-  export const sendProductPrice = (productId) => {
+  export const sendProduct = (productId) => {
     return (dispatch) => {
-        dispatch(sendProductPricePending());
-        // dispatch(fetchProductPrice(productId));
-        // const price = getState().fidelity.productPrice;
-        console.log(productId);
-        // return axios.put(`https://cors-anywhere.herokuapp.com/https://salty-citadel-63624.herokuapp.com/api/users/33`,{
-        return axios.get(`https://cors-anywhere.herokuapp.com/https://salty-citadel-63624.herokuapp.com/base?idProduct=${productId}`)
+      dispatch(pending());
+      console.log(productId);
+      return axios.get(`https://cors-anywhere.herokuapp.com/https://salty-citadel-63624.herokuapp.com/base?idProduct=${productId}`)
+      .then(
+        response => {
+          console.log(response);
+          const tokenAmount=response.data.result;
+          dispatch(storeTokenAmount(tokenAmount))
+        
+        }
+      )
+      .catch(
+      error => {
+          dispatch(error(error))
+          console.log(error)
+      })}
+    }
+
+    export const sendBalance = (id) => {
+      return (dispatch, getState) => {
+        const { fidelityTokenAmount } = getState().fidelity;
+        dispatch(pending());
+        console.log(fidelityTokenAmount);
+        return axios.put(`https://cors-anywhere.herokuapp.com/https://salty-citadel-63624.herokuapp.com/api/users/${id}`, {balance: fidelityTokenAmount})
         .then(
-            response => {
-              console.log(response);
-              const tokenAmount=response.data.result;
-              dispatch(storeTokenAmount(tokenAmount))
-            
-            }
+          response => {
+            console.log(response);
+            // const tokenAmount=response.data.result;
+            // dispatch(storeTokenAmount(tokenAmount))
+          }
         )
         .catch(
         error => {
-            dispatch(sendPriceError(error))
+            dispatch(error(error))
             console.log(error)
         })}
-    }
+      }
 
   
   
