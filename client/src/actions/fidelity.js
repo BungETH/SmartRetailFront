@@ -1,12 +1,10 @@
 import axios from 'axios';
-
+//local import
 export const FETCH_FIDELITY_CONTRACT = 'FETCH_FIDELITY_CONTRACT';
 export const FETCH_CURRENT_ACCOUNT = 'FETCH_CURRENT_ACCOUNT';
 export const PENDING = 'PENDING';
 export const STORE_TOKEN_AMOUNT = 'STORE_TOKEN_AMOUNT';
 export const ERROR = 'ERROR';
-
-
 //Plain object actions
 export const fetchFidelityContract = (contract) => ({
   type: FETCH_FIDELITY_CONTRACT,
@@ -24,9 +22,9 @@ export const pending = () => ({
 });
 
 export const storeTokenAmount = (amount) => ({
-    type: STORE_TOKEN_AMOUNT,
-    amount,
-  });
+  type: STORE_TOKEN_AMOUNT,
+  amount,
+});
 
 export const error = (error) => ({
   type: ERROR,

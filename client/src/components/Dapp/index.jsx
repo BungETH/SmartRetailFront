@@ -42,6 +42,7 @@ const Dapp = ({
     fetchProducts();
   }, []);
 
+  const { promiseInProgress } = usePromiseTracker();
   return (
     <div className="dapp">
       <div className={classes.root}>
@@ -61,15 +62,20 @@ const Dapp = ({
           </Toolbar>
         </AppBar>
       </div>
-      {products.map((product) => (
-        <Marketplace
-          key={product.id}
-          productId={product.id}
-          title={product.title}
-          description={product.description}
-          price={product.unitPrice}
-        />
-      ))}
+
+      {promiseInProgress ? (
+        <Loading type={"bubbles"} color={"#3F51B5"} />
+      ) : (
+        products.map((product) => (
+          <Marketplace
+            key={product.id}
+            productId={product.id}
+            title={product.title}
+            description={product.description}
+            price={product.unitPrice}
+          />
+        ))
+      )}
     </div>
   );
 };

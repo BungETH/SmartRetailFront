@@ -1,9 +1,11 @@
 
-// import {
-//   FETCH_FIDELITY_TOKENS,
-//   storeFidelityTokens
-// } from '../actions/fidelity';
-// const BN = require('bn.js');
+
+
+//import {
+//FETCH_FIDELITY_TOKENS,
+//storeFidelityTokens
+//} from '../actions/fidelity';
+//const BN = require('bn.js');
 
 const FidelityMiddleware = (store) => (next) => (action) => {
   const BN = require('bn.js');
@@ -24,6 +26,7 @@ const FidelityMiddleware = (store) => (next) => (action) => {
 		// next(action);
 		// break;
 		// }
+
 		default: next(action);
 	}
 };
