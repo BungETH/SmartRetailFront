@@ -1,12 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-<<<<<<< HEAD
-import App from './components/App/index';
-=======
 import { Provider } from 'react-redux';
 import store from './store';
 import App from './containers/App';
->>>>>>> dev
 import * as serviceWorker from './serviceWorker';
 import './styles/index.scss';
 

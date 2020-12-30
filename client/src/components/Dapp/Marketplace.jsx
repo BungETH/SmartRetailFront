@@ -1,14 +1,6 @@
-<<<<<<< HEAD:client/src/components/Dapp/Marketplace.jsx
-import React, { useState }from 'react';
-import PropTypes from 'prop-types'
-// import axios from 'axios';
-=======
+//npm import
 import React, { useEffect } from 'react';
-<<<<<<< HEAD:client/src/components/Dapp/Marketplace.jsx
-import axios from 'axios';
->>>>>>> dev:client/src/components/Dapp/Marketplace.js
-=======
->>>>>>> a7bb1db378f4e18fa3f29ad4df1e6e817346687b:client/src/components/Dapp/Marketplace.js
+import PropTypes from 'prop-types'
 import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardActionArea from '@material-ui/core/CardActionArea';
@@ -17,35 +9,12 @@ import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
-import testImg from '../../assets/citation_NH_mindPower.jpg';
-<<<<<<< HEAD:client/src/components/Dapp/Marketplace.jsx
-import { getFidelityTokens } from '../../actions';
 
-=======
->>>>>>> dev:client/src/components/Dapp/Marketplace.js
+//local import
+import testImg from '../../assets/citation_NH_mindPower.jpg';
 
 const Marketplace = ({
-<<<<<<< HEAD:client/src/components/Dapp/Marketplace.jsx
-  tokenAmount,
-<<<<<<< HEAD:client/src/components/Dapp/Marketplace.jsx
-  onClick
-  // getFidelityTokens,
-}) => {
-  //console.log(tokenAmount);
-  // const [rewards,setRewards] = useState(0);
-  const contract = drizzle.contracts.FidelityToken; 
-  const price = 1000;
-  /*const claimToken = async (price) => {
-    const getToken = await contract.methods.claim(price*0.05).send({gas: 900000, from: account });
-    console.log(getToken);
-    dispatch(getFidelityTokens(getToken.events.Transfer.returnValues.value))
-  }*/
-=======
-  fetchPrice,
-  fetchFidelityTokens,
-=======
   sendProductPrice,
->>>>>>> a7bb1db378f4e18fa3f29ad4df1e6e817346687b:client/src/components/Dapp/Marketplace.js
   title,
   description,
   price,
@@ -67,7 +36,6 @@ const Marketplace = ({
   //   console.log(getToken.events.Transfer.returnValues.value);
   //   getFidelityTokens(getToken.events.Transfer.returnValues.value)
   // }
->>>>>>> dev:client/src/components/Dapp/Marketplace.js
   const useStyles = makeStyles({
     root: {
       maxWidth: 345,
@@ -96,11 +64,6 @@ const Marketplace = ({
   //       console.log(res.data);
   //     });
   // };
-<<<<<<< HEAD:client/src/components/Dapp/Marketplace.jsx
-  /*const handleBuy = () => {
-    claimToken(price);
-  }*/
-=======
   const handleBuy = () => {
     // fetchProductPrice(price);
     sendProductPrice(productId);
@@ -108,7 +71,6 @@ const Marketplace = ({
   /*useEffect(() => {
     fetchProducts();
   }, []);*/
->>>>>>> dev:client/src/components/Dapp/Marketplace.js
 
   return (
     <div>
@@ -129,7 +91,7 @@ const Marketplace = ({
           </CardContent>
         </CardActionArea>
         <CardActions>
-          <Button size="small" color="primary" onClick={() => onClick(account, contract, price)}>
+          <Button size="small" color="primary" onClick={handleBuy}>
             Buy
           </Button>
           <Button size="small" color="primary">

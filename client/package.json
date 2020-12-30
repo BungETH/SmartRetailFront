@@ -20,6 +20,7 @@
     "prop-type": "^0.0.1",
     "react": "^16.11.0",
     "react-dom": "^16.11.0",
+    "react-loading": "^2.0.3",
     "react-promise-tracker": "^2.1.0",
     "react-redux": "^7.2.2",
     "react-router-dom": "^5.2.0",
