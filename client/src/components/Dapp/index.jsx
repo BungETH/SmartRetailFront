@@ -13,8 +13,16 @@ import Marketplace from "../../containers/Marketplace";
 // import { fetchProductsSucces, fetchProductsError, fetchProductsPending } from "../../actions/fidelity";
 
 import "./dapp.scss";
+import Loading from "../ReactLoading/ReactLoading";
+import { usePromiseTracker } from "react-promise-tracker";
 
-const Dapp = ({ drizzle, currentAccount, fetchFidelityContract, fetchProducts,  products}) => {
+const Dapp = ({
+  drizzle,
+  currentAccount,
+  fetchFidelityContract,
+  fetchProducts,
+  products,
+}) => {
   const contract = drizzle.contracts.FidelityToken;
   // const [productsList, setProductsList] = useState([]);
   // const test = async () => {
@@ -52,10 +60,9 @@ const Dapp = ({ drizzle, currentAccount, fetchFidelityContract, fetchProducts,  
   useEffect(() => {
     fetchFidelityContract(contract);
     fetchProducts();
-    
-    
   }, []);
 
+  const { promiseInProgress } = usePromiseTracker();
   return (
     <div className="dapp">
       <div className={classes.root}>
@@ -75,15 +82,20 @@ const Dapp = ({ drizzle, currentAccount, fetchFidelityContract, fetchProducts,  
           </Toolbar>
         </AppBar>
       </div>
-      {products.map((product) => (
-        <Marketplace
-          key={product.id}
-          productId={product.id}
-          title={product.title}
-          description={product.description}
-          price={product.unitPrice}
-        />
-      ))}
+
+      {promiseInProgress ? (
+        <Loading type={"bubbles"} color={"#3F51B5"} />
+      ) : (
+        products.map((product) => (
+          <Marketplace
+            key={product.id}
+            productId={product.id}
+            title={product.title}
+            description={product.description}
+            price={product.unitPrice}
+          />
+        ))
+      )}
     </div>
   );
 };
