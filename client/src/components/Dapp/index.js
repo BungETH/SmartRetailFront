@@ -1,5 +1,6 @@
-import PropTypes from 'prop-types';
 import React, { useEffect } from 'react';
+import PropTypes from 'prop-types';
+import { usePromiseTracker } from "react-promise-tracker";
 import { Link } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
@@ -10,6 +11,7 @@ import MenuIcon from '@material-ui/icons/Menu';
 
 // local import
 import Marketplace from '../../containers/Marketplace';
+import Loading  from '../ReactLoading';
 import './dapp.scss';
 
 const Dapp = ({

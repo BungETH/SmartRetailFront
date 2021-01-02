@@ -1,9 +1,11 @@
 import React, { useEffect } from 'react';
+import { usePromiseTracker } from "react-promise-tracker";
 import { DrizzleContext } from '@drizzle/react-plugin';
 import { Drizzle } from '@drizzle/store';
 import store from '../../store';
 import drizzleOptions from '../../drizzleOptions';
 import DappRouter from '../../utils/DappRouter';
+import Loading from "../ReactLoading";
 import './app.scss';
 
 // It instanciate new drizzle object with our drizzleOptions
@@ -25,21 +27,19 @@ const App = ({ fetchCurrentAccount, currentAccount }) => {
     getAccount();
   }, [currentAccount]);
 
+  const { promiseInProgress } = usePromiseTracker();
   return (
     // Here is native drizzle components who helps to Dapp initialisation
     <DrizzleContext.Provider drizzle={drizzle}>
       <DrizzleContext.Consumer>
         {(drizzleContext) => {
           const { drizzleState, initialized } = drizzleContext;
-          if (!initialized) {
-            return 'Loading...';
-          }
-          return (
+          return initialized ? (
             <div className="app">
-              <DappRouter
-                drizzle={drizzle}
-              />
+              <DappRouter drizzle={drizzle} />
             </div>
+          ) : (
+            <Loading type={"cylon"} color={"#357EDD"} />
           );
         }}
       </DrizzleContext.Consumer>
