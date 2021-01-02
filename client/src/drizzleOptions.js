@@ -1,5 +1,4 @@
-import ComplexStorage from './contracts/ComplexStorage.json';
-import SimpleStorage from './contracts/SimpleStorage.json';
+import SmartRetailEscrow from './contracts/SmartRetailEscrow.json';
 import FidelityToken from './contracts/FidelityToken.json';
 
 // Here you can add data usefull for drizzle object initialisation
@@ -11,9 +10,9 @@ const options = {
       url: 'ws://127.0.0.1:7545',
     },
   },
-  contracts: [SimpleStorage, ComplexStorage, FidelityToken],
+  contracts: [SmartRetailEscrow, FidelityToken],
   events: {
-    SimpleStorage: ['StorageSet'],
+    SmartRetailEscrow: ['FundSendToContract','FundSendToSeller'],
   },
   // syncAlways:true,
 };
