@@ -18,7 +18,7 @@ const Marketplace = ({
   title,
   description,
   price,
-  tokenBalance,
+  //tokenBalance,
   productId,
 }) => {
   /*const fetchProducts = async () => {
@@ -107,9 +107,7 @@ const Marketplace = ({
           </Typography>
         </CardActions>
       </Card>
-      <Typography gutterBottom variant="h5" component="h2">
-        {tokenBalance}
-      </Typography>
+      
     </div>
   );
 };

@@ -5,7 +5,8 @@ import Dapp from '../../components/Dapp';
 
 const mapStateToProps = (state) => ({
   currentAccount: state.fidelity.account,
-  products: state.products
+  products: state.products,
+  tokenBalance: state.fidelity.fidelityTokenAmount
   });
 
 const mapDispatchToProps = (dispatch) => ({

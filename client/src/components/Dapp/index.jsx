@@ -22,6 +22,7 @@ const Dapp = ({
   fetchFidelityContract,
   fetchProducts,
   products,
+  tokenBalance
 }) => {
   const contract = drizzle.contracts.FidelityToken;
   // const [productsList, setProductsList] = useState([]);
@@ -76,6 +77,9 @@ const Dapp = ({
             >
               <MenuIcon />
             </IconButton>
+            <Typography gutterBottom variant="h5" component="h2">
+              {tokenBalance}
+            </Typography>
             <Typography variant="h6" align="right" className={classes.title}>
               {currentAccount}
             </Typography>
