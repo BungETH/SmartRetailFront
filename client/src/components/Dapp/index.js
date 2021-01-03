@@ -19,35 +19,38 @@ const Dapp = ({
   currentAccount,
   fetchFidelityContract,
   fetchProducts,
-  products
+  fetchEscrowContract,
+  products,
+  balance,
 }) => {
-  console.log(drizzle);
-  const contract = drizzle.drizzle.contracts.FidelityToken;
-  const useStyles = makeStyles((theme) => ({
-    root: {
-      flexGrow: 1,
-    },
-    menuButton: {
-      marginRight: theme.spacing(2),
-    },
-    title: {
-      flexGrow: 1,
-    },
-    media: {
-      height: 140,
-    },
-  }));
-  const classes = useStyles();
+  const fidelityContract = drizzle.drizzle.contracts.FidelityToken;
+  const escrowContract = drizzle.drizzle.contracts.SmartRetailEscrow;
+  // const useStyles = makeStyles((theme) => ({
+  //   root: {
+  //     flexGrow: 1,
+  //   },
+  //   menuButton: {
+  //     marginRight: theme.spacing(2),
+  //   },
+  //   title: {
+  //     flexGrow: 1,
+  //   },
+  //   media: {
+  //     height: 140,
+  //   },
+  // }));
+  // const classes = useStyles();
 
   useEffect(() => {
-    fetchFidelityContract(contract);
+    fetchFidelityContract(fidelityContract);
+    fetchEscrowContract(escrowContract)
     fetchProducts();
   }, []);
 
   const { promiseInProgress } = usePromiseTracker();
   return (
     <div className="dapp">
-      <div className={classes.root}>
+      {/* <div className={classes.root}>
         <AppBar position="static">
           <Toolbar>
             <IconButton
@@ -59,16 +62,20 @@ const Dapp = ({
               <MenuIcon />
             </IconButton>
             <Typography variant="h6" align="right" className={classes.title}>
+              {balance}
+            </Typography>
+            <Typography variant="h6" align="right" className={classes.title}>
               <Link to="/account">{currentAccount}</Link>
             </Typography>
           </Toolbar>
         </AppBar>
-      </div>
-
+      </div> */}
       {promiseInProgress ? (
         <Loading type={"bubbles"} color={"#3F51B5"} />
       ) : (
+        
         products.map((product) => (
+          
           <Marketplace
             key={product.id}
             productId={product.id}
@@ -78,6 +85,7 @@ const Dapp = ({
           />
         ))
       )}
+      
     </div>
   );
 };

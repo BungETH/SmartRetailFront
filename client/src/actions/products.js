@@ -28,7 +28,7 @@ export const fetchProducts = () => {
     return trackPromise(
       axios
         .get(
-          `https://cors-anywhere.herokuapp.com/https://salty-citadel-63624.herokuapp.com/api/products?page=${1}`
+          `https://salty-citadel-63624.herokuapp.com/api/products?page=${1}`
         )
         .then((json) => {
           const { data } = json;

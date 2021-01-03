@@ -4,7 +4,9 @@ import { DrizzleContext } from '@drizzle/react-plugin';
 import { Drizzle } from '@drizzle/store';
 import store from '../../store';
 import drizzleOptions from '../../drizzleOptions';
+import { BrowserRouter as Router } from 'react-router-dom';
 import DappRouter from '../../utils/DappRouter';
+import NavBar from '../NavBar';
 import Loading from "../ReactLoading";
 import './app.scss';
 
@@ -36,7 +38,10 @@ const App = ({ fetchCurrentAccount, currentAccount }) => {
           const { drizzleState, initialized } = drizzleContext;
           return initialized ? (
             <div className="app">
-              <DappRouter drizzle={drizzle} />
+              <Router>
+                <NavBar currentAccount={currentAccount} />
+                <DappRouter drizzle={drizzle} currentAccount={currentAccount} />
+              </Router>
             </div>
           ) : (
             <Loading type={"cylon"} color={"#357EDD"} />

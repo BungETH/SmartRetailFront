@@ -16,14 +16,14 @@ import testImg from '../../assets/citation_NH_mindPower.jpg';
 const Marketplace = ({
   sendProduct,
   sendBalance,
+  fetchTransactionParams,
   title,
   description,
-  price,
-  tokenBalance,
   productId,
+  price,
 }) => {
   const useStyles = makeStyles({
-    root: {
+    homeCards: {
       maxWidth: 345,
       marginLeft: '10em',
       marginTop: '4em',
@@ -36,16 +36,18 @@ const Marketplace = ({
     },
   });
 
+  const sellerAddress = '0xC96822B34c7F892B09A39F080B2659105af00146' 
   const classes = useStyles();
   const handleBuy = () => {
     sendProduct(productId);
+    fetchTransactionParams(sellerAddress, price);
     setTimeout(() => { 
       sendBalance(33);
     }, 3000);
   };
   return (
     <div>
-      <Card raised className={classes.root}>
+      <Card raised className={classes.homeCards}>
         <CardActionArea>
           <CardMedia
             className={classes.media}
@@ -84,9 +86,9 @@ const Marketplace = ({
           </Typography>
         </CardActions>
       </Card>
-      <Typography gutterBottom variant="h5" component="h2">
+      {/* <Typography gutterBottom variant="h5" component="h2">
         {tokenBalance}
-      </Typography>
+      </Typography> */}
     </div>
   );
 };
