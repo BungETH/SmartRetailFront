@@ -1,6 +1,7 @@
 export const FETCH_ESCROW_CONTRACT = 'FETCH_ESCROW_CONTRACT';
 export const STORE_TRANSACTION_PARAMS = 'STORE_TRANSACTION_PARAMS';
 export const SEND_TRANSACTION = 'SEND_TRANSACTION';
+export const SEND_CONFIRMATION_DELIVERY = 'SEND_CONFIRMATION_DELIVERY';
 
 export const fetchEscrowContract = (contract) => ({
   type: FETCH_ESCROW_CONTRACT,
@@ -16,9 +17,14 @@ export const sendTransaction = () => ({
   type: SEND_TRANSACTION,
 });
 
+export const sendConfirmationDelivery = (amount) => ({
+  type: SEND_CONFIRMATION_DELIVERY,
+  amount,
+});
+
 export const fetchTransactionParams = (seller, value) => {
-  return (dispatch, getState) => {
-    dispatch(storeTransactionParams(seller,value))
+  return (dispatch) => {
+    dispatch(storeTransactionParams(seller,value));
     dispatch(sendTransaction());
   }
 }

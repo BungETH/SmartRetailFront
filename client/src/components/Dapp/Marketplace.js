@@ -9,7 +9,6 @@ import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
-
 //local import
 import testImg from '../../assets/citation_NH_mindPower.jpg';
 
@@ -24,12 +23,13 @@ const Marketplace = ({
 }) => {
   const useStyles = makeStyles({
     homeCards: {
-      maxWidth: 345,
-      marginLeft: '10em',
-      marginTop: '4em',
+      width: 345,
+      height: 500,
+      margin: '4em',
+      marginTop: '5em',
     },
     media: {
-      height: 140,
+      height: 240,
     },
     price: {
       paddingLeft: '1em',
@@ -40,9 +40,11 @@ const Marketplace = ({
   const classes = useStyles();
   const handleBuy = () => {
     sendProduct(productId);
-    fetchTransactionParams(sellerAddress, price);
     setTimeout(() => { 
-      sendBalance(33);
+      fetchTransactionParams(sellerAddress, price);
+    }, 2000);
+    setTimeout(() => { 
+      sendBalance(1);
     }, 3000);
   };
   return (
@@ -63,7 +65,7 @@ const Marketplace = ({
             </Typography>
           </CardContent>
         </CardActionArea>
-        <CardActions>
+        <CardActions className={classes.actions}>
           <Button
             size="small"
             color="primary"
@@ -86,9 +88,6 @@ const Marketplace = ({
           </Typography>
         </CardActions>
       </Card>
-      {/* <Typography gutterBottom variant="h5" component="h2">
-        {tokenBalance}
-      </Typography> */}
     </div>
   );
 };

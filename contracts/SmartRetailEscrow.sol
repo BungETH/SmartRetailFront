@@ -3,48 +3,49 @@ pragma solidity >=0.4.21 <0.7.0;
 
 import "@openzeppelin/contracts/access/Ownable.sol";
 import "@openzeppelin/contracts/math/SafeMath.sol";
-
-
-contract SmartRetailEscrow is Ownable{
-    
-    using SafeMath for uint;
+import "@openzeppelin/contracts/utils/ReentrancyGuard.sol";
+import "@openzeppelin/contracts/payment/escrow/Escrow.sol";
+import "./FDLTTokenManager.sol";
+contract SmartRetailEscrow is Ownable, ReentrancyGuard {
+    Escrow escrow;
+    FDLTTokenManager tokenManager;
     
     event FundSendToContract(string _contractMessage);
     event FundSendToSeller(string _SellerMessage);
     enum State { AWAITING_PAYMENT, AWAITING_DELIVERY }
     State public currState = State.AWAITING_PAYMENT;
     address payable seller;
-    uint public value;
+    address buyer;
     
-    // constructor(address payable _seller, uint _value) public {
-    //     seller = _seller;
-    //     value = _value;
-    // }
+    constructor() ReentrancyGuard() public {
+        escrow = new Escrow();
+        tokenManager = new FDLTTokenManager();
+        buyer = msg.sender;
+    }
     
+    receive() external payable {}
     
-     receive() external payable {}
-
-     /**
-     * @notice deposit value send to deployed smartcontract
+    /**
+     * Receives payments from customers in contract
      */
-    function sendPayement(address payable _seller, uint _value) external payable onlyOwner {
+    function sendPayment(address payable _seller, uint _value) external payable onlyOwner{
         seller = _seller;
-        value = _value;
         require(currState == State.AWAITING_PAYMENT, "Already paid");
-        require(value == msg.value, "You're not sending the correct value");
-        require (msg.sender.balance >= msg.value, "Not enough balance");
-        address(this).transfer(msg.value);
+        require((_value) == msg.value, "You're not sending the correct value");
+        escrow.deposit{value: msg.value}(seller);
         emit FundSendToContract("Successfully deposit funds to contract");
         currState = State.AWAITING_DELIVERY;
     }
-
+        
     /**
-     * @notice confirmDelivery call by the buyer in order to trigger paiement to the seller 
+     * Withdraw funds to seller
      */
-    function confirmDelivery() external payable onlyOwner {
+    function confirmDelivery(uint _amount) external onlyOwner nonReentrant() {
         require(currState == State.AWAITING_DELIVERY, "You cannot confirm until deposit first");
-        seller.transfer(address(this).balance);
+        escrow.withdraw(seller);
+        tokenManager.asyncDeposit(msg.sender, _amount);
         emit FundSendToSeller("Successfully transferred funds to seller");
         currState = State.AWAITING_PAYMENT;
     }
+
 }

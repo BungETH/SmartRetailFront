@@ -13,7 +13,7 @@ import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
 import Dapp from '../../containers/Dapp';
 import ProductDetails from '../../components/ProductDetails';
-import Account from '../../components/Account';
+import Account from '../../containers/Account';
 
 const DappRouter = (drizzle,currentAccount) => (
 

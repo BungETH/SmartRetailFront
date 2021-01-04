@@ -1,14 +1,15 @@
 import {
   FETCH_FIDELITY_CONTRACT,
   FETCH_CURRENT_ACCOUNT,
-  STORE_TOKEN_AMOUNT,
+  STORE_TOKEN_AMOUNT_IN_WEI,
+  STORE_USER_BALANCE,
 } from '../actions/fidelity';
 
 const initialState = {
   contract:{},
   account:'',
-  fidelityTokenAmount:0,
-
+  tokenEarnedInWei:0,
+  userBalance:0,
 };
 
 const fidelityReducer = (state = initialState, action = {}) => {
@@ -25,10 +26,15 @@ const fidelityReducer = (state = initialState, action = {}) => {
         account: action.account,
       };
        
-    case STORE_TOKEN_AMOUNT:
+    case STORE_TOKEN_AMOUNT_IN_WEI:
       return {
         ...state,
-        fidelityTokenAmount: state.fidelityTokenAmount+action.amount,
+        tokenEarnedInWei: action.amount,
+      };
+      case STORE_USER_BALANCE:
+      return {
+        ...state,
+        userBalance: action.balance,
 			};
 		default: return state;
 	};
