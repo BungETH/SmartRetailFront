@@ -13,7 +13,7 @@ import Marketplace from "../../containers/Marketplace";
 // import { fetchProductsSucces, fetchProductsError, fetchProductsPending } from "../../actions/fidelity";
 
 import "./dapp.scss";
-import Loading from "../ReactLoading/ReactLoading";
+import Loading from "../ReactLoading/Loading";
 import { usePromiseTracker } from "react-promise-tracker";
 
 const Dapp = ({

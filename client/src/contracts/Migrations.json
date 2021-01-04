@@ -916,18 +916,10 @@
     "1337": {
       "events": {},
       "links": {},
-<<<<<<< HEAD
-<<<<<<< HEAD
-      "address": "0xe816D6B5f3A75b116EC6af6EB8E9A89a601C22E9",
-      "transactionHash": "0x214cda18ebceb3d04505a425b45f3ab96abffc7f80598642ce3aacb7c4baced7"
-=======
-      "address": "0xfa68BcE12cBD858b7C614Ec827dC2767a5fc0d06",
-      "transactionHash": "0x92a62f18e5aaaa8ce9d1547078d11a70aa9c2d3e6b9d0d52e5f7ecd774897894"
->>>>>>> dev
-=======
+
       "address": "0xC2b0852839d7e04bD4Ca4311B3cB3A9550E5190d",
       "transactionHash": "0x824b0ccdd39ab87db5d10b9466cf22c5e8505998014f5de94b0163c607fc4456"
->>>>>>> a7bb1db378f4e18fa3f29ad4df1e6e817346687b
+
     },
     "5777": {
       "events": {},
@@ -942,17 +934,10 @@
       "transactionHash": "0x3d1e301eb9686747d406669452dcff05fd9e5bc7d0c73d8db1ba22cbb95b2dbd"
     }
   },
-<<<<<<< HEAD
-  "schemaVersion": "3.3.3",
-<<<<<<< HEAD
-  "updatedAt": "2020-12-22T17:09:34.577Z",
-=======
-  "updatedAt": "2020-12-26T18:06:58.371Z",
->>>>>>> dev
-=======
+
   "schemaVersion": "3.3.2",
   "updatedAt": "2020-12-27T17:05:49.643Z",
->>>>>>> a7bb1db378f4e18fa3f29ad4df1e6e817346687b
+
   "networkType": "ethereum",
   "devdoc": {
     "kind": "dev",

@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 import { fetchFidelityContract } from '../../actions/fidelity';
 import { fetchProducts } from '../../actions/products';
-import Dapp from '../../components/Dapp';
+import Dapp from '../../components/Dapp/index.jsx';
 
 const mapStateToProps = (state) => ({
   currentAccount: state.fidelity.account,

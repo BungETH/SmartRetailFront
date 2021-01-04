@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from "react";
 import { DrizzleContext } from "@drizzle/react-plugin";
 import { Drizzle } from "@drizzle/store";
-import Loading from "../ReactLoading/ReactLoading";
+import Loading from "../ReactLoading/Loading";
 //local import
 import store from "../../store";
 import drizzleOptions from "../../drizzleOptions";
