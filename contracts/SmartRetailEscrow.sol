@@ -6,6 +6,7 @@ import "@openzeppelin/contracts/math/SafeMath.sol";
 import "@openzeppelin/contracts/utils/ReentrancyGuard.sol";
 import "@openzeppelin/contracts/payment/escrow/Escrow.sol";
 import "./FDLTTokenManager.sol";
+
 contract SmartRetailEscrow is Ownable, ReentrancyGuard {
     Escrow escrow;
     FDLTTokenManager tokenManager;
