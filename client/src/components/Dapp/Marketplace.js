@@ -1,6 +1,6 @@
-//npm import
-import React, { useEffect } from 'react';
-import PropTypes from 'prop-types'
+import React from 'react';
+import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardActionArea from '@material-ui/core/CardActionArea';
@@ -14,30 +14,21 @@ import Typography from '@material-ui/core/Typography';
 import testImg from '../../assets/citation_NH_mindPower.jpg';
 
 const Marketplace = ({
-  sendProductPrice,
+  sendProduct,
+  sendBalance,
+  fetchTransactionParams,
   title,
   description,
+<<<<<<< HEAD:client/src/components/Dapp/Marketplace.jsx
   price,
   //tokenBalance,
+=======
+>>>>>>> 4a8bf8caff1ba96fe6faf3840122f9c9490457e6:client/src/components/Dapp/Marketplace.js
   productId,
+  price,
 }) => {
-  /*const fetchProducts = async () => {
-    await axios.get(`https://salty-citadel-63624.herokuapp.com/api/products?page=1`)
-        .then((res) => {
-          console.log(res);
-          console.log(res.data);
-        });
-  }*/
-
-  // const contract = drizzle.contracts.FidelityToken; 
-  //const price = 1000;
-  // const claimToken = async (price) => {
-  //   const getToken = await contract.methods.claim(price*0.05).send({gas: 900000, from: account });
-  //   console.log(getToken.events.Transfer.returnValues.value);
-  //   getFidelityTokens(getToken.events.Transfer.returnValues.value)
-  // }
   const useStyles = makeStyles({
-    root: {
+    homeCards: {
       maxWidth: 345,
       marginLeft: '10em',
       marginTop: '4em',
@@ -50,31 +41,18 @@ const Marketplace = ({
     },
   });
 
+  const sellerAddress = '0xC96822B34c7F892B09A39F080B2659105af00146' 
   const classes = useStyles();
-
-  // const handleBuy = async () => {
-  //   const headers = {
-  //     'Content-Type': 'text/plain',
-  //     'Access-Control-Allow-Origin': '*',
-  //   };
-  //   console.log('buy');
-  //   await axios.post(`https://cors-anywhere.herokuapp.com/https://salty-citadel-63624.herokuapp.com/base?score=${price}`, { headers }, { price })
-  //     .then((res) => {
-  //       console.log(res);
-  //       console.log(res.data);
-  //     });
-  // };
   const handleBuy = () => {
-    // fetchProductPrice(price);
-    sendProductPrice(productId);
-  }
-  /*useEffect(() => {
-    fetchProducts();
-  }, []);*/
-
+    sendProduct(productId);
+    fetchTransactionParams(sellerAddress, price);
+    setTimeout(() => { 
+      sendBalance(33);
+    }, 3000);
+  };
   return (
     <div>
-      <Card raised className={classes.root}>
+      <Card raised className={classes.homeCards}>
         <CardActionArea>
           <CardMedia
             className={classes.media}
@@ -91,11 +69,17 @@ const Marketplace = ({
           </CardContent>
         </CardActionArea>
         <CardActions>
-          <Button size="small" color="primary" onClick={handleBuy}>
+          <Button
+            size="small"
+            color="primary"
+            onClick={handleBuy}
+          >
             Buy
           </Button>
           <Button size="small" color="primary">
-            Show details
+            <Link to="/product">
+              Show details
+            </Link>
           </Button>
           <Typography
             className={classes.price}
@@ -107,7 +91,13 @@ const Marketplace = ({
           </Typography>
         </CardActions>
       </Card>
+<<<<<<< HEAD:client/src/components/Dapp/Marketplace.jsx
       
+=======
+      {/* <Typography gutterBottom variant="h5" component="h2">
+        {tokenBalance}
+      </Typography> */}
+>>>>>>> 4a8bf8caff1ba96fe6faf3840122f9c9490457e6:client/src/components/Dapp/Marketplace.js
     </div>
   );
 };

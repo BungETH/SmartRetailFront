@@ -1,3 +1,4 @@
+<<<<<<< HEAD:client/src/components/App/index.jsx
 //npm import
 import React, { useEffect, useState } from "react";
 import { DrizzleContext } from "@drizzle/react-plugin";
@@ -8,6 +9,19 @@ import store from "../../store";
 import drizzleOptions from "../../drizzleOptions";
 import Dapp from "../../containers/Dapp";
 import "./app.scss";
+=======
+import React, { useEffect } from 'react';
+import { usePromiseTracker } from "react-promise-tracker";
+import { DrizzleContext } from '@drizzle/react-plugin';
+import { Drizzle } from '@drizzle/store';
+import store from '../../store';
+import drizzleOptions from '../../drizzleOptions';
+import { BrowserRouter as Router } from 'react-router-dom';
+import DappRouter from '../../utils/DappRouter';
+import NavBar from '../NavBar';
+import Loading from "../ReactLoading";
+import './app.scss';
+>>>>>>> 4a8bf8caff1ba96fe6faf3840122f9c9490457e6:client/src/components/App/index.js
 
 // It instanciate new drizzle object with our drizzleOptions
 
@@ -18,7 +32,7 @@ const App = ({ fetchCurrentAccount, currentAccount }) => {
     const accounts = await window.ethereum.enable();
     fetchCurrentAccount(accounts[0]);
   }
-  window.ethereum.on("accountsChanged", () => {
+  window.ethereum.on('accountsChanged', () => {
     getAccount();
   });
 
@@ -28,18 +42,22 @@ const App = ({ fetchCurrentAccount, currentAccount }) => {
     getAccount();
   }, [currentAccount]);
 
+  const { promiseInProgress } = usePromiseTracker();
   return (
     // Here is native drizzle components who helps to Dapp initialisation
     <DrizzleContext.Provider drizzle={drizzle}>
       <DrizzleContext.Consumer>
         {(drizzleContext) => {
           const { drizzleState, initialized } = drizzleContext;
-          return !initialized ? (
-            <Loading type={"bubbles"} color={"#3F51B5"} />
-          ) : (
+          return initialized ? (
             <div className="app">
-              <Dapp drizzle={drizzle} />
+              <Router>
+                <NavBar currentAccount={currentAccount} />
+                <DappRouter drizzle={drizzle} currentAccount={currentAccount} />
+              </Router>
             </div>
+          ) : (
+            <Loading type={"cylon"} color={"#357EDD"} />
           );
         }}
       </DrizzleContext.Consumer>
