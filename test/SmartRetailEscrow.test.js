@@ -8,21 +8,19 @@ contract('SmartRetailEscrow', function (accounts) {
     // const voter2 = accounts[2];
     // const voter3 = accounts[3];
     let SmartRetailEscrowInstance;
-    const amount = new BN(10);
-
-
+    const amount = new BN(5);
 
     beforeEach(async function () {
         SmartRetailEscrowInstance = await SmartRetailEscrow.new({from: admin});
     });
 
     it("first", async () => {
-        console.debug(account1,amount);
 
+        let resultPayment = await SmartRetailEscrowInstance.sendPayment(account1, amount, {from: admin, value: amount });
+        let manager = await SmartRetailEscrowInstance.tokenManager();
+        let resultDelivery = await SmartRetailEscrowInstance.confirmDelivery(amount, {from: admin })
 
-        let result = await SmartRetailEscrowInstance.sendPayment(account1, amount, {from: admin});
-
-        console.debug(result);
+        console.debug(resultDelivery,manager);
         
     });
 

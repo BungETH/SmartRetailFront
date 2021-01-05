@@ -7,9 +7,15 @@ import "@openzeppelin/contracts/utils/ReentrancyGuard.sol";
 import "@openzeppelin/contracts/payment/escrow/Escrow.sol";
 import "./FDLTTokenManager.sol";
 
+contract TokenManagerInterface {
+    function asyncDeposit(address dest, uint256 amount) public{}
+    function claim() public {}
+}
+
+
 contract SmartRetailEscrow is Ownable, ReentrancyGuard {
     Escrow escrow;
-    FDLTTokenManager tokenManager;
+    TokenManagerInterface tokenManagerContract;
     
     event FundSendToContract(string _contractMessage);
     event FundSendToSeller(string _SellerMessage);
@@ -18,9 +24,9 @@ contract SmartRetailEscrow is Ownable, ReentrancyGuard {
     address payable seller;
     address buyer;
     
-    constructor() ReentrancyGuard() public {
+    constructor(address _tokenManagerContractAddress) ReentrancyGuard() public {
         escrow = new Escrow();
-        tokenManager = new FDLTTokenManager();
+        tokenManagerContract = TokenManagerInterface(_tokenManagerContractAddress);
         buyer = msg.sender;
     }
     
@@ -44,9 +50,13 @@ contract SmartRetailEscrow is Ownable, ReentrancyGuard {
     function confirmDelivery(uint _amount) external onlyOwner nonReentrant() {
         require(currState == State.AWAITING_DELIVERY, "You cannot confirm until deposit first");
         escrow.withdraw(seller);
-        tokenManager.asyncDeposit(msg.sender, _amount);
+        tokenManagerContract.asyncDeposit(msg.sender, _amount);
         emit FundSendToSeller("Successfully transferred funds to seller");
         currState = State.AWAITING_PAYMENT;
+    }
+    
+    function setTokenManagerContractAddress(address _address) external onlyOwner {
+        tokenManagerContract = TokenManagerInterface(_address);
     }
 
 }
