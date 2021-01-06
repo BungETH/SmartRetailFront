@@ -6,7 +6,6 @@ import ReduxThunk from 'redux-thunk';
 
 //local import
 import FidelityMiddleware from '../middleware/FidelityMiddleware';
-import ProductsMiddleware from '../middleware/ProductsMiddleware';
 import EscrowMiddleware from '../middleware/EscrowMiddleware';
 import fidelityReducer from '../reducers/fidelityReducer';
 import productsReducer from '../reducers/productsReducer';

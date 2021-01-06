@@ -19,11 +19,6 @@ const Marketplace = ({
   fetchTransactionParams,
   title,
   description,
-<<<<<<< HEAD:client/src/components/Dapp/Marketplace.jsx
-  price,
-  //tokenBalance,
-=======
->>>>>>> 4a8bf8caff1ba96fe6faf3840122f9c9490457e6:client/src/components/Dapp/Marketplace.js
   productId,
   price,
 }) => {
@@ -91,13 +86,9 @@ const Marketplace = ({
           </Typography>
         </CardActions>
       </Card>
-<<<<<<< HEAD:client/src/components/Dapp/Marketplace.jsx
-      
-=======
       {/* <Typography gutterBottom variant="h5" component="h2">
         {tokenBalance}
       </Typography> */}
->>>>>>> 4a8bf8caff1ba96fe6faf3840122f9c9490457e6:client/src/components/Dapp/Marketplace.js
     </div>
   );
 };

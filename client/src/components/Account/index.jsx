@@ -1,30 +1,10 @@
 import React from 'react';
-<<<<<<< HEAD
-=======
 import { makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
->>>>>>> 4a8bf8caff1ba96fe6faf3840122f9c9490457e6
 import Button from '@material-ui/core/Button';
 
 const Account = () => {
 
-<<<<<<< HEAD
-  const handleBuy = () => {
-    console.log('buy with tokens');
-
-  }
-
-  return(
-    <div>
-      <Button
-        variant="contained"
-        size="small"
-        color="primary"
-        onClick={handleBuy}
-      >
-        Buy with tokens
-      </Button>
-=======
 
   const useStyles = makeStyles({
     accountPaper: {
@@ -59,7 +39,6 @@ const Account = () => {
           Buy with tokens
         </Button>
       </Paper>
->>>>>>> 4a8bf8caff1ba96fe6faf3840122f9c9490457e6
     </div>
   );
 };

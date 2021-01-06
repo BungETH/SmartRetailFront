@@ -4,7 +4,7 @@ import {
   sendBalance,
 } from '../../actions/fidelity';
 import { fetchTransactionParams} from '../../actions/escrow';
-import Marketplace from '../../components/Dapp/Marketplace';
+import Marketplace from '../../components/Dapp/Marketplace.jsx';
 
 const mapStateToProps = (state) => ({
     tokenBalance: state.fidelity.fidelityTokenAmount,

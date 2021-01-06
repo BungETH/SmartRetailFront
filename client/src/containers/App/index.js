@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import { fetchCurrentAccount } from '../../actions/fidelity';
-import App from '../../components/App';
+import App from '../../components/App/index.jsx';
 
 const mapStateToProps = (state) => ({
     currentAccount: state.fidelity.account,

@@ -1,15 +1,3 @@
-<<<<<<< HEAD:client/src/components/App/index.jsx
-//npm import
-import React, { useEffect, useState } from "react";
-import { DrizzleContext } from "@drizzle/react-plugin";
-import { Drizzle } from "@drizzle/store";
-import Loading from "../ReactLoading/Loading";
-//local import
-import store from "../../store";
-import drizzleOptions from "../../drizzleOptions";
-import Dapp from "../../containers/Dapp";
-import "./app.scss";
-=======
 import React, { useEffect } from 'react';
 import { usePromiseTracker } from "react-promise-tracker";
 import { DrizzleContext } from '@drizzle/react-plugin';
@@ -19,9 +7,8 @@ import drizzleOptions from '../../drizzleOptions';
 import { BrowserRouter as Router } from 'react-router-dom';
 import DappRouter from '../../utils/DappRouter';
 import NavBar from '../NavBar';
-import Loading from "../ReactLoading";
+import Loading from "../ReactLoading/Loading";
 import './app.scss';
->>>>>>> 4a8bf8caff1ba96fe6faf3840122f9c9490457e6:client/src/components/App/index.js
 
 // It instanciate new drizzle object with our drizzleOptions
 

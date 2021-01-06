@@ -1,72 +1,56 @@
-//npm import
-import PropTypes from "prop-types";
-import React, { useEffect } from "react";
-import { makeStyles } from "@material-ui/core/styles";
-import AppBar from "@material-ui/core/AppBar";
-import Toolbar from "@material-ui/core/Toolbar";
-import Typography from "@material-ui/core/Typography";
-import IconButton from "@material-ui/core/IconButton";
-import MenuIcon from "@material-ui/icons/Menu";
-
-//local import
-import Marketplace from "../../containers/Marketplace";
-// import { fetchProductsSucces, fetchProductsError, fetchProductsPending } from "../../actions/fidelity";
-
-import "./dapp.scss";
-import Loading from "../ReactLoading/Loading";
+import React, { useEffect } from 'react';
+import PropTypes from 'prop-types';
 import { usePromiseTracker } from "react-promise-tracker";
+import { Link } from 'react-router-dom';
+import { makeStyles } from '@material-ui/core/styles';
+import AppBar from '@material-ui/core/AppBar';
+import Toolbar from '@material-ui/core/Toolbar';
+import Typography from '@material-ui/core/Typography';
+import IconButton from '@material-ui/core/IconButton';
+import MenuIcon from '@material-ui/icons/Menu';
+
+// local import
+import Marketplace from '../../containers/Marketplace';
+import Loading  from '../ReactLoading/Loading';
+import './dapp.scss';
 
 const Dapp = ({
   drizzle,
   currentAccount,
   fetchFidelityContract,
   fetchProducts,
+  fetchEscrowContract,
   products,
-  tokenBalance
+  balance,
 }) => {
-  const contract = drizzle.contracts.FidelityToken;
-  // const [productsList, setProductsList] = useState([]);
-  // const test = async () => {
-  //   await axios.get(`https://cors-anywhere.herokuapp.com/https://salty-citadel-63624.herokuapp.com/api/products?page=${1}`)
-  // .then(
-  //   json => {
-  //     const { data } = json;
-  //     const products = data["hydra:member"];
-  //     fetchProductsSucces(products)
-  //     console.log(products)
-  //     setProductsList(products)
-  //   }
-  // )
-  // .catch( error => {
-  //   fetchProductsError(error)
-  //   console.log(error)
-  // })}
-
-  const useStyles = makeStyles((theme) => ({
-    root: {
-      flexGrow: 1,
-    },
-    menuButton: {
-      marginRight: theme.spacing(2),
-    },
-    title: {
-      flexGrow: 1,
-    },
-    media: {
-      height: 140,
-    },
-  }));
-  const classes = useStyles();
+  const fidelityContract = drizzle.drizzle.contracts.FidelityToken;
+  const escrowContract = drizzle.drizzle.contracts.SmartRetailEscrow;
+  // const useStyles = makeStyles((theme) => ({
+  //   root: {
+  //     flexGrow: 1,
+  //   },
+  //   menuButton: {
+  //     marginRight: theme.spacing(2),
+  //   },
+  //   title: {
+  //     flexGrow: 1,
+  //   },
+  //   media: {
+  //     height: 140,
+  //   },
+  // }));
+  // const classes = useStyles();
 
   useEffect(() => {
-    fetchFidelityContract(contract);
+    fetchFidelityContract(fidelityContract);
+    fetchEscrowContract(escrowContract)
     fetchProducts();
   }, []);
 
   const { promiseInProgress } = usePromiseTracker();
   return (
     <div className="dapp">
-      <div className={classes.root}>
+      {/* <div className={classes.root}>
         <AppBar position="static">
           <Toolbar>
             <IconButton
@@ -77,20 +61,21 @@ const Dapp = ({
             >
               <MenuIcon />
             </IconButton>
-            <Typography gutterBottom variant="h5" component="h2">
-              {tokenBalance}
+            <Typography variant="h6" align="right" className={classes.title}>
+              {balance}
             </Typography>
             <Typography variant="h6" align="right" className={classes.title}>
-              {currentAccount}
+              <Link to="/account">{currentAccount}</Link>
             </Typography>
           </Toolbar>
         </AppBar>
-      </div>
-
+      </div> */}
       {promiseInProgress ? (
         <Loading type={"bubbles"} color={"#3F51B5"} />
       ) : (
+        
         products.map((product) => (
+          
           <Marketplace
             key={product.id}
             productId={product.id}
@@ -100,10 +85,10 @@ const Dapp = ({
           />
         ))
       )}
+      
     </div>
   );
 };
-
 Dapp.propTypes = {
   currentAccount: PropTypes.any.isRequired,
   drizzle: PropTypes.any.isRequired,
