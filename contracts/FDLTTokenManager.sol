@@ -19,14 +19,14 @@ contract FDLTTokenManager
         token = new FDLTToken(); // crée une nouvelle instance du smart contract FDLTToken ! L’instance ERC20Token déployée sera stockée dans la variable “token”
     }
 
-    function asyncDeposit(address dest, uint256 amount) public {
-        tokenPayments[dest] = tokenPayments[dest].add(amount);
-        emit Deposit(dest, tokenPayments[dest]);
+    function asyncDeposit(address _dest, uint256 _amount) public {
+        tokenPayments[_dest] = tokenPayments[_dest].add(_amount);
+        emit Deposit(_dest, tokenPayments[_dest]);
     }
 
     function claim() external {
         require(tokenPayments[msg.sender] !=0, "not enought tokens");
-        token.mintTokenTo(dest,tokenPayments[msg.sender]);
+        token.mintTokenTo(msg.sender, tokenPayments[msg.sender]);
         tokenPayments[msg.sender] = 0;
         emit Claimed(msg.sender);
     }
