@@ -1,4 +1,4 @@
 /node_modules
 .vscode
 .idea
-/client/src/contracts
+/client/src/contracts/*
