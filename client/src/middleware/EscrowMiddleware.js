@@ -26,11 +26,12 @@ const EscrowMiddleware = (store) => (next) => (action) => {
     case SEND_CONFIRMATION_DELIVERY: {
       const escrowState = store.getState().escrow;
       const { account } = store.getState().fidelity;
-      const amountInWei = new BigNumber(escrowState.amountInWei*10**18);
+      const amountInWei = new BigNumber(escrowState.amountInWei);
       console.log(amountInWei);
       async function sendConfirmationToEscrow() {
         const transaction = await escrowState.contract.methods.confirmDelivery(amountInWei).send({ gas: 900000, from: account });
         console.log(transaction);
+        // appeller token manager 
       }
       sendConfirmationToEscrow();
     };

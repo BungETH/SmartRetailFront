@@ -4,11 +4,6 @@ import axios from 'axios'
 
 //local import
 import {
-  // FETCH_PRODUCTS_SUCCES,
-  // fetchProductsPending,
-  // fetchProductsSucces,
-  // fetchProductsError,
-  // FETCH_PRODUCTS_PENDING
 } from '../actions/fidelity'
 
 export const productsMiddleware = (store) => (next) => (action) => {
