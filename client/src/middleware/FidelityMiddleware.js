@@ -14,7 +14,6 @@ import {
         }
         claimTokens();
       };
-  
           default: next(action);
       }
   };
