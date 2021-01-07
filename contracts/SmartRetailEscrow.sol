@@ -7,14 +7,15 @@ import "@openzeppelin/contracts/utils/ReentrancyGuard.sol";
 import "@openzeppelin/contracts/payment/escrow/Escrow.sol";
 import "./FDLTTokenManager.sol";
 
-contract TokenManagerInterface {
+contract FDLTTokenManagerInterface {
     function asyncDeposit(address dest, uint256 amount) external{}
     function claim(address dest) external {}
 }
 
 contract SmartRetailEscrow is Ownable, ReentrancyGuard {
     Escrow private escrow;
-    TokenManagerInterface tokenManagerContract;
+    FDLTTokenManager public manager;
+    FDLTTokenManagerInterface private tokenManagerContract;
 
     event FundSendToContract(string _contractMessage, uint OrderId);
     event FundSendToSeller(string _SellerMessage,  uint OrderId);
@@ -29,9 +30,10 @@ contract SmartRetailEscrow is Ownable, ReentrancyGuard {
 
     enum State { AWAITING_PAYMENT, AWAITING_DELIVERY, PAID}
 
-    constructor(address _tokenManagerContractAddress) ReentrancyGuard() public {
+    constructor() ReentrancyGuard() public {
         escrow = new Escrow();
-        tokenManagerContract = TokenManagerInterface(_tokenManagerContractAddress);
+        manager = new FDLTTokenManager(); // crée une nouvelle instance du smart contract FDLTTokenManager ! L’instance FDLTTokenManager déployée sera stockée dans la variable “manager”
+        tokenManagerContract = FDLTTokenManagerInterface(address(manager));
     }
 
     receive() external payable {}
@@ -69,7 +71,7 @@ contract SmartRetailEscrow is Ownable, ReentrancyGuard {
     }
 
     function setTokenManagerContractAddress(address _address) external onlyOwner {
-        tokenManagerContract = TokenManagerInterface(_address);
+        tokenManagerContract = FDLTTokenManagerInterface(_address);
     }
     
     function getDepositsOf() public view returns(uint){

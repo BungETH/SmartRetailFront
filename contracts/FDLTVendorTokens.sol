@@ -16,15 +16,7 @@ contract FDLTVendorTokens is ERC1155 {
     function addNewVendorToken(uint256 initialSupply) external {
         vendorCount++;
         uint256 vendorTokenId = vendorCount;
-<<<<<<< HEAD
-        _mint(msg.sender, vendorTokenId, initialSupply, "");        
-=======
-<<<<<<< HEAD
-    
-        _mint(msg.sender, vendorTokenId, initialSupply, _description);        
-=======
+
         _mint(msg.sender, vendorTokenId, initialSupply, "");
->>>>>>> update EscrowSmartRetail COntract
->>>>>>> update EscrowSmartRetail COntract
     }
 }

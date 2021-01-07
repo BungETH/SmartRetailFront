@@ -33,11 +33,7 @@ contract FDLTTokenManager is Ownable
 
     function claim() external {
         require(tokenPayments[msg.sender] !=0, "not enought tokens");
-<<<<<<< HEAD
-        token.mintTokenTo(msg.sender, tokenPayments[msg.sender]);
-=======
         FDLTTokenInterfaceContract.mintTokenTo(msg.sender,tokenPayments[msg.sender]);
->>>>>>> update TokenManager for Event child
         tokenPayments[msg.sender] = 0;
         emit Claimed(msg.sender);
     }
