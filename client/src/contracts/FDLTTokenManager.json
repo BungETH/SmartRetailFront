@@ -103,7 +103,7 @@
   "deployedBytecode": "0x608060405234801561001057600080fd5b506004361061004c5760003560e01c80634e71d92d146100515780636127421d1461005b5780637c7a39a4146100b3578063fc0c546a14610101575b600080fd5b610059610135565b005b61009d6004803603602081101561007157600080fd5b81019080803573ffffffffffffffffffffffffffffffffffffffff169060200190929190505050610367565b6040518082815260200191505060405180910390f35b6100ff600480360360408110156100c957600080fd5b81019080803573ffffffffffffffffffffffffffffffffffffffff1690602001909291908035906020019092919050505061037f565b005b6101096104ac565b604051808273ffffffffffffffffffffffffffffffffffffffff16815260200191505060405180910390f35b6000600160003373ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff1681526020019081526020016000205414156101eb576040517f08c379a00000000000000000000000000000000000000000000000000000000081526004018080602001828103825260128152602001807f6e6f7420656e6f7567687420746f6b656e73000000000000000000000000000081525060200191505060405180910390fd5b60008054906101000a900473ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff1663669a1f6933600160003373ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff168152602001908152602001600020546040518363ffffffff1660e01b8152600401808373ffffffffffffffffffffffffffffffffffffffff16815260200182815260200192505050600060405180830381600087803b1580156102bb57600080fd5b505af11580156102cf573d6000803e3d6000fd5b505050506000600160003373ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff168152602001908152602001600020819055507fb449c24d261a59627b537c8c41c57ab559f4205c56bea745ff61c5521bece21433604051808273ffffffffffffffffffffffffffffffffffffffff16815260200191505060405180910390a1565b60016020528060005260406000206000915090505481565b6103d181600160008573ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff168152602001908152602001600020546104d090919063ffffffff16565b600160008473ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff168152602001908152602001600020819055507fe1fffcc4923d04b559f4d29a8bfc6cda04eb5b0d3c460751c2402c5c5cc9109c82600160008573ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff16815260200190815260200160002054604051808373ffffffffffffffffffffffffffffffffffffffff1681526020018281526020019250505060405180910390a15050565b60008054906101000a900473ffffffffffffffffffffffffffffffffffffffff1681565b60008082840190508381101561054e576040517f08c379a000000000000000000000000000000000000000000000000000000000815260040180806020018281038252601b8152602001807f536166654d6174683a206164646974696f6e206f766572666c6f77000000000081525060200191505060405180910390fd5b809150509291505056fea2646970667358221220d7d39c4cf8f03b56973f7f9959e01fa923a2c9eaa444dcd8461d95791d7e95e064736f6c634300060c0033",
   "immutableReferences": {},
   "sourceMap": "180:912:1:-:0;;;451:200;;;;;;;;;;490:15;;;;;:::i;:::-;;;;;;;;;;;;;;;;;;;;;;;;482:5;;:23;;;;;;;;;;;;;;;;;;180:912;;;;;;;;;;:::o;:::-;;;;;;;",
-  "deployedSourceMap": "180:912:1:-:0;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;848:242;;;:::i;:::-;;312:49;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;:::i;:::-;;;;;;;;;;;;;;;;;;;657:185;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;:::i;:::-;;244:22;;;:::i;:::-;;;;;;;;;;;;;;;;;;;;;848:242;920:1;892:13;:25;906:10;892:25;;;;;;;;;;;;;;;;:29;;884:60;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;954:5;;;;;;;;;;:17;;;972:10;984:13;:25;998:10;984:25;;;;;;;;;;;;;;;;954:56;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;1048:1;1020:13;:25;1034:10;1020:25;;;;;;;;;;;;;;;:29;;;;1064:19;1072:10;1064:19;;;;;;;;;;;;;;;;;;;;848:242::o;312:49::-;;;;;;;;;;;;;;;;;:::o;657:185::-;751:33;776:7;751:13;:20;765:5;751:20;;;;;;;;;;;;;;;;:24;;:33;;;;:::i;:::-;728:13;:20;742:5;728:20;;;;;;;;;;;;;;;:56;;;;799:36;807:5;814:13;:20;828:5;814:20;;;;;;;;;;;;;;;;799:36;;;;;;;;;;;;;;;;;;;;;;;;;;657:185;;:::o;244:22::-;;;;;;;;;;;;:::o;882:176:7:-;940:7;959:9;975:1;971;:5;959:17;;999:1;994;:6;;986:46;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;1050:1;1043:8;;;882:176;;;;:::o",
+  "deployedSourceMap": "180:912:1:-:0;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;848:242;;;:::i;:::-;;312:49;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;:::i;:::-;;;;;;;;;;;;;;;;;;;657:185;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;:::i;:::-;;244:22;;;:::i;:::-;;;;;;;;;;;;;;;;;;;;;848:242;920:1;892:13;:25;906:10;892:25;;;;;;;;;;;;;;;;:29;;884:60;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;954:5;;;;;;;;;;:17;;;972:10;984:13;:25;998:10;984:25;;;;;;;;;;;;;;;;954:56;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;1048:1;1020:13;:25;1034:10;1020:25;;;;;;;;;;;;;;;:29;;;;1064:19;1072:10;1064:19;;;;;;;;;;;;;;;;;;;;848:242::o;312:49::-;;;;;;;;;;;;;;;;;:::o;657:185::-;751:33;776:7;751:13;:20;765:5;751:20;;;;;;;;;;;;;;;;:24;;:33;;;;:::i;:::-;728:13;:20;742:5;728:20;;;;;;;;;;;;;;;:56;;;;799:36;807:5;814:13;:20;828:5;814:20;;;;;;;;;;;;;;;;799:36;;;;;;;;;;;;;;;;;;;;;;;;;;657:185;;:::o;244:22::-;;;;;;;;;;;;:::o;882:176:10:-;940:7;959:9;975:1;971;:5;959:17;;999:1;994;:6;;986:46;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;1050:1;1043:8;;;882:176;;;;:::o",
   "source": "// contracts/FDLTTokenManager.sol\n// SPDX-License-Identifier: MIT\n\npragma solidity >=0.4.21 <0.7.0;\n\nimport \"./FDLTToken.sol\";\nimport \"@openzeppelin/contracts/math/SafeMath.sol\";\n\ncontract FDLTTokenManager\n{\n    using SafeMath for uint256;\n    FDLTToken public token; // L’instance ERC20Token à déployer\n    mapping (address => uint256) public tokenPayments;\n\n    event Deposit(address dest, uint allowance);\n    event Claimed(address dest);\n\n    constructor() public {\n        token = new FDLTToken(); // crée une nouvelle instance du smart contract FDLTToken ! L’instance ERC20Token déployée sera stockée dans la variable “token”\n    }\n\n    function asyncDeposit(address _dest, uint256 _amount) public {\n        tokenPayments[_dest] = tokenPayments[_dest].add(_amount);\n        emit Deposit(_dest, tokenPayments[_dest]);\n    }\n\n    function claim() external {\n        require(tokenPayments[msg.sender] !=0, \"not enought tokens\");\n        token.mintTokenTo(msg.sender, tokenPayments[msg.sender]);\n        tokenPayments[msg.sender] = 0;\n        emit Claimed(msg.sender);\n    }\n}",
   "sourcePath": "/mnt/c/Users/damie/Documents/Smart_Retail/contracts/FDLTTokenManager.sol",
   "ast": {
@@ -148,7 +148,7 @@
         "id": 47,
         "nodeType": "ImportDirective",
         "scope": 141,
-        "sourceUnit": 721,
+        "sourceUnit": 902,
         "src": "127:51:1",
         "symbolAliases": [],
         "unitAlias": ""
@@ -176,10 +176,10 @@
               "id": 48,
               "name": "SafeMath",
               "nodeType": "UserDefinedTypeName",
-              "referencedDeclaration": 720,
+              "referencedDeclaration": 901,
               "src": "218:8:1",
               "typeDescriptions": {
-                "typeIdentifier": "t_contract$_SafeMath_$720",
+                "typeIdentifier": "t_contract$_SafeMath_$901",
                 "typeString": "library SafeMath"
               }
             },
@@ -632,7 +632,7 @@
                         "lValueRequested": false,
                         "memberName": "add",
                         "nodeType": "MemberAccess",
-                        "referencedDeclaration": 553,
+                        "referencedDeclaration": 734,
                         "src": "751:24:1",
                         "typeDescriptions": {
                           "typeIdentifier": "t_function_internal_pure$_t_uint256_$_t_uint256_$returns$_t_uint256_$bound_to$_t_uint256_$",
@@ -1406,7 +1406,7 @@
         "id": 47,
         "nodeType": "ImportDirective",
         "scope": 141,
-        "sourceUnit": 721,
+        "sourceUnit": 902,
         "src": "127:51:1",
         "symbolAliases": [],
         "unitAlias": ""
@@ -1434,10 +1434,10 @@
               "id": 48,
               "name": "SafeMath",
               "nodeType": "UserDefinedTypeName",
-              "referencedDeclaration": 720,
+              "referencedDeclaration": 901,
               "src": "218:8:1",
               "typeDescriptions": {
-                "typeIdentifier": "t_contract$_SafeMath_$720",
+                "typeIdentifier": "t_contract$_SafeMath_$901",
                 "typeString": "library SafeMath"
               }
             },
@@ -1890,7 +1890,7 @@
                         "lValueRequested": false,
                         "memberName": "add",
                         "nodeType": "MemberAccess",
-                        "referencedDeclaration": 553,
+                        "referencedDeclaration": 734,
                         "src": "751:24:1",
                         "typeDescriptions": {
                           "typeIdentifier": "t_function_internal_pure$_t_uint256_$_t_uint256_$returns$_t_uint256_$bound_to$_t_uint256_$",
@@ -2663,12 +2663,12 @@
         }
       },
       "links": {},
-      "address": "0x61544158e1285c7F5069bE7ecF0647ffb98123E2",
-      "transactionHash": "0x54cb55112c5dfecfaee44c16eac72d42f492c8e2c72ed4d061fa3f70bd8c40e0"
+      "address": "0x47E0950D2dB392117af125542E2438C7aD70b25F",
+      "transactionHash": "0x4de37fb7e88054658467d4e1e7a13544ada6bcfebb3e5f5153e6b12bc2a3edcb"
     }
   },
   "schemaVersion": "3.3.2",
-  "updatedAt": "2021-01-06T14:04:58.966Z",
+  "updatedAt": "2021-01-07T22:10:31.780Z",
   "networkType": "ethereum",
   "devdoc": {
     "kind": "dev",

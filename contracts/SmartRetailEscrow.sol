@@ -71,6 +71,8 @@ contract SmartRetailEscrow is Ownable, ReentrancyGuard {
     function setTokenManagerContractAddress(address _address) external onlyOwner {
         tokenManagerContract = TokenManagerInterface(_address);
     }
+    
+    function getDepositsOf() public view returns(uint){
         return escrow.depositsOf(msg.sender);
     }
 }

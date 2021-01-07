@@ -1,6 +1,6 @@
 import SmartRetailEscrow from './contracts/SmartRetailEscrow.json';
 // import FidelityToken from './contracts/FidelityToken.json';
-import FDLTToken from './contracts/FDLTToken.json';
+//import FDLTToken from './contracts/FDLTToken.json';
 import FDLTTokenManager from './contracts/FDLTTokenManager.json';
 
 // Here you can add data usefull for drizzle object initialisation
