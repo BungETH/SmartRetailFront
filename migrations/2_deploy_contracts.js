@@ -1,10 +1,9 @@
-const FidelityToken = artifacts.require("FidelityToken");
 const SmartRetailEscrow = artifacts.require("SmartRetailEscrow");
-const FDLTToken = artifacts.require("FDLTToken");
 const FDLTTokenManager = artifacts.require("FDLTTokenManager");
 
-
-module.exports = function(deployer) {
-  deployer.deploy(FidelityToken);
-  deployer.deploy(SmartRetailEscrow);
+module.exports = async function(deployer) {
+ 
+  await deployer.deploy(FDLTTokenManager).then(function(instance) {
+    return deployer.deploy(SmartRetailEscrow, instance.address);
+  });
 };

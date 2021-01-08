@@ -1,51 +1,82 @@
 // SPDX-License-Identifier: MIT
+<<<<<<< HEAD
 pragma solidity >=0.4.21 <0.7.5;
+=======
+pragma solidity 0.6.12;
+>>>>>>> 41fe833db711b4a69b1a10b2a62f998ffaaf35a4
 
 import "@openzeppelin/contracts/access/Ownable.sol";
 import "@openzeppelin/contracts/math/SafeMath.sol";
 import "@openzeppelin/contracts/utils/ReentrancyGuard.sol";
 import "@openzeppelin/contracts/payment/escrow/Escrow.sol";
 import "./FDLTTokenManager.sol";
+
+contract TokenManagerInterface {
+    function asyncDeposit(address dest, uint256 amount) external{}
+    function claim(address dest) external {}
+}
+
 contract SmartRetailEscrow is Ownable, ReentrancyGuard {
-    Escrow escrow;
-    FDLTTokenManager tokenManager;
-    
-    event FundSendToContract(string _contractMessage);
-    event FundSendToSeller(string _SellerMessage);
-    enum State { AWAITING_PAYMENT, AWAITING_DELIVERY }
-    State public currState = State.AWAITING_PAYMENT;
-    address payable seller;
-    address buyer;
-    
-    constructor() ReentrancyGuard() public {
+    Escrow private escrow;
+    TokenManagerInterface tokenManagerContract;
+
+    event FundSendToContract(string contractMessage,  uint orderId, address seller, address buyer, uint amount ,State state);
+    event FundSendToSeller(string sellerMessage,  uint orderId);
+
+    mapping(uint => Order) public listOrder;
+    struct Order {
+        address payable seller;
+        address buyer;
+        uint amount;
+        State state;
+    } 
+
+    enum State { AWAITING_PAYMENT, AWAITING_DELIVERY, PAID}
+
+    constructor(address _tokenManagerContractAddress) ReentrancyGuard() public {
         escrow = new Escrow();
-        tokenManager = new FDLTTokenManager();
-        buyer = msg.sender;
+        tokenManagerContract = TokenManagerInterface(_tokenManagerContractAddress);
     }
-    
+
     receive() external payable {}
-    
+
     /**
      * Receives payments from customers in contract
      */
-    function sendPayment(address payable _seller, uint _value) external payable onlyOwner{
-        seller = _seller;
-        require(currState == State.AWAITING_PAYMENT, "Already paid");
+    function sendPayment(address payable _seller, uint _value) external payable {
         require((_value) == msg.value, "You're not sending the correct value");
-        escrow.deposit{value: msg.value}(seller);
-        emit FundSendToContract("Successfully deposit funds to contract");
-        currState = State.AWAITING_DELIVERY;
+
+        Order memory newOrder;
+        newOrder.seller = _seller;
+        newOrder.buyer = msg.sender;
+        newOrder.amount = msg.value;
+
+        escrow.deposit{value: msg.value}(_seller);
+        newOrder.state = State.AWAITING_DELIVERY;
+        listOrder[block.timestamp] = newOrder;
+        emit FundSendToContract("Successfully deposit funds to contract", block.timestamp, newOrder.seller, newOrder.buyer,  newOrder.amount, newOrder.state);
     }
-        
+
     /**
      * Withdraw funds to seller
      */
-    function confirmDelivery(uint _amount) external onlyOwner nonReentrant() {
-        require(currState == State.AWAITING_DELIVERY, "You cannot confirm until deposit first");
-        escrow.withdraw(seller);
-        tokenManager.asyncDeposit(msg.sender, _amount);
-        emit FundSendToSeller("Successfully transferred funds to seller");
-        currState = State.AWAITING_PAYMENT;
+    function confirmDelivery(uint _orderId) external nonReentrant() {
+        require(listOrder[_orderId].state != State.PAID, "order is already paid");
+        require(listOrder[_orderId].state == State.AWAITING_DELIVERY, "You cannot confirm until deposit first");
+        require(listOrder[_orderId].amount == escrow.depositsOf(listOrder[_orderId].seller), "incorrect order value");
+        require(listOrder[_orderId].buyer == msg.sender, "caller is not the buyer");
+        escrow.withdraw(listOrder[_orderId].seller);
+        // todo function convert orderAmount to tokenAmount
+        tokenManagerContract.asyncDeposit(msg.sender, listOrder[_orderId].amount );
+        listOrder[_orderId].state = State.PAID;
+        emit FundSendToSeller("Successfully transferred funds to seller", _orderId);
     }
 
+    function setTokenManagerContractAddress(address _address) external onlyOwner {
+        tokenManagerContract = TokenManagerInterface(_address);
+    }
+    
+    function getDepositsOf() public view returns(uint){
+        return escrow.depositsOf(msg.sender);
+    }
 }
