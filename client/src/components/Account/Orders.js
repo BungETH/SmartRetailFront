@@ -57,7 +57,7 @@ const Orders = ({ userOrders }) => {
     <div className={classes.root}>
       {userOrders[0].orderId !== 0 && (
         userOrders.map((order) => (
-          <Accordion>
+          <Accordion key={order.orderId}>
             <AccordionSummary
               expandIcon={<ExpandMoreIcon />}
               aria-controls="panel1c-content"
@@ -77,7 +77,12 @@ const Orders = ({ userOrders }) => {
               </div>
               <div className={classes.column}>
                 <Typography className={classes.heading}>status</Typography>
-                <Typography className={classes.secondaryHeading}>{order.state}</Typography>
+                {order.state === '1' && (
+                <Typography className={classes.secondaryHeading}>awaiting delivery</Typography>
+                )}
+                {order.state === '2' && (
+                <Typography className={classes.secondaryHeading}>Paied</Typography>
+                )}
               </div>
             </AccordionSummary>
             <AccordionDetails className={classes.details}>
@@ -111,9 +116,9 @@ export default Orders;
 Orders.propTypes = {
   userOrders: PropTypes.arrayOf(
     PropTypes.shape({
-      orderId: PropTypes.number.isRequired,
+      orderId: PropTypes.string.isRequired,
       seller: PropTypes.string.isRequired,
-      amount: PropTypes.number.isRequired,
+      amount: PropTypes.string.isRequired,
       state: PropTypes.number.isRequired,
     }).isRequired,
   ).isRequired,
