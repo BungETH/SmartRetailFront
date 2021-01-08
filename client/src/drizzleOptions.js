@@ -1,5 +1,7 @@
 import SmartRetailEscrow from './contracts/SmartRetailEscrow.json';
 import FidelityToken from './contracts/FidelityToken.json';
+import FDLTToken from './contracts/FDLTToken.json';
+import FDLTTokenManager from './contracts/FDLTTokenManager.json';
 
 // Here you can add data usefull for drizzle object initialisation
 // like contracts, events, or provider
@@ -10,9 +12,10 @@ const options = {
       url: 'ws://127.0.0.1:7545',
     },
   },
-  contracts: [SmartRetailEscrow, FidelityToken],
+  contracts: [SmartRetailEscrow, FidelityToken, FDLTToken, FDLTTokenManager],
   events: {
     SmartRetailEscrow: ['FundSendToContract','FundSendToSeller'],
+    FDLTTokenManager: ['Deposit'],
   },
   // syncAlways:true,
 };

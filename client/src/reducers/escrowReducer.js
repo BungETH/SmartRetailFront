@@ -3,10 +3,13 @@ import {
     STORE_TRANSACTION_PARAMS,
     FETCH_ESCROW_CONTRACT,
 } from '../actions/escrow';
+import {
+  STORE_PRODUCT_PRICE_IN_WEI,
+} from '../actions/fidelity';
   const initialState = {
     contract:{},
     sellerAddress:'',
-    amount:0,
+    amountInWei: 0,
   };
   
   const escrowReducer = (state = initialState, action = {}) => {
@@ -16,6 +19,12 @@ import {
           ...state,
           sellerAddress: action.seller,
           amount: action.value,
+        };
+
+      case STORE_PRODUCT_PRICE_IN_WEI:
+        return {
+          ...state,
+          amountInWei: action.price,
         };
 
       case FETCH_ESCROW_CONTRACT:
