@@ -1,13 +1,13 @@
 import { connect } from 'react-redux';
 import { sendConfirmationDelivery } from '../../actions/escrow';
-import { fetchUserBalance, claimTokens} from '../../actions/fidelity';
+import { fetchUserBalance, claimTokens } from '../../actions/fidelity';
 
 import Account from '../../components/Account';
 
 const mapStateToProps = (state) => ({
-    tokenAmount: state.fidelity.tokenEarnedInWei,
-    balance: state.fidelity.userBalance,
-  });
+  orders: state.escrow.userOrder,
+  balance: state.fidelity.userBalance,
+});
 
 const mapDispatchToProps = (dispatch) => ({
   sendConfirmationDelivery: () => {
@@ -18,10 +18,9 @@ const mapDispatchToProps = (dispatch) => ({
     dispatch(fetchUserBalance(id));
   },
 
-  claimTokens: (id) => {
+  claimTokens: () => {
     dispatch(claimTokens());
   },
-  
 });
 
 export default connect(

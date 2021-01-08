@@ -17,8 +17,8 @@ contract SmartRetailEscrow is Ownable, ReentrancyGuard {
     FDLTTokenManager public manager;
     FDLTTokenManagerInterface private tokenManagerContract;
 
-    event FundSendToContract(string _contractMessage, uint OrderId);
-    event FundSendToSeller(string _SellerMessage,  uint OrderId);
+    event FundSendToContract(string contractMessage,  uint orderId, address seller, address buyer, uint amount ,State state);
+    event FundSendToSeller(string sellerMessage,  uint orderId);
 
     mapping(uint => Order) public listOrder;
     struct Order {
@@ -52,7 +52,7 @@ contract SmartRetailEscrow is Ownable, ReentrancyGuard {
         escrow.deposit{value: msg.value}(_seller);
         newOrder.state = State.AWAITING_DELIVERY;
         listOrder[block.timestamp] = newOrder;
-        emit FundSendToContract("Successfully deposit funds to contract",block.timestamp);
+        emit FundSendToContract("Successfully deposit funds to contract", block.timestamp, newOrder.seller, newOrder.buyer,  newOrder.amount, newOrder.state);
     }
 
     /**

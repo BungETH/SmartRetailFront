@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { usePromiseTracker } from "react-promise-tracker";
 // local import
 import Marketplace from '../../containers/Marketplace';
-import Loading  from '../ReactLoading';
+import Loading from '../ReactLoading';
 import './dapp.scss';
 
 const Dapp = ({
