@@ -1,10 +1,10 @@
 import {
   SEND_TRANSACTION,
   SEND_CONFIRMATION_DELIVERY,
+  storeOrders,
 } from '../actions/escrow';
 
 const BigNumber = require('bignumber.js');
-
 
 const EscrowMiddleware = (store) => (next) => (action) => {
   switch (action.type) {
@@ -13,29 +13,37 @@ const EscrowMiddleware = (store) => (next) => (action) => {
       const escrowState = store.getState().escrow;
       const seller = escrowState.sellerAddress;
       const amount = new BigNumber(escrowState.amountInWei);
-      console.log(escrowState);
-      async function sendPaymentToEscrow() {
-        const transaction = await escrowState.contract.methods.sendPayment(seller, amount).send({ gas: 900000, from: account, value: amount });
-        console.log(transaction);
-      }
-      sendPaymentToEscrow();
+      const payment = async function sendPaymentToEscrow() {
+        const transaction = await escrowState.contract.methods.sendPayment(seller, amount).send({
+          gas: 900000,
+          from: account,
+          value: amount,
+        });
+        console.log(transaction.events.FundSendToContract.returnValues);
+        const values = transaction.events.FundSendToContract.returnValues;
+        store.dispatch(storeOrders(values.orderId, values.seller, values.amount, values.state));
+      };
+      payment();
       next(action);
-		  break;
-    };
+      break;
+    }
 
     case SEND_CONFIRMATION_DELIVERY: {
       const escrowState = store.getState().escrow;
       const { account } = store.getState().fidelity;
       const amountInWei = new BigNumber(escrowState.amountInWei);
-      console.log(amountInWei);
-      async function sendConfirmationToEscrow() {
-        const transaction = await escrowState.contract.methods.confirmDelivery(amountInWei).send({ gas: 900000, from: account });
+      const confirm = async function sendConfirmationToEscrow() {
+        const transaction = await escrowState.contract.methods.confirmDelivery(amountInWei).send({
+          gas: 900000,
+          from: account,
+        });
         console.log(transaction);
-        // appeller token manager 
-      }
-      sendConfirmationToEscrow();
-    };
+        // appeller token manager
+      };
+      confirm();
+      break;
+    }
     default: next(action);
-	}
+  }
 };
 export default EscrowMiddleware;

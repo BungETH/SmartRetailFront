@@ -40,10 +40,10 @@ const Marketplace = ({
   const classes = useStyles();
   const handleBuy = () => {
     sendProduct(productId);
-    setTimeout(() => { 
+    setTimeout(() => {
       fetchTransactionParams(sellerAddress, price);
     }, 2000);
-    setTimeout(() => { 
+    setTimeout(() => {
       sendBalance(1);
     }, 3000);
   };
