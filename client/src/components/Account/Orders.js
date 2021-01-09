@@ -49,14 +49,14 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const Orders = ({ userOrders }) => {
+const Orders = ({ orders, sendConfirmationDelivery }) => {
   const classes = useStyles();
-  console.log(userOrders[0].orderId);
-
+  console.log(orders);
+ 
   return (
     <div className={classes.root}>
-      {userOrders[0].orderId !== 0 && (
-        userOrders.map((order) => (
+      {orders[0].orderId !== 0 && (
+        orders.map((order) => (
           <Accordion key={order.orderId}>
             <AccordionSummary
               expandIcon={<ExpandMoreIcon />}
@@ -103,8 +103,11 @@ const Orders = ({ userOrders }) => {
             <Divider />
             <AccordionActions>
               <Button size="small">Cancel</Button>
-              <Button size="small" color="primary">
-                Save
+              <Button
+                size="small"
+                color="primary"
+                onClick={() => sendConfirmationDelivery(order.orderId)}>
+                  Confirm Delivery
               </Button>
             </AccordionActions>
           </Accordion>
@@ -114,11 +117,11 @@ const Orders = ({ userOrders }) => {
 };
 export default Orders;
 Orders.propTypes = {
-  userOrders: PropTypes.arrayOf(
+  orders: PropTypes.arrayOf(
     PropTypes.shape({
-      orderId: PropTypes.string.isRequired,
+      orderId: PropTypes.number.isRequired,
       seller: PropTypes.string.isRequired,
-      amount: PropTypes.string.isRequired,
+      amount: PropTypes.number.isRequired,
       state: PropTypes.number.isRequired,
     }).isRequired,
   ).isRequired,
