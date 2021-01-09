@@ -9,7 +9,7 @@ import "./FDLTTokenManager.sol";
 
 /** @author The SmartRetail Team
   * @title TokenManagerInterface
- 	* @dev Import asyncDeposit and claim from FDLTTokenManager.sol
+ 	* @dev Import asyncDeposit and claim from FDLTTokenManager.sol +1
 	*/
 contract TokenManagerInterface {
     function asyncDeposit(address dest, uint256 amount) external{}
@@ -21,7 +21,8 @@ contract TokenManagerInterface {
 	*/
 contract SmartRetailEscrow is Ownable, ReentrancyGuard { 
 	Escrow private escrow;
-	TokenManagerInterface tokenManagerContract;
+	FDLTTokenManager public manager;
+	FDLTTokenManagerInterface private tokenManagerContract;
 
 	event FundSendToContract(string contractMessage,  uint orderId, address seller, address buyer, uint amount ,State state);
 	event FundSendToSeller(string sellerMessage,  uint orderId);
@@ -36,12 +37,14 @@ contract SmartRetailEscrow is Ownable, ReentrancyGuard {
 
 	enum State { AWAITING_PAYMENT, AWAITING_DELIVERY, PAID}
 
-	constructor(address _tokenManagerContractAddress) ReentrancyGuard() public {
+	constructor() ReentrancyGuard() public {
 		/// @notice Create new escrow contract for current order
-			escrow = new Escrow();
-		/// @notice Fetch the right interface contract where FDLTTokenManager.sol is deployed
-			tokenManagerContract = TokenManagerInterface(_tokenManagerContractAddress);
-	}
+        escrow = new Escrow();
+		/// @notice crée une nouvelle instance du smart contract FDLTTokenManager ! L’instance FDLTTokenManager déployée sera stockée dans la variable “manager”
+        manager = new FDLTTokenManager(); 
+        /// @notice Fetch the right interface contract where FDLTTokenManager.sol is deployed
+		tokenManagerContract = FDLTTokenManagerInterface(address(manager));
+    }
 
 	receive() external payable {}
 
