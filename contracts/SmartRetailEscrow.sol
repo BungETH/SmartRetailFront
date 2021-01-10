@@ -9,9 +9,9 @@ import "./FDLTTokenManager.sol";
 
 /** @author The SmartRetail Team
   * @title TokenManagerInterface
- 	* @dev Import asyncDeposit and claim from FDLTTokenManager.sol +1
+	* @dev Import asyncDeposit and claim from FDLTTokenManager.sol 
 	*/
-contract TokenManagerInterface {
+contract FDLTTokenManagerInterface {
     function asyncDeposit(address dest, uint256 amount) external{}
     function claim(address dest) external {}
 }
@@ -24,7 +24,7 @@ contract SmartRetailEscrow is Ownable, ReentrancyGuard {
 	FDLTTokenManager public manager;
 	FDLTTokenManagerInterface private tokenManagerContract;
 
-	event FundSendToContract(string contractMessage,  uint orderId, address seller, address buyer, uint amount ,State state);
+	event FundSendToContract(string contractMessage, FDLTTokenManager FDLTTokenManagerContract,  uint orderId, address seller, address buyer, uint amount ,State state);
 	event FundSendToSeller(string sellerMessage,  uint orderId);
 
 	mapping(uint => Order) public listOrders;
@@ -61,16 +61,16 @@ contract SmartRetailEscrow is Ownable, ReentrancyGuard {
 
 			newOrder.seller = _seller;
 			newOrder.buyer = msg.sender;
-			newOrder.amount = msg.value;
+			newOrder.amount =_value;
 
 			escrow.deposit{value: msg.value}(_seller);
 			newOrder.state = State.AWAITING_DELIVERY;
 			listOrders[block.timestamp] = newOrder;
 
-			emit FundSendToContract("Successfully deposit funds to contract", block.timestamp, newOrder.seller, newOrder.buyer,  newOrder.amount, newOrder.state);
+			emit FundSendToContract("Successfully deposit funds to contract",manager, block.timestamp, newOrder.seller, newOrder.buyer,  newOrder.amount, newOrder.state);
 	}
 
-		/**
+	/**
 		* @notice Withdraw funds from escrow to seller address
 		* @dev The _orderId param must be the block timestamp of the associated sendPayement fonction transaction
 		* @param _orderId The order id
@@ -78,7 +78,7 @@ contract SmartRetailEscrow is Ownable, ReentrancyGuard {
 	function confirmDelivery(uint _orderId) external nonReentrant() {
 			require(listOrders[_orderId].state != State.PAID, "order is already paid");
 			require(listOrders[_orderId].state == State.AWAITING_DELIVERY, "You cannot confirm until deposit first");
-			require(listOrders[_orderId].amount == escrow.depositsOf(listOrders[_orderId].seller), "incorrect order value");
+			// require(listOrders[_orderId].amount == escrow.depositsOf(listOrders[_orderId].seller), "incorrect order value");
 			require(listOrders[_orderId].buyer == msg.sender, "caller is not the buyer");
 
 			escrow.withdraw(listOrders[_orderId].seller);
@@ -89,12 +89,16 @@ contract SmartRetailEscrow is Ownable, ReentrancyGuard {
 			emit FundSendToSeller("Successfully transferred funds to seller", _orderId);
 	}
 
+	function claimFDLTToken() external  {
+		tokenManagerContract.claim(msg.sender);
+	}
+
 	/**
 		* @notice Set a new FDLTTokenManager.sol contract address in case of updates
 		* @param _address The FDLTTokenManager.sol contract address
 		*/
 	function setTokenManagerContractAddress(address _address) external onlyOwner {
-			tokenManagerContract = TokenManagerInterface(_address);
+			tokenManagerContract = FDLTTokenManagerInterface(_address);
 	}
 	
 

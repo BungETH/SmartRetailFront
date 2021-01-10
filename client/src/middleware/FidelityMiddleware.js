@@ -6,10 +6,9 @@ import {
   const FidelityMiddleware = (store) => (next) => (action) => {
     switch (action.type) {
       case CLAIM_TOKENS: {
-        const fidelityState = store.getState().fidelity;
-        console.log(fidelityState);
+        const escrowState = store.getState().escrow;
         async function claimTokens() {
-          const transaction = await fidelityState.contract.methods.claim().send({ gas: 3000000, from: fidelityState.account });
+          const transaction = await escrowState.contract.methods.claimFDLTToken().send({ gas: 3000000, from: escrowState.account });
           console.log(transaction);
         }
         claimTokens();
