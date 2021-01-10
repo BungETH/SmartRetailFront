@@ -19,7 +19,7 @@ contract FDLTTokenManager is Ownable
     mapping (address => uint256) public tokenPayments;
 
     event Deposit(address dest, uint allowance);
-    event Claimed(address dest);
+    event Claimed(address dest, address tokenAddress);
 
     constructor() public {
         token = new FDLTToken(); // crée une nouvelle instance du smart contract FDLTToken ! L’instance ERC20Token déployée sera stockée dans la variable “token”
@@ -35,7 +35,7 @@ contract FDLTTokenManager is Ownable
         require(tokenPayments[_dest] !=0, "not enought tokens");
         FDLTTokenInterfaceContract.mintTokenTo(_dest,tokenPayments[_dest]);
         tokenPayments[_dest] = 0;
-        emit Claimed(_dest);
+        emit Claimed(_dest, address(token));
     }
 
     function setFDLTTokenContractAddress(address _address) external onlyOwner {
