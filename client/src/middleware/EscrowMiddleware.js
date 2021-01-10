@@ -31,9 +31,8 @@ const EscrowMiddleware = (store) => (next) => (action) => {
     case SEND_CONFIRMATION_DELIVERY: {
       const escrowState = store.getState().escrow;
       const { account } = store.getState().fidelity;
-      const amountInWei = new BigNumber(escrowState.amountInWei);
       const confirm = async function sendConfirmationToEscrow() {
-        const transaction = await escrowState.contract.methods.confirmDelivery(amountInWei).send({
+        const transaction = await escrowState.contract.methods.confirmDelivery(action.orderId).send({
           gas: 900000,
           from: account,
         });

@@ -17,6 +17,10 @@ const useStyles = makeStyles((theme) => ({
     width: '100%',
     alignSelf: 'center',
   },
+  
+  content:{
+    margin:'6px 0',
+  },
   heading: {
     fontSize: theme.typography.pxToRem(15),
   },
@@ -57,7 +61,11 @@ const Orders = ({ orders, sendConfirmationDelivery }) => {
     <div className={classes.root}>
       {orders[0].orderId !== 0 && (
         orders.map((order) => (
-          <Accordion key={order.orderId}>
+          <Accordion
+            key={order.orderId}
+            TransitionProps={{ unmountOnExit: true }} 
+          >
+            
             <AccordionSummary
               expandIcon={<ExpandMoreIcon />}
               aria-controls="panel1c-content"
@@ -85,21 +93,6 @@ const Orders = ({ orders, sendConfirmationDelivery }) => {
                 )}
               </div>
             </AccordionSummary>
-            <AccordionDetails className={classes.details}>
-              <div className={classes.column} />
-              <div className={classes.column}>
-                <Chip label="Barbados" onDelete={() => {}} />
-              </div>
-              <div className={clsx(classes.column, classes.helper)}>
-                <Typography variant="caption">
-                  Select your destination of choice
-                  <br />
-                  <a href="#secondary-heading-and-columns" className={classes.link}>
-                    Learn more
-                  </a>
-                </Typography>
-              </div>
-            </AccordionDetails>
             <Divider />
             <AccordionActions>
               <Button size="small">Cancel</Button>

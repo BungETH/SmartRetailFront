@@ -31,11 +31,11 @@ contract FDLTTokenManager is Ownable
         emit Deposit(_dest, tokenPayments[_dest]);
     }
 
-    function claim() external {
-        require(tokenPayments[msg.sender] !=0, "not enought tokens");
-        FDLTTokenInterfaceContract.mintTokenTo(msg.sender,tokenPayments[msg.sender]);
-        tokenPayments[msg.sender] = 0;
-        emit Claimed(msg.sender);
+    function claim(address _dest) external {
+        require(tokenPayments[_dest] !=0, "not enought tokens");
+        FDLTTokenInterfaceContract.mintTokenTo(_dest,tokenPayments[_dest]);
+        tokenPayments[_dest] = 0;
+        emit Claimed(_dest);
     }
 
     function setFDLTTokenContractAddress(address _address) external onlyOwner {

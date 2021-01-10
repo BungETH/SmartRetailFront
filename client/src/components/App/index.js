@@ -11,7 +11,6 @@ import Loading from "../ReactLoading";
 import './app.scss';
 
 // It instanciate new drizzle object with our drizzleOptions
-
 const drizzle = new Drizzle(drizzleOptions, store);
 
 const App = ({ fetchCurrentAccount, currentAccount }) => {
@@ -36,6 +35,7 @@ const App = ({ fetchCurrentAccount, currentAccount }) => {
       <DrizzleContext.Consumer>
         {(drizzleContext) => {
           const { drizzleState, initialized } = drizzleContext;
+          console.log(drizzleState);
           return initialized ? (
             <div className="app">
               <Router>

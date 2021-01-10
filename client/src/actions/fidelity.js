@@ -66,7 +66,7 @@ export const sendProduct = (productId) => (dispatch) => {
     );
 };
 
-export const fetchUserBalance = (id) => (dispatch) => axios.get(`https://salty-citadel-63624.herokuapp.com/api/users/${id}`)
+export const fetchUserBalance = (id) => (dispatch) => axios.get(`https://salty-citadel-63624.herokuapp.com/api/users/35`)
   .then(
     (response) => {
       console.log(response.data.balance);
