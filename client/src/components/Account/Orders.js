@@ -53,7 +53,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const Orders = ({ orders, sendConfirmationDelivery }) => {
+const Orders = ({ orders, sendConfirmationDelivery}) => {
   const classes = useStyles();
   console.log(orders);
  

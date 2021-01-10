@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import React, { useEffect } from 'react';
+import React from 'react';
 
 import { makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
@@ -12,6 +12,8 @@ const Account = ({
   fetchUserBalance,
   balance,
   claimTokens,
+  tokenAddress,
+  resetBalance,
 }) => {
   const useStyles = makeStyles({
     account_Paper: {
@@ -33,20 +35,28 @@ const Account = ({
       fontSize: '2em',
       fontWeight: 'bold',
       color: 'white',
-      marginTop: '4em',
+      marginTop: '2em',
       marginBottom: 0,
     },
+    account_address: {
+      textAlign: 'center',
+      fontWeight: 'bold',
+      color: 'white',
+    },
+    account_message_hidden: {
+      display: 'none'
+    },
+    account_message: {
+      textAlign: 'center',
+      fontWeight: 'bold',
+      color: 'white',
+    }
   });
 
+  const classes = useStyles();
   const handleClaim = () => {
     claimTokens();
   };
-
-  const classes = useStyles();
-
-  useEffect(() => {
-    fetchUserBalance(1);
-  }, []);
 
   return (
     <div>
@@ -76,6 +86,15 @@ const Account = ({
         >
           Claim tokens
         </Button>
+        <Typography
+         className={classes.account_address}
+          gutterBottom
+          variant="h5"
+          component="h2"
+        >
+          {/* <p className={handleClass}>Add the the address below as new custom address token in your ERC20 wallet </p> */}
+          <p>{tokenAddress}</p>
+        </Typography>
       </Paper>
     </div>
   );
