@@ -20,6 +20,7 @@ const Marketplace = ({
   description,
   productId,
   price,
+  imgUrl
 }) => {
   const useStyles = makeStyles({
     homeCards: {
@@ -53,7 +54,7 @@ const Marketplace = ({
         <CardActionArea>
           <CardMedia
             className={classes.media}
-            image={testImg}
+            image={imgUrl}
             title="Contemplative Reptile"
           />
           <CardContent>

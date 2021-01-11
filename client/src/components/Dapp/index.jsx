@@ -3,11 +3,7 @@ import PropTypes from 'prop-types';
 import { usePromiseTracker } from "react-promise-tracker";
 // local import
 import Marketplace from '../../containers/Marketplace';
-<<<<<<< HEAD:client/src/components/Dapp/index.jsx
-import Loading  from '../ReactLoading/Loading';
-=======
-import Loading from '../ReactLoading';
->>>>>>> 41fe833db711b4a69b1a10b2a62f998ffaaf35a4:client/src/components/Dapp/index.js
+import Loading from '../ReactLoading/Loading';
 import './dapp.scss';
 
 const Dapp = ({
@@ -38,6 +34,7 @@ const Dapp = ({
           <Marketplace
             key={product.id}
             productId={product.id}
+            imgUrl={product.imgUrl}
             title={product.title}
             description={product.description}
             price={product.unitPrice}
