@@ -9,7 +9,7 @@ import "./FDLTTokenManager.sol";
 
 /** @author The SmartRetail Team
   * @title TokenManagerInterface
-	* @dev Import asyncDeposit and claim from FDLTTokenManager.sol 
+	* @dev Import asyncDeposit and claim from FDLTTokenManager.sol
 	*/
 contract FDLTTokenManagerInterface {
     function asyncDeposit(address dest, uint256 amount) external{}
@@ -41,7 +41,7 @@ contract SmartRetailEscrow is Ownable, ReentrancyGuard {
 		/// @notice Create new escrow contract for current order
         escrow = new Escrow();
 		/// @notice crée une nouvelle instance du smart contract FDLTTokenManager ! L’instance FDLTTokenManager déployée sera stockée dans la variable “manager”
-        manager = new FDLTTokenManager(); 
+        manager = new FDLTTokenManager();
         /// @notice Fetch the right interface contract where FDLTTokenManager.sol is deployed
 		tokenManagerContract = FDLTTokenManagerInterface(address(manager));
     }
@@ -101,7 +101,6 @@ contract SmartRetailEscrow is Ownable, ReentrancyGuard {
 			tokenManagerContract = FDLTTokenManagerInterface(_address);
 	}
 	
-
 	/**
 		* @notice Get the deposit amount locked in escrow contract waiting to transfer to caller
 		* @return uint the pending amount of caller
