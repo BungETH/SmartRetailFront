@@ -1,14 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/core/styles';
-import clsx from 'clsx';
 import Accordion from '@material-ui/core/Accordion';
-import AccordionDetails from '@material-ui/core/AccordionDetails';
 import AccordionSummary from '@material-ui/core/AccordionSummary';
 import AccordionActions from '@material-ui/core/AccordionActions';
 import Typography from '@material-ui/core/Typography';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-import Chip from '@material-ui/core/Chip';
 import Button from '@material-ui/core/Button';
 import Divider from '@material-ui/core/Divider';
 
@@ -17,9 +14,8 @@ const useStyles = makeStyles((theme) => ({
     width: '100%',
     alignSelf: 'center',
   },
-  
-  content:{
-    margin:'6px 0',
+  content: {
+    margin: '6px 0',
   },
   heading: {
     fontSize: theme.typography.pxToRem(15),
@@ -53,19 +49,17 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const Orders = ({ orders, sendConfirmationDelivery}) => {
+const Orders = ({ orders, sendConfirmationDelivery }) => {
   const classes = useStyles();
-  console.log(orders);
- 
+
   return (
     <div className={classes.root}>
       {orders[0].orderId !== 0 && (
         orders.map((order) => (
           <Accordion
             key={order.orderId}
-            TransitionProps={{ unmountOnExit: true }} 
+            TransitionProps={{ unmountOnExit: true }}
           >
-            
             <AccordionSummary
               expandIcon={<ExpandMoreIcon />}
               aria-controls="panel1c-content"
@@ -99,8 +93,9 @@ const Orders = ({ orders, sendConfirmationDelivery}) => {
               <Button
                 size="small"
                 color="primary"
-                onClick={() => sendConfirmationDelivery(order.orderId)}>
-                  Confirm Delivery
+                onClick={() => sendConfirmationDelivery(order.orderId)}
+              >
+                Confirm Delivery
               </Button>
             </AccordionActions>
           </Accordion>
@@ -118,4 +113,5 @@ Orders.propTypes = {
       state: PropTypes.number.isRequired,
     }).isRequired,
   ).isRequired,
+  sendConfirmationDelivery: PropTypes.func.isRequired,
 };

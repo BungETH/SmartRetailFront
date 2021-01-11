@@ -3,13 +3,13 @@ import { fetchCurrentAccount } from '../../actions/fidelity';
 import App from '../../components/App';
 
 const mapStateToProps = (state) => ({
-    currentAccount: state.fidelity.account,
-  });
+  currentAccount: state.fidelity.account,
+});
 
 const mapDispatchToProps = (dispatch) => ({
-    fetchCurrentAccount: (account) => {
+  fetchCurrentAccount: (account) => {
     dispatch(fetchCurrentAccount(account));
-},
+  },
 });
 
 export default connect(

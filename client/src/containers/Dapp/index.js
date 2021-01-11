@@ -8,7 +8,7 @@ const mapStateToProps = (state) => ({
   currentAccount: state.fidelity.account,
   products: state.products,
   balance: state.fidelity.fidelityTokenAmount,
-  });
+});
 
 const mapDispatchToProps = (dispatch) => ({
   fetchFidelityContract: (contract) => {
@@ -18,8 +18,7 @@ const mapDispatchToProps = (dispatch) => ({
   fetchEscrowContract: (contract) => {
     dispatch(fetchEscrowContract(contract));
   },
-  
-  
+
   fetchProducts: (products) => {
     dispatch(fetchProducts(products));
 },
