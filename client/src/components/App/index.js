@@ -1,14 +1,14 @@
+import PropTypes from "prop-types";
 import React, { useEffect } from 'react';
-import { usePromiseTracker } from "react-promise-tracker";
 import { DrizzleContext } from '@drizzle/react-plugin';
 import { Drizzle } from '@drizzle/store';
+import { BrowserRouter as Router } from 'react-router-dom';
 import store from '../../store';
 import drizzleOptions from '../../drizzleOptions';
-import { BrowserRouter as Router } from 'react-router-dom';
+
 import DappRouter from '../../utils/DappRouter';
 import NavBar from '../NavBar';
-import Loading from "../ReactLoading";
-import './app.scss';
+import Loading from '../ReactLoading';
 
 // It instanciate new drizzle object with our drizzleOptions
 const drizzle = new Drizzle(drizzleOptions, store);
@@ -28,14 +28,12 @@ const App = ({ fetchCurrentAccount, currentAccount }) => {
     getAccount();
   }, [currentAccount]);
 
-  const { promiseInProgress } = usePromiseTracker();
   return (
     // Here is native drizzle components who helps to Dapp initialisation
     <DrizzleContext.Provider drizzle={drizzle}>
       <DrizzleContext.Consumer>
         {(drizzleContext) => {
-          const { drizzleState, initialized } = drizzleContext;
-          console.log(drizzleState);
+          const { initialized } = drizzleContext;
           return initialized ? (
             <div className="app">
               <Router>
@@ -44,12 +42,17 @@ const App = ({ fetchCurrentAccount, currentAccount }) => {
               </Router>
             </div>
           ) : (
-            <Loading type={"cylon"} color={"#357EDD"} />
+            <Loading type="cylon" color="#357EDD" />
           );
         }}
       </DrizzleContext.Consumer>
     </DrizzleContext.Provider>
   );
+};
+
+App.propTypes = {
+  currentAccount: PropTypes.string.isRequired,
+  fetchCurrentAccount: PropTypes.func.isRequired,
 };
 
 export default App;

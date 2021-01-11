@@ -7972,12 +7972,12 @@
         }
       },
       "links": {},
-      "address": "0x7B960b183B199Bf63579f18d43664797Bb567771",
-      "transactionHash": "0x6a32aa809c399dfbcc084b6555310a8218b3dd783b066badc647733bfcc28957"
+      "address": "0x211A94e1d12d6fd7696dDCCE390Fe5E410a0A460",
+      "transactionHash": "0xf2fdfe539729f07f4e6c25155ed682a36dcc5f98eff7cfbff19e4ed7709c93af"
     }
   },
   "schemaVersion": "3.3.2",
-  "updatedAt": "2021-01-10T19:53:51.420Z",
+  "updatedAt": "2021-01-11T08:04:34.258Z",
   "networkType": "ethereum",
   "devdoc": {
     "author": "The SmartRetail Team",

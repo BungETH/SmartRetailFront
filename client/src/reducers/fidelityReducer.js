@@ -8,10 +8,10 @@ import {
 } from '../actions/fidelity';
 
 const initialState = {
-  tokenAddress:'',
-  account:'',
-  tokenEarnedInWei:0,
-  userBalance:0,
+  tokenAddress: '',
+  account: '',
+  tokenEarnedInWei: 0,
+  userBalance: 0,
 };
 
 const fidelityReducer = (state = initialState, action = {}) => {
@@ -27,7 +27,6 @@ const fidelityReducer = (state = initialState, action = {}) => {
         ...state,
         account: action.account,
       };
-       
     case STORE_TOKEN_AMOUNT_IN_WEI:
       return {
         ...state,
@@ -36,23 +35,20 @@ const fidelityReducer = (state = initialState, action = {}) => {
     case STORE_USER_BALANCE:
       return {
         ...state,
-        userBalance: state.userBalance+action.balance,
+        userBalance: state.userBalance + action.balance,
       };
-      case STORE_TOKEN_ADDRESS:
-        return {
-          ...state,
-          tokenAddress: action.address,
-        };
-        case RESET_BALANCE:
-        return {
-          ...state,
-          userBalance: 0,
-        };
-      
-		default: return state;
-	};
+    case STORE_TOKEN_ADDRESS:
+      return {
+        ...state,
+        tokenAddress: action.address,
+      };
+    case RESET_BALANCE:
+      return {
+        ...state,
+        userBalance: 0,
+      };
+    default: return state;
+  }
 };
-
-
 
 export default fidelityReducer;

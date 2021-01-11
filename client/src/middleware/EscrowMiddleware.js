@@ -19,7 +19,6 @@ const EscrowMiddleware = (store) => (next) => (action) => {
           from: account,
           value: amount,
         });
-        console.log(transaction.events.FundSendToContract.returnValues);
         const values = transaction.events.FundSendToContract.returnValues;
         store.dispatch(storeOrders(values.orderId, values.seller, values.amount, values.state));
       };
@@ -36,7 +35,7 @@ const EscrowMiddleware = (store) => (next) => (action) => {
           gas: 900000,
           from: account,
         });
-        console.log(transaction);
+        // console.log(transaction);
         // appeller token manager
       };
       confirm();
