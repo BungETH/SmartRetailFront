@@ -35,23 +35,9 @@ const Marketplace = ({
     },
   });
 
-<<<<<<< HEAD
   
   const classes = useStyles();
   
-=======
-  const sellerAddress = '0xC96822B34c7F892B09A39F080B2659105af00146';
-  const classes = useStyles();
-  const handleBuy = () => {
-    sendProduct(productId);
-    setTimeout(() => {
-      fetchTransactionParams(sellerAddress, price);
-    }, 2000);
-    setTimeout(() => {
-      sendBalance(35);
-    }, 3000);
-  };
->>>>>>> 605ee880fa9dc29577edc1c6dea9cb9e4671e89c
   return (
     <div>
       <Card raised className={classes.homeCards}>
@@ -99,10 +85,6 @@ const Marketplace = ({
 
 Marketplace.propTypes = {
   description: PropTypes.any.isRequired,
-<<<<<<< HEAD
-=======
-  fetchTransactionParams: PropTypes.func.isRequired,
->>>>>>> 605ee880fa9dc29577edc1c6dea9cb9e4671e89c
   img: PropTypes.any.isRequired,
   price: PropTypes.any.isRequired,
   productId: PropTypes.any.isRequired,

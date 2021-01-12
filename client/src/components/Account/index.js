@@ -9,10 +9,7 @@ import Typography from '@material-ui/core/Typography';
 import Orders from '../../containers/Account/Orders';
 
 const Account = ({
-<<<<<<< HEAD
   drizzle,
-=======
->>>>>>> 605ee880fa9dc29577edc1c6dea9cb9e4671e89c
   balance,
   claimTokens,
   tokenAddress,
@@ -63,13 +60,9 @@ const Account = ({
         >
           <p>Pending delivery :</p>
         </Typography>
-<<<<<<< HEAD
         <Orders
           drizzle={drizzle}
         />
-=======
-        <Orders />
->>>>>>> 605ee880fa9dc29577edc1c6dea9cb9e4671e89c
         <Typography
           className={classes.account_text}
           gutterBottom

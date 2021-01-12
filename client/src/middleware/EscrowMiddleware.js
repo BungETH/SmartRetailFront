@@ -2,10 +2,7 @@ import axios from 'axios';
 import {
   SEND_CONFIRMATION_DELIVERY,
   storeOrders,
-<<<<<<< HEAD
   // updateStatus,
-=======
->>>>>>> 605ee880fa9dc29577edc1c6dea9cb9e4671e89c
 } from '../actions/escrow';
 import { SEND_TRANSACTION } from '../actions/fidelity';
 
@@ -22,7 +19,6 @@ const EscrowMiddleware = (store) => (next) => (action) => {
       const amount = new BigNumber(escrowState.amountInWei);
       const payment = async function sendPaymentToEscrow() {
         const transaction = await escrowState.contract.methods.sendPayment(seller, amount).send({
-<<<<<<< HEAD
           from: account,
           value: amount,
         })
@@ -43,14 +39,6 @@ const EscrowMiddleware = (store) => (next) => (action) => {
           (error) => {
           console.log(error);
       })
-=======
-          gas: 900000,
-          from: account,
-          value: amount,
-        });
-        const values = transaction.events.FundSendToContract.returnValues;
-        store.dispatch(storeOrders(values.orderId, values.seller, values.amount, values.state));
->>>>>>> 605ee880fa9dc29577edc1c6dea9cb9e4671e89c
       };
       payment();
       next(action);
@@ -58,7 +46,6 @@ const EscrowMiddleware = (store) => (next) => (action) => {
     }
 
     case SEND_CONFIRMATION_DELIVERY: {
-<<<<<<< HEAD
       const confirmation = async function sendConfirmationDelivery() {
         const transaction = await escrowState.contract.methods.confirmDelivery(action.orderId).send({ from: account });
         console.log(transaction);
@@ -67,19 +54,6 @@ const EscrowMiddleware = (store) => (next) => (action) => {
       };
       confirmation();
       next(action);
-=======
-      const escrowState = store.getState().escrow;
-      const { account } = store.getState().fidelity;
-      const confirm = async function sendConfirmationToEscrow() {
-        const transaction = await escrowState.contract.methods.confirmDelivery(action.orderId).send({
-          gas: 900000,
-          from: account,
-        });
-        // console.log(transaction);
-        // appeller token manager
-      };
-      confirm();
->>>>>>> 605ee880fa9dc29577edc1c6dea9cb9e4671e89c
       break;
     }
     default: next(action);

@@ -1,8 +1,4 @@
 import {
-<<<<<<< HEAD
-=======
-  STORE_TRANSACTION_PARAMS,
->>>>>>> 605ee880fa9dc29577edc1c6dea9cb9e4671e89c
   FETCH_ESCROW_CONTRACT,
   STORE_ORDERS,
 } from '../actions/escrow';
@@ -21,10 +17,7 @@ const initialState = {
     amount: 0,
     state: 0,
   }],
-<<<<<<< HEAD
   status: '',
-=======
->>>>>>> 605ee880fa9dc29577edc1c6dea9cb9e4671e89c
 };
 const escrowReducer = (state = initialState, action = {}) => {
   switch (action.type) {
@@ -40,11 +33,7 @@ const escrowReducer = (state = initialState, action = {}) => {
         ...state,
         amountInWei: action.price,
       };
-<<<<<<< HEAD
       
-=======
-
->>>>>>> 605ee880fa9dc29577edc1c6dea9cb9e4671e89c
     case FETCH_ESCROW_CONTRACT:
       return {
         ...state,
