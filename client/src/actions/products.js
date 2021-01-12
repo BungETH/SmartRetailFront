@@ -34,11 +34,9 @@ export const fetchProducts = () => {
           const { data } = json;
           const products = data['hydra:member'];
           dispatch(fetchProductsSucces(products));
-          console.log(products);
         })
         .catch((error) => {
           dispatch(fetchProductsError(error));
-          console.log(error);
         }),
     );
   };

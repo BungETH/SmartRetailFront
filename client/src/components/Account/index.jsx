@@ -9,11 +9,9 @@ import Typography from '@material-ui/core/Typography';
 import Orders from '../../containers/Account/Orders';
 
 const Account = ({
-  fetchUserBalance,
   balance,
   claimTokens,
   tokenAddress,
-  resetBalance,
 }) => {
   const useStyles = makeStyles({
     account_Paper: {
@@ -43,14 +41,6 @@ const Account = ({
       fontWeight: 'bold',
       color: 'white',
     },
-    account_message_hidden: {
-      display: 'none'
-    },
-    account_message: {
-      textAlign: 'center',
-      fontWeight: 'bold',
-      color: 'white',
-    }
   });
 
   const classes = useStyles();
@@ -69,7 +59,7 @@ const Account = ({
         >
           <p>Pending delivery :</p>
         </Typography>
-        <Orders/>
+        <Orders />
         <Typography
           className={classes.account_text}
           gutterBottom
@@ -87,12 +77,11 @@ const Account = ({
           Claim tokens
         </Button>
         <Typography
-         className={classes.account_address}
+          className={classes.account_address}
           gutterBottom
           variant="h5"
           component="h2"
         >
-          {/* <p className={handleClass}>Add the the address below as new custom address token in your ERC20 wallet </p> */}
           <p>{tokenAddress}</p>
         </Typography>
       </Paper>
@@ -103,7 +92,7 @@ const Account = ({
 Account.propTypes = {
   balance: PropTypes.number.isRequired,
   claimTokens: PropTypes.func.isRequired,
-  fetchUserBalance: PropTypes.func.isRequired,
+  tokenAddress: PropTypes.string.isRequired,
 };
 
 export default Account;
