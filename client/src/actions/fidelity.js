@@ -11,7 +11,10 @@ export const STORE_PRODUCT_PRICE_IN_WEI = 'STORE_PRODUCT_PRICE_IN_WEI';
 export const STORE_USER_BALANCE = 'STORE_USER_BALANCE';
 export const STORE_TOKEN_ADDRESS = 'STORE_TOKEN_ADDRESS';
 export const CLAIM_TOKENS = 'CLAIM_TOKENS';
+<<<<<<< HEAD
 export const STORE_PRODUCT_PRICE_IN_DOLLARS = 'STORE_PRODUCT_PRICE_IN_DOLLARS';
+=======
+>>>>>>> 605ee880fa9dc29577edc1c6dea9cb9e4671e89c
 export const RESET_BALANCE = 'RESET_BALANCE';
 export const ERROR = 'ERROR';
 
@@ -77,7 +80,11 @@ export const error = (errorLog) => ({
 });
 
 // Plain object actions
+<<<<<<< HEAD
 export const sendProduct = (productId, price) => (dispatch) => {
+=======
+export const sendProduct = (productId) => (dispatch) => {
+>>>>>>> 605ee880fa9dc29577edc1c6dea9cb9e4671e89c
   dispatch(pending());
   return axios.get(`https://salty-citadel-63624.herokuapp.com/base?idProduct=${productId}`)
     .then(
@@ -86,10 +93,13 @@ export const sendProduct = (productId, price) => (dispatch) => {
         const tokenAmountInWei = response.data.weiToken;
         dispatch(storeTokenAmountInWei(tokenAmountInWei));
         dispatch(storeProductPriceInWei(ethAmountInWei));
+<<<<<<< HEAD
         dispatch(storeProductPriceInDollars(price));
         dispatch(storeTransactionParams("0xC96822B34c7F892B09A39F080B2659105af00146", ethAmountInWei));
         dispatch(sendTransaction());
         dispatch(sendBalance(35));
+=======
+>>>>>>> 605ee880fa9dc29577edc1c6dea9cb9e4671e89c
       },
     )
     .catch(
@@ -97,8 +107,11 @@ export const sendProduct = (productId, price) => (dispatch) => {
         dispatch(error(sendProductError));
       },
     );
+<<<<<<< HEAD
     
    
+=======
+>>>>>>> 605ee880fa9dc29577edc1c6dea9cb9e4671e89c
 };
 
 export const fetchUserBalance = () => (dispatch) => axios.get('https://salty-citadel-63624.herokuapp.com/api/users/35')

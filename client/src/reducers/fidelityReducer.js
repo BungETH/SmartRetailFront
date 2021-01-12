@@ -5,7 +5,10 @@ import {
   STORE_USER_BALANCE,
   STORE_TOKEN_ADDRESS,
   RESET_BALANCE,
+<<<<<<< HEAD
   STORE_PRODUCT_PRICE_IN_DOLLARS,
+=======
+>>>>>>> 605ee880fa9dc29577edc1c6dea9cb9e4671e89c
 } from '../actions/fidelity';
 
 const initialState = {
@@ -13,7 +16,10 @@ const initialState = {
   account: '',
   tokenEarnedInWei: 0,
   userBalance: 0,
+<<<<<<< HEAD
   productPriceInDollars: null,
+=======
+>>>>>>> 605ee880fa9dc29577edc1c6dea9cb9e4671e89c
 };
 
 const fidelityReducer = (state = initialState, action = {}) => {
@@ -49,11 +55,14 @@ const fidelityReducer = (state = initialState, action = {}) => {
         ...state,
         userBalance: 0,
       };
+<<<<<<< HEAD
     case STORE_PRODUCT_PRICE_IN_DOLLARS:
       return {
         ...state,
         productPriceInDollars: action.price,
       };
+=======
+>>>>>>> 605ee880fa9dc29577edc1c6dea9cb9e4671e89c
     default: return state;
   }
 };

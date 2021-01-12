@@ -3,6 +3,10 @@ import {
   sendProduct,
   sendBalance,
 } from '../../actions/fidelity';
+<<<<<<< HEAD
+=======
+import { fetchTransactionParams } from '../../actions/escrow';
+>>>>>>> 605ee880fa9dc29577edc1c6dea9cb9e4671e89c
 import Marketplace from '../../components/Dapp/Marketplace';
 
 const mapStateToProps = (state) => ({
@@ -17,6 +21,12 @@ const mapDispatchToProps = (dispatch) => ({
   sendBalance: (id) => {
     dispatch(sendBalance(id));
   },
+<<<<<<< HEAD
+=======
+  fetchTransactionParams: (seller, value) => {
+    dispatch(fetchTransactionParams(seller, value));
+  },
+>>>>>>> 605ee880fa9dc29577edc1c6dea9cb9e4671e89c
 });
 
 export default connect(

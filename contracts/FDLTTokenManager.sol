@@ -15,7 +15,6 @@ contract FDLTTokenInterface {
   function mintTokenTo(address dest, uint amount) external {}
 }
 
-
 /** @author The SmartRetail Team
   * @title FDLTTokenManager 
 	* @notice Token creation logic 

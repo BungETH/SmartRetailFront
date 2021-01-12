@@ -27,6 +27,7 @@ contract SmartRetailEscrow is Ownable, ReentrancyGuard {
 	FDLTTokenManagerInterface private tokenManagerContract;
 
 	event FundSendToContract(string contractMessage, FDLTTokenManager FDLTTokenManagerContract,  uint orderId, address seller, address buyer, uint amount ,State state);
+<<<<<<< HEAD
 	event FundSendToSeller(string sellerMessage,  uint orderId, State currentState);
 
 	mapping(uint => Order) public listOrders;
@@ -35,11 +36,22 @@ contract SmartRetailEscrow is Ownable, ReentrancyGuard {
 		address buyer;
 		uint amount;
 		State state;
+=======
+	event FundSendToSeller(string sellerMessage,  uint orderId);
+
+	mapping(uint => Order) public listOrders;
+	struct Order {
+			address payable seller;
+			address buyer;
+			uint amount;
+			State state;
+>>>>>>> 605ee880fa9dc29577edc1c6dea9cb9e4671e89c
 	} 
 
 	enum State { AWAITING_PAYMENT, AWAITING_DELIVERY, PAID}
 
 	constructor() ReentrancyGuard() public {
+<<<<<<< HEAD
 		/// @notice Create new escrow contract for current order and store it on escrow variable
     escrow = new Escrow();
 		/// @notice Create a new instance of FDLTTokenManager contract and store it on manager variable
@@ -47,6 +59,15 @@ contract SmartRetailEscrow is Ownable, ReentrancyGuard {
     /// @notice Fetch the right interface contract where FDLTTokenManager.sol is deployed
 		tokenManagerContract = FDLTTokenManagerInterface(address(manager));
   }
+=======
+		/// @notice Create new escrow contract for current order
+        escrow = new Escrow();
+		/// @notice crée une nouvelle instance du smart contract FDLTTokenManager ! L’instance FDLTTokenManager déployée sera stockée dans la variable “manager”
+        manager = new FDLTTokenManager();
+        /// @notice Fetch the right interface contract where FDLTTokenManager.sol is deployed
+		tokenManagerContract = FDLTTokenManagerInterface(address(manager));
+    }
+>>>>>>> 605ee880fa9dc29577edc1c6dea9cb9e4671e89c
 
 	receive() external payable {}
 
@@ -57,10 +78,10 @@ contract SmartRetailEscrow is Ownable, ReentrancyGuard {
 		* @param _value The value of the product
 		*/
 	function sendPayment(address payable _seller, uint _value) external payable {
+<<<<<<< HEAD
 		require((_value) == msg.value, "You're not sending the correct value");
 
 		Order memory newOrder;
-
 		newOrder.seller = _seller;
 		newOrder.buyer = msg.sender;
 		newOrder.amount =_value;
@@ -78,14 +99,15 @@ contract SmartRetailEscrow is Ownable, ReentrancyGuard {
 			newOrder.amount,
 			newOrder.state
 		);
-	}
+=======
+			require((_value) == msg.value, "You're not sending the correct value");
 
-	/**
-		* @notice Withdraw funds from escrow to seller address
+			Order memory newOrder;
 		* @dev The _orderId param must be the block timestamp of the associated sendPayement fonction transaction
 		* @param _orderId The order id
 		*/
 	function confirmDelivery(uint _orderId) external nonReentrant() {
+<<<<<<< HEAD
 		require(listOrders[_orderId].state != State.PAID, "order is already paid");
 		require(listOrders[_orderId].state == State.AWAITING_DELIVERY, "You cannot confirm until deposit first");
 		require(listOrders[_orderId].buyer == msg.sender, "caller is not the buyer");
@@ -100,19 +122,41 @@ contract SmartRetailEscrow is Ownable, ReentrancyGuard {
 	/**
 		* @notice Call the claim function of FDLTTokenManager.sol contract
 		*/
+=======
+			require(listOrders[_orderId].state != State.PAID, "order is already paid");
+			require(listOrders[_orderId].state == State.AWAITING_DELIVERY, "You cannot confirm until deposit first");
+			// require(listOrders[_orderId].amount == escrow.depositsOf(listOrders[_orderId].seller), "incorrect order value");
+			require(listOrders[_orderId].buyer == msg.sender, "caller is not the buyer");
+
+			escrow.withdraw(listOrders[_orderId].seller);
+			// todo function convert orderAmount to tokenAmount
+			tokenManagerContract.asyncDeposit(msg.sender, listOrders[_orderId].amount );
+			listOrders[_orderId].state = State.PAID;
+
+			emit FundSendToSeller("Successfully transferred funds to seller", _orderId);
+	}
+
+>>>>>>> 605ee880fa9dc29577edc1c6dea9cb9e4671e89c
 	function claimFDLTToken() external  {
 		tokenManagerContract.claim(msg.sender);
 	}
 
 	/**
 		* @notice Set a new FDLTTokenManager.sol contract address in case of updates
+<<<<<<< HEAD
 		* @param _address The new FDLTTokenManager.sol contract address
+=======
+		* @param _address The FDLTTokenManager.sol contract address
+>>>>>>> 605ee880fa9dc29577edc1c6dea9cb9e4671e89c
 		*/
 	function setTokenManagerContractAddress(address _address) external onlyOwner {
 			tokenManagerContract = FDLTTokenManagerInterface(_address);
 	}
 	
+<<<<<<< HEAD
 
+=======
+>>>>>>> 605ee880fa9dc29577edc1c6dea9cb9e4671e89c
 	/**
 		* @notice Get the deposit amount locked in escrow contract waiting to transfer to caller
 		* @return uint the pending amount of caller

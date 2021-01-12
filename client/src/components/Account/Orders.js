@@ -49,6 +49,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
+<<<<<<< HEAD
 const Orders = ({
   orders,
   sendConfirmationDelivery,
@@ -59,6 +60,11 @@ const Orders = ({
   const state = drizzle.drizzle.store.getState();
   const ordersList = [];
   
+=======
+const Orders = ({ orders, sendConfirmationDelivery }) => {
+  const classes = useStyles();
+
+>>>>>>> 605ee880fa9dc29577edc1c6dea9cb9e4671e89c
   return (
     <div className={classes.root}>
       {orders[0].orderId !== 0 && (
@@ -89,7 +95,11 @@ const Orders = ({
                 {order.state === '1' && (
                 <Typography className={classes.secondaryHeading}>awaiting delivery</Typography>
                 )}
+<<<<<<< HEAD
                 {status === 'success' && (
+=======
+                {order.state === '2' && (
+>>>>>>> 605ee880fa9dc29577edc1c6dea9cb9e4671e89c
                 <Typography className={classes.secondaryHeading}>Paied</Typography>
                 )}
               </div>
@@ -110,6 +120,7 @@ const Orders = ({
     </div>
   );
 };
+<<<<<<< HEAD
 
 export default Orders;
 
@@ -117,6 +128,13 @@ Orders.propTypes = {
   orders: PropTypes.arrayOf(
     PropTypes.shape({
       orderId: PropTypes.any.isRequired,
+=======
+export default Orders;
+Orders.propTypes = {
+  orders: PropTypes.arrayOf(
+    PropTypes.shape({
+      orderId: PropTypes.number.isRequired,
+>>>>>>> 605ee880fa9dc29577edc1c6dea9cb9e4671e89c
       seller: PropTypes.string.isRequired,
       amount: PropTypes.number.isRequired,
       state: PropTypes.number.isRequired,
