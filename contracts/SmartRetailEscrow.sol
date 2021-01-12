@@ -1,4 +1,7 @@
+//	contracts/SmartRetailEscrow.sol
 // SPDX-License-Identifier: MIT
+// Contract Natspec documentation here https://ipfs.io/ipfs/QmSjb6xNNUrztDBdjJFJ9cgmEMfuk9X6vTkBEaefNqiQo7
+
 pragma solidity 0.6.12;
 
 import "@openzeppelin/contracts/access/Ownable.sol";
@@ -9,7 +12,7 @@ import "./FDLTTokenManager.sol";
 
 /** @author The SmartRetail Team
   * @title TokenManagerInterface
-	* @dev Import asyncDeposit and claim from FDLTTokenManager.sol 
+	* @dev Use asyncDeposit and claim from FDLTTokenManager.sol 
 	*/
 contract FDLTTokenManagerInterface {
     function asyncDeposit(address dest, uint256 amount) external{}
@@ -38,11 +41,11 @@ contract SmartRetailEscrow is Ownable, ReentrancyGuard {
 	enum State { AWAITING_PAYMENT, AWAITING_DELIVERY, PAID}
 
 	constructor() ReentrancyGuard() public {
-		/// @notice Create new escrow contract for current order
+		///@notice Create new escrow contract for current order
         escrow = new Escrow();
-		/// @notice crée une nouvelle instance du smart contract FDLTTokenManager ! L’instance FDLTTokenManager déployée sera stockée dans la variable “manager”
+		///@notice crée une nouvelle instance du smart contract FDLTTokenManager ! L’instance FDLTTokenManager déployée sera stockée dans la variable “manager”
         manager = new FDLTTokenManager(); 
-        /// @notice Fetch the right interface contract where FDLTTokenManager.sol is deployed
+    ///@notice Fetch the right interface contract where FDLTTokenManager.sol is deployed
 		tokenManagerContract = FDLTTokenManagerInterface(address(manager));
     }
 
