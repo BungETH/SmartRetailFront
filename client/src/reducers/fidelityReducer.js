@@ -5,6 +5,7 @@ import {
   STORE_USER_BALANCE,
   STORE_TOKEN_ADDRESS,
   RESET_BALANCE,
+  STORE_PRODUCT_PRICE_IN_DOLLARS,
 } from '../actions/fidelity';
 
 const initialState = {
@@ -12,6 +13,7 @@ const initialState = {
   account: '',
   tokenEarnedInWei: 0,
   userBalance: 0,
+  productPriceInDollars: null,
 };
 
 const fidelityReducer = (state = initialState, action = {}) => {
@@ -46,6 +48,11 @@ const fidelityReducer = (state = initialState, action = {}) => {
       return {
         ...state,
         userBalance: 0,
+      };
+    case STORE_PRODUCT_PRICE_IN_DOLLARS:
+      return {
+        ...state,
+        productPriceInDollars: action.price,
       };
     default: return state;
   }

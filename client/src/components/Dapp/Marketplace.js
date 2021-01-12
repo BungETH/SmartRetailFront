@@ -14,7 +14,6 @@ import Typography from '@material-ui/core/Typography';
 const Marketplace = ({
   sendProduct,
   sendBalance,
-  fetchTransactionParams,
   title,
   img,
   description,
@@ -36,17 +35,9 @@ const Marketplace = ({
     },
   });
 
-  const sellerAddress = '0xC96822B34c7F892B09A39F080B2659105af00146';
+  
   const classes = useStyles();
-  const handleBuy = () => {
-    sendProduct(productId);
-    setTimeout(() => {
-      fetchTransactionParams(sellerAddress, price);
-    }, 2000);
-    setTimeout(() => {
-      sendBalance(35);
-    }, 3000);
-  };
+  
   return (
     <div>
       <Card raised className={classes.homeCards}>
@@ -69,7 +60,7 @@ const Marketplace = ({
           <Button
             size="small"
             color="primary"
-            onClick={handleBuy}
+            onClick={() => sendProduct(productId, price)}
           >
             Buy
           </Button>
@@ -94,7 +85,6 @@ const Marketplace = ({
 
 Marketplace.propTypes = {
   description: PropTypes.any.isRequired,
-  fetchTransactionParams: PropTypes.func.isRequired,
   img: PropTypes.any.isRequired,
   price: PropTypes.any.isRequired,
   productId: PropTypes.any.isRequired,

@@ -9,10 +9,12 @@ import Typography from '@material-ui/core/Typography';
 import Orders from '../../containers/Account/Orders';
 
 const Account = ({
+  drizzle,
   balance,
   claimTokens,
   tokenAddress,
 }) => {
+
   const useStyles = makeStyles({
     account_Paper: {
       backgroundColor: '#3f51b5',
@@ -59,7 +61,9 @@ const Account = ({
         >
           <p>Pending delivery :</p>
         </Typography>
-        <Orders />
+        <Orders
+          drizzle={drizzle}
+        />
         <Typography
           className={classes.account_text}
           gutterBottom

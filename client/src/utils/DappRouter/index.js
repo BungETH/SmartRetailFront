@@ -30,7 +30,9 @@ const DappRouter = (drizzle) => (
         exact
         path="/account"
       >
-        <Account />
+        <Account 
+          drizzle={drizzle}
+        />
       </Route>
     </Switch>
   </div>

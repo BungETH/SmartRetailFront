@@ -49,9 +49,16 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const Orders = ({ orders, sendConfirmationDelivery }) => {
+const Orders = ({
+  orders,
+  sendConfirmationDelivery,
+  status,
+  drizzle,
+}) => {
   const classes = useStyles();
-
+  const state = drizzle.drizzle.store.getState();
+  const ordersList = [];
+  
   return (
     <div className={classes.root}>
       {orders[0].orderId !== 0 && (
@@ -82,7 +89,7 @@ const Orders = ({ orders, sendConfirmationDelivery }) => {
                 {order.state === '1' && (
                 <Typography className={classes.secondaryHeading}>awaiting delivery</Typography>
                 )}
-                {order.state === '2' && (
+                {status === 'success' && (
                 <Typography className={classes.secondaryHeading}>Paied</Typography>
                 )}
               </div>
@@ -103,11 +110,13 @@ const Orders = ({ orders, sendConfirmationDelivery }) => {
     </div>
   );
 };
+
 export default Orders;
+
 Orders.propTypes = {
   orders: PropTypes.arrayOf(
     PropTypes.shape({
-      orderId: PropTypes.number.isRequired,
+      orderId: PropTypes.any.isRequired,
       seller: PropTypes.string.isRequired,
       amount: PropTypes.number.isRequired,
       state: PropTypes.number.isRequired,

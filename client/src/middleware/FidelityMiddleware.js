@@ -10,12 +10,10 @@ const FidelityMiddleware = (store) => (next) => (action) => {
       const escrowState = store.getState().escrow;
       const claimTokens = async function claimTokens() {
         const transaction = await escrowState.contract.methods.claimFDLTToken().send({
-          gas: 3000000,
           from: escrowState.account,
         })
           .then(
             (response) => {
-              // console.log(transaction);
               store.dispatch(storeTokenAddress(response.events[0].address));
               store.dispatch(resetBalance());
             },

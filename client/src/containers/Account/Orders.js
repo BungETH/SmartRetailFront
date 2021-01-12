@@ -4,6 +4,7 @@ import Orders from '../../components/Account/Orders';
 
 const mapStateToProps = (state) => ({
   orders: state.escrow.userOrders,
+  status: state.escrow.status,
 });
 
 const mapDispatchToProps = (dispatch) => ({

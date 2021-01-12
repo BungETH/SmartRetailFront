@@ -56,9 +56,14 @@ Dapp.propTypes = {
   fetchEscrowContract: PropTypes.func.isRequired,
   fetchFidelityContract: PropTypes.func.isRequired,
   fetchProducts: PropTypes.func.isRequired,
-  products: PropTypes.shape({
-    map: PropTypes.func.isRequired,
-  }).isRequired,
+  products: PropTypes.arrayOf(PropTypes.shape({
+    id: PropTypes.number.isRequired,
+    title: PropTypes.string.isRequired,
+    description: PropTypes.string.isRequired,
+    unitPrice: PropTypes.number.isRequired,
+    imgUrl: PropTypes.string.isRequired,
+    map: PropTypes.func,
+  }).isRequired),
 };
 
 export default Dapp;

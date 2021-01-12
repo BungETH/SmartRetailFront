@@ -4,11 +4,14 @@ import axios from 'axios';
 export const FETCH_FIDELITY_CONTRACT = 'FETCH_FIDELITY_CONTRACT';
 export const FETCH_CURRENT_ACCOUNT = 'FETCH_CURRENT_ACCOUNT';
 export const PENDING = 'PENDING';
+export const STORE_TRANSACTION_PARAMS = 'STORE_TRANSACTION_PARAMS';
+export const SEND_TRANSACTION = 'SEND_TRANSACTION';
 export const STORE_TOKEN_AMOUNT_IN_WEI = 'STORE_TOKEN_AMOUNT_IN_WEI';
 export const STORE_PRODUCT_PRICE_IN_WEI = 'STORE_PRODUCT_PRICE_IN_WEI';
 export const STORE_USER_BALANCE = 'STORE_USER_BALANCE';
 export const STORE_TOKEN_ADDRESS = 'STORE_TOKEN_ADDRESS';
 export const CLAIM_TOKENS = 'CLAIM_TOKENS';
+export const STORE_PRODUCT_PRICE_IN_DOLLARS = 'STORE_PRODUCT_PRICE_IN_DOLLARS';
 export const RESET_BALANCE = 'RESET_BALANCE';
 export const ERROR = 'ERROR';
 
@@ -27,15 +30,32 @@ const pending = () => ({
   type: PENDING,
 });
 
+export const storeTransactionParams = (seller, value) => ({
+  type: STORE_TRANSACTION_PARAMS,
+  seller,
+  value,
+});
+
+export const sendTransaction = () => ({
+  type: SEND_TRANSACTION,
+});
+
 export const storeTokenAmountInWei = (amount) => ({
   type: STORE_TOKEN_AMOUNT_IN_WEI,
   amount,
+});
+
+export const storeProductPriceInDollars = (productId, price) => ({
+  type: STORE_PRODUCT_PRICE_IN_DOLLARS,
+  productId,
+  price,
 });
 
 export const storeProductPriceInWei = (price) => ({
   type: STORE_PRODUCT_PRICE_IN_WEI,
   price,
 });
+
 export const storeUserBalance = (balance) => ({
   type: STORE_USER_BALANCE,
   balance,
@@ -57,7 +77,7 @@ export const error = (errorLog) => ({
 });
 
 // Plain object actions
-export const sendProduct = (productId) => (dispatch) => {
+export const sendProduct = (productId, price) => (dispatch) => {
   dispatch(pending());
   return axios.get(`https://salty-citadel-63624.herokuapp.com/base?idProduct=${productId}`)
     .then(
@@ -66,6 +86,10 @@ export const sendProduct = (productId) => (dispatch) => {
         const tokenAmountInWei = response.data.weiToken;
         dispatch(storeTokenAmountInWei(tokenAmountInWei));
         dispatch(storeProductPriceInWei(ethAmountInWei));
+        dispatch(storeProductPriceInDollars(price));
+        dispatch(storeTransactionParams("0xC96822B34c7F892B09A39F080B2659105af00146", ethAmountInWei));
+        dispatch(sendTransaction());
+        dispatch(sendBalance(35));
       },
     )
     .catch(
@@ -73,6 +97,8 @@ export const sendProduct = (productId) => (dispatch) => {
         dispatch(error(sendProductError));
       },
     );
+    
+   
 };
 
 export const fetchUserBalance = () => (dispatch) => axios.get('https://salty-citadel-63624.herokuapp.com/api/users/35')
