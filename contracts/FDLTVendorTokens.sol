@@ -16,6 +16,7 @@ contract FDLTVendorTokens is ERC1155 {
     function addNewVendorToken(uint256 initialSupply) external {
         vendorCount++;
         uint256 vendorTokenId = vendorCount;
-        _mint(msg.sender, vendorTokenId, initialSupply, "");        
+
+        _mint(msg.sender, vendorTokenId, initialSupply, "");
     }
 }

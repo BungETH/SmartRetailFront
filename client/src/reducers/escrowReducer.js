@@ -11,7 +11,7 @@ const initialState = {
   contract: {},
   sellerAddress: '',
   amountInWei: 0,
-  userOrder: [{
+  userOrders: [{
     orderId: 0,
     seller: '',
     amount: 0,
@@ -40,10 +40,10 @@ const escrowReducer = (state = initialState, action = {}) => {
       };
 
     case STORE_ORDERS:
-      if (state.userOrder[0].orderId === 0) {
+      if (state.userOrders[0].orderId === 0) {
         return {
           ...state,
-          userOrder: [{
+          userOrders: [{
             orderId: action.orderId,
             seller: action.seller,
             amount: action.amount,
@@ -53,7 +53,7 @@ const escrowReducer = (state = initialState, action = {}) => {
       }
       return {
         ...state,
-        userOrder: [...state.userOrder, {
+        userOrders: [...state.userOrders, {
           orderId: action.orderId,
           buyer: action.buyer,
           seller: action.seller,

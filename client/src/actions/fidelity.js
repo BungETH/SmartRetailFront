@@ -6,7 +6,9 @@ export const PENDING = 'PENDING';
 export const STORE_TOKEN_AMOUNT_IN_WEI = 'STORE_TOKEN_AMOUNT_IN_WEI';
 export const STORE_PRODUCT_PRICE_IN_WEI = 'STORE_PRODUCT_PRICE_IN_WEI';
 export const STORE_USER_BALANCE = 'STORE_USER_BALANCE';
+export const STORE_TOKEN_ADDRESS = 'STORE_TOKEN_ADDRESS';
 export const CLAIM_TOKENS = 'CLAIM_TOKENS';
+export const RESET_BALANCE = 'RESET_BALANCE';
 export const ERROR = 'ERROR';
 // Plain object actions
 export const fetchFidelityContract = (contract) => ({
@@ -36,8 +38,15 @@ export const storeUserBalance = (balance) => ({
   type: STORE_USER_BALANCE,
   balance,
 });
+export const storeTokenAddress = (address) => ({
+  type: STORE_TOKEN_ADDRESS,
+  address,
+});
 export const claimTokens = () => ({
   type: CLAIM_TOKENS,
+});
+export const resetBalance = () => ({
+  type: RESET_BALANCE,
 });
 
 export const error = (errorLog) => ({
@@ -66,7 +75,7 @@ export const sendProduct = (productId) => (dispatch) => {
     );
 };
 
-export const fetchUserBalance = (id) => (dispatch) => axios.get(`https://salty-citadel-63624.herokuapp.com/api/users/${id}`)
+export const fetchUserBalance = (id) => (dispatch) => axios.get(`https://salty-citadel-63624.herokuapp.com/api/users/35`)
   .then(
     (response) => {
       console.log(response.data.balance);
@@ -80,6 +89,22 @@ export const fetchUserBalance = (id) => (dispatch) => axios.get(`https://salty-c
       console.log(error);
     },
   );
+
+// export const resetBalance = () => (dispatch) => {
+//   dispatch(pending());
+//   return axios.put(`https://salty-citadel-63624.herokuapp.com/api/users/35`, { balance: 0 })
+//   .then(
+//     (response) => {
+//       console.log(response);
+//     },
+//   )
+//   .catch(
+//     (resetBalanceError) => {
+//       dispatch(error(resetBalanceError));
+//       console.log(resetBalanceError);
+//     },
+//   );
+// }
 
 export const sendBalance = (id) => (dispatch, getState) => {
   dispatch(fetchUserBalance(id));

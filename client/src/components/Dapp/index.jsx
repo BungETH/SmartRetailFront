@@ -13,8 +13,9 @@ const Dapp = ({
   fetchEscrowContract,
   products,
 }) => {
-  const fidelityContract = drizzle.drizzle.contracts.FDLTTokenManager;
+  const fidelityContract = drizzle.drizzle.options.contracts[1];
   const escrowContract = drizzle.drizzle.contracts.SmartRetailEscrow;
+  console.log(drizzle.drizzle.options.contracts);
  
   useEffect(() => {
     fetchFidelityContract(fidelityContract);

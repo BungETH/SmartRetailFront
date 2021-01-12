@@ -1,25 +1,23 @@
 import { connect } from 'react-redux';
-import { sendConfirmationDelivery } from '../../actions/escrow';
-import { fetchUserBalance, claimTokens } from '../../actions/fidelity';
+import { fetchUserBalance, claimTokens, resetBalance } from '../../actions/fidelity';
 
 import Account from '../../components/Account';
 
 const mapStateToProps = (state) => ({
-  orders: state.escrow.userOrder,
   balance: state.fidelity.userBalance,
+  tokenAddress: state.fidelity.tokenAddress,
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  sendConfirmationDelivery: () => {
-    dispatch(sendConfirmationDelivery());
-  },
-
+  
   fetchUserBalance: (id) => {
     dispatch(fetchUserBalance(id));
   },
-
   claimTokens: () => {
     dispatch(claimTokens());
+  },
+  resetBalance: (id) => {
+    dispatch(resetBalance(id));
   },
 });
 

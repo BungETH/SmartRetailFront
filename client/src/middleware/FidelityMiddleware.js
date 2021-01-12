@@ -1,18 +1,29 @@
 import {
     CLAIM_TOKENS,
+    storeTokenAddress,
+    resetBalance,
+    fetchUserBalance,
 } from '../actions/fidelity';
   
   
   const FidelityMiddleware = (store) => (next) => (action) => {
     switch (action.type) {
       case CLAIM_TOKENS: {
-        const fidelityState = store.getState().fidelity;
-        console.log(fidelityState);
+        const escrowState = store.getState().escrow;
         async function claimTokens() {
-          const transaction = await fidelityState.contract.methods.claim().send({ gas: 3000000, from: fidelityState.account });
-          console.log(transaction);
+          const transaction = await escrowState.contract.methods.claimFDLTToken().send({ gas: 3000000, from: escrowState.account })
+          .then(
+            (response) => {
+              console.log(response);
+              store.dispatch(storeTokenAddress(response.events[0].address));
+              store.dispatch(resetBalance());
+            },
+          )
+          
         }
         claimTokens();
+
+        
       };
           default: next(action);
       }

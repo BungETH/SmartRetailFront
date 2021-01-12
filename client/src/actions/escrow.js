@@ -19,9 +19,9 @@ export const sendTransaction = () => ({
   type: SEND_TRANSACTION,
 });
 
-export const sendConfirmationDelivery = (amount) => ({
+export const sendConfirmationDelivery = (orderId) => ({
   type: SEND_CONFIRMATION_DELIVERY,
-  amount,
+  orderId,
 });
 
 export const storeOrders = (orderId, seller, amount, state) => ({

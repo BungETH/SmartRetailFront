@@ -1,21 +1,20 @@
 import PropTypes from 'prop-types';
-import React, { useEffect } from 'react';
+import React from 'react';
 
 import { makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 
-import Orders from './Orders';
+import Orders from '../../containers/Account/Orders';
 
 const Account = ({
   fetchUserBalance,
   balance,
-  orders,
-  sendConfirmationDelivery,
   claimTokens,
+  tokenAddress,
+  resetBalance,
 }) => {
-  console.log('orders', orders);
   const useStyles = makeStyles({
     account_Paper: {
       backgroundColor: '#3f51b5',
@@ -36,24 +35,28 @@ const Account = ({
       fontSize: '2em',
       fontWeight: 'bold',
       color: 'white',
-      marginTop: '4em',
+      marginTop: '2em',
       marginBottom: 0,
     },
+    account_address: {
+      textAlign: 'center',
+      fontWeight: 'bold',
+      color: 'white',
+    },
+    account_message_hidden: {
+      display: 'none'
+    },
+    account_message: {
+      textAlign: 'center',
+      fontWeight: 'bold',
+      color: 'white',
+    }
   });
 
+  const classes = useStyles();
   const handleClaim = () => {
     claimTokens();
   };
-
-  const handleDelivery = () => {
-    sendConfirmationDelivery(balance);
-  };
-
-  const classes = useStyles();
-
-  useEffect(() => {
-    fetchUserBalance(1);
-  }, []);
 
   return (
     <div>
@@ -66,16 +69,7 @@ const Account = ({
         >
           <p>Pending delivery :</p>
         </Typography>
-        <Orders
-          userOrders={orders}
-        />
-        {/* <Button
-          className={classes.account_buttons}
-          variant="contained"
-          onClick={handleDelivery}
-        >
-          Confirm delivery
-        </Button> */}
+        <Orders/>
         <Typography
           className={classes.account_text}
           gutterBottom
@@ -92,24 +86,24 @@ const Account = ({
         >
           Claim tokens
         </Button>
+        <Typography
+         className={classes.account_address}
+          gutterBottom
+          variant="h5"
+          component="h2"
+        >
+          {/* <p className={handleClass}>Add the the address below as new custom address token in your ERC20 wallet </p> */}
+          <p>{tokenAddress}</p>
+        </Typography>
       </Paper>
     </div>
   );
 };
 
 Account.propTypes = {
-  orders: PropTypes.arrayOf(
-    PropTypes.shape({
-      orderId: PropTypes.number.isRequired,
-      seller: PropTypes.string.isRequired,
-      amount: PropTypes.number.isRequired,
-      state: PropTypes.number.isRequired,
-    }).isRequired,
-  ).isRequired,
   balance: PropTypes.number.isRequired,
   claimTokens: PropTypes.func.isRequired,
   fetchUserBalance: PropTypes.func.isRequired,
-  sendConfirmationDelivery: PropTypes.func.isRequired,
 };
 
 export default Account;

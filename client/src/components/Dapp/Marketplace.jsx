@@ -45,7 +45,7 @@ const Marketplace = ({
       fetchTransactionParams(sellerAddress, price);
     }, 2000);
     setTimeout(() => {
-      sendBalance(1);
+      sendBalance(35);
     }, 3000);
   };
   return (

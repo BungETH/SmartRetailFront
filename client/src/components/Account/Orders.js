@@ -17,6 +17,10 @@ const useStyles = makeStyles((theme) => ({
     width: '100%',
     alignSelf: 'center',
   },
+  
+  content:{
+    margin:'6px 0',
+  },
   heading: {
     fontSize: theme.typography.pxToRem(15),
   },
@@ -49,15 +53,19 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const Orders = ({ userOrders }) => {
+const Orders = ({ orders, sendConfirmationDelivery}) => {
   const classes = useStyles();
-  console.log(userOrders[0].orderId);
-
+  console.log(orders);
+ 
   return (
     <div className={classes.root}>
-      {userOrders[0].orderId !== 0 && (
-        userOrders.map((order) => (
-          <Accordion>
+      {orders[0].orderId !== 0 && (
+        orders.map((order) => (
+          <Accordion
+            key={order.orderId}
+            TransitionProps={{ unmountOnExit: true }} 
+          >
+            
             <AccordionSummary
               expandIcon={<ExpandMoreIcon />}
               aria-controls="panel1c-content"
@@ -77,29 +85,22 @@ const Orders = ({ userOrders }) => {
               </div>
               <div className={classes.column}>
                 <Typography className={classes.heading}>status</Typography>
-                <Typography className={classes.secondaryHeading}>{order.state}</Typography>
+                {order.state === '1' && (
+                <Typography className={classes.secondaryHeading}>awaiting delivery</Typography>
+                )}
+                {order.state === '2' && (
+                <Typography className={classes.secondaryHeading}>Paied</Typography>
+                )}
               </div>
             </AccordionSummary>
-            <AccordionDetails className={classes.details}>
-              <div className={classes.column} />
-              <div className={classes.column}>
-                <Chip label="Barbados" onDelete={() => {}} />
-              </div>
-              <div className={clsx(classes.column, classes.helper)}>
-                <Typography variant="caption">
-                  Select your destination of choice
-                  <br />
-                  <a href="#secondary-heading-and-columns" className={classes.link}>
-                    Learn more
-                  </a>
-                </Typography>
-              </div>
-            </AccordionDetails>
             <Divider />
             <AccordionActions>
               <Button size="small">Cancel</Button>
-              <Button size="small" color="primary">
-                Save
+              <Button
+                size="small"
+                color="primary"
+                onClick={() => sendConfirmationDelivery(order.orderId)}>
+                  Confirm Delivery
               </Button>
             </AccordionActions>
           </Accordion>
@@ -109,7 +110,7 @@ const Orders = ({ userOrders }) => {
 };
 export default Orders;
 Orders.propTypes = {
-  userOrders: PropTypes.arrayOf(
+  orders: PropTypes.arrayOf(
     PropTypes.shape({
       orderId: PropTypes.number.isRequired,
       seller: PropTypes.string.isRequired,
