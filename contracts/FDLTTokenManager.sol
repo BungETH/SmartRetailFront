@@ -1,66 +1,64 @@
 // contracts/FDLTTokenManager.sol
 // SPDX-License-Identifier: MIT
+// Contract Natspec documentation here https://ipfs.io/ipfs/QmYMEZgF9mFL9CDAdT4UdveEXf4LkoZsqYXtb7UZEm1rKj
 
-pragma solidity >=0.4.21 <0.7.0;
+pragma solidity 0.6.12;
 
 import "./FDLTToken.sol";
 import "@openzeppelin/contracts/math/SafeMath.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
 
 /** @author The SmartRetail Team
-  * @title FDLTTokenInterface
-	* @dev Import mintTokenTo function from FDLTToken.sol 
-	*/
+  * @title FDLTTokenManager
+  * @dev Use mintTokenTo function of FDLTToken.sol
+  */
 contract FDLTTokenInterface {
   function mintTokenTo(address dest, uint amount) external {}
 }
-
 /** @author The SmartRetail Team
-  * @title FDLTTokenManager 
-	* @notice Token creation logic 
-	*/
+  * @title FDLTTokenManager
+  */
 contract FDLTTokenManager is Ownable {
-
 	using SafeMath for uint256;
-	FDLTToken public token; // The ERC20 instance to deploy
+	FDLTToken private token; 
 	FDLTTokenInterface private FDLTTokenInterfaceContract;
-	mapping (address => uint256) public tokenPayments;
+	mapping (address => uint256) private tokenPayments;
 
 	event Deposit(address dest, uint allowance);
 	event Claimed(address dest, address tokenAddress);
 
+	/// @dev Creates a new instance of the ERC20 FDLTToken smart contract and use its address to create interface for "mintTokenTo" function import
 	constructor() public {
-		/// Create a new token instance and store it in token variable
-		token = new FDLTToken(); 
-		/// Fetch the right interface contract where FDLTToken.sol is deployed and store it in FDLTTokenInterfaceContract variable
-		FDLTTokenInterfaceContract = FDLTTokenInterface(address(token));
+			token = new FDLTToken();
+			FDLTTokenInterfaceContract = FDLTTokenInterface(address(token));
 	}
+
 	/**
-		* @notice Manage users token balance
-		* @param _dest The buyer address
-		* @param _amount The value of the purchase in wei
+		* @dev Add deposits of the reward token
+		* @param _dest The address of the rewarded user
+		* @param _amount The amount of tokens to increase
 		*/
 	function asyncDeposit(address _dest, uint256 _amount) public {
-		tokenPayments[_dest] = tokenPayments[_dest].add(_amount);
-		emit Deposit(_dest, tokenPayments[_dest]);
+			tokenPayments[_dest] = tokenPayments[_dest].add(_amount);
+			emit Deposit(_dest, tokenPayments[_dest]);
 	}
 
 	/**
-		* @notice Mint token depending on the user's balance
-		* @param _dest The address to send minted tokens
+		* @dev Call mintTokenTo function of FDLTToken contract in order to mint tokens according to user balance. Note: the user's token balance is reset to zero
+		* @param _dest The address of the rewarded user to manage balance
 		*/
 	function claim(address _dest) external {
-		require(tokenPayments[_dest] !=0, "not enought tokens");
-		FDLTTokenInterfaceContract.mintTokenTo(_dest,tokenPayments[_dest]);
-		tokenPayments[_dest] = 0;
-		emit Claimed(_dest, address(token));
+			require(tokenPayments[_dest] !=0, "not enought tokens");
+			FDLTTokenInterfaceContract.mintTokenTo(_dest,tokenPayments[_dest]);
+			tokenPayments[_dest] = 0;
+			emit Claimed(_dest, address(token));
 	}
 
 	/**
-		* @notice Set a new FDLTToken.sol contract address in case of updates
+		* @dev Set a new FDLTToken.sol contract address in case of updates
 		* @param _address The new FDLTToken.sol contract address
 		*/
 	function setFDLTTokenContractAddress(address _address) external onlyOwner {
-		FDLTTokenInterfaceContract = FDLTTokenInterface(_address);
+			FDLTTokenInterfaceContract = FDLTTokenInterface(_address);
 	}
 }
