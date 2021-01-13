@@ -36,7 +36,7 @@ const Marketplace = ({
     },
   });
 
-  const sellerAddress = '0xC96822B34c7F892B09A39F080B2659105af00146';
+  const sellerAddress = '0x4c0FeD497BC2868E1010C8eC8bEfcfCd3013601b';
   const classes = useStyles();
   const handleBuy = () => {
     sendProduct(productId);
