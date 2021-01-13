@@ -1,9 +1,10 @@
 import { connect } from 'react-redux';
 import { sendConfirmationDelivery } from '../../actions/escrow';
-import Orders from '../../components/Account/Orders';
+import Orders from '../../components/Account/Orders.jsx';
 
 const mapStateToProps = (state) => ({
   orders: state.escrow.userOrders,
+  status: state.escrow.status,
 });
 
 const mapDispatchToProps = (dispatch) => ({

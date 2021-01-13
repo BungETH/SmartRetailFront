@@ -1,10 +1,10 @@
 import {
-  STORE_TRANSACTION_PARAMS,
   FETCH_ESCROW_CONTRACT,
   STORE_ORDERS,
 } from '../actions/escrow';
 import {
   STORE_PRODUCT_PRICE_IN_WEI,
+  STORE_TRANSACTION_PARAMS,
 } from '../actions/fidelity';
 
 const initialState = {
@@ -17,6 +17,7 @@ const initialState = {
     amount: 0,
     state: 0,
   }],
+  status: '',
 };
 const escrowReducer = (state = initialState, action = {}) => {
   switch (action.type) {
@@ -32,7 +33,7 @@ const escrowReducer = (state = initialState, action = {}) => {
         ...state,
         amountInWei: action.price,
       };
-
+      
     case FETCH_ESCROW_CONTRACT:
       return {
         ...state,

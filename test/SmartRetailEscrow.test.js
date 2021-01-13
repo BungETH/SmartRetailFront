@@ -4,24 +4,23 @@ const SmartRetailEscrow = artifacts.require("SmartRetailEscrow");
 
 contract('SmartRetailEscrow', function (accounts) {
     const admin = accounts[8];
-    const account1 = accounts[1];
-    // const voter2 = accounts[2];
-    // const voter3 = accounts[3];
+    const seller = accounts[1];
+    const buyer = accounts[2];
+
     let SmartRetailEscrowInstance;
-    const amount = new BN(5);
+    const amount = new BN(5000);
 
     beforeEach(async function () {
         SmartRetailEscrowInstance = await SmartRetailEscrow.new({from: admin});
     });
 
-    it("first", async () => {
+    it("SendPaymentToSeller", async () => {
 
-        let resultPayment = await SmartRetailEscrowInstance.sendPayment(account1, amount, {from: admin, value: amount });
-        let manager = await SmartRetailEscrowInstance.tokenManager();
-        let resultDelivery = await SmartRetailEscrowInstance.confirmDelivery(amount, {from: admin })
+        await SmartRetailEscrowInstance.sendPayment(seller, amount, {from: buyer, value: amount });
+        let amountDepositOfSeller = await SmartRetailEscrowInstance.getDepositsOf({from:seller});
 
-        console.debug(resultDelivery,manager);
-        
+        expect(amountDepositOfSeller).to.be.bignumber.equal(amount);
+
     });
 
     // it("Adminstrator should start proposal registration session", async () => {
