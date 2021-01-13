@@ -2,7 +2,7 @@
 // SPDX-License-Identifier: MIT 
 // Contract Natspec documentation here https://ipfs.io/ipfs/QmW6XEMY77kaaz47WoZT3NKCBED9n9cT4yU3JqoWcH9Xe7
 
-pragma solidity 0.7.5;
+pragma solidity 0.6.12;
 
 import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
 
