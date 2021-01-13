@@ -8,17 +8,16 @@ import "@openzeppelin/contracts/math/SafeMath.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
 
 contract FDLTTokenInterface {
-    function mintTokenTo(address dest, uint amount) external {}
+    function mintTokenTo(address dest, uint256 amount) external {}
 }
 
-contract FDLTTokenManager is Ownable
-{
+contract FDLTTokenManager is Ownable {
     using SafeMath for uint256;
     FDLTToken public token; // L’instance ERC20Token à déployer
     FDLTTokenInterface private FDLTTokenInterfaceContract;
-    mapping (address => uint256) public tokenPayments;
+    mapping(address => uint256) public tokenPayments;
 
-    event Deposit(address dest, uint allowance);
+    event Deposit(address dest, uint256 allowance);
     event Claimed(address dest, address tokenAddress);
 
     constructor() public {
@@ -32,8 +31,8 @@ contract FDLTTokenManager is Ownable
     }
 
     function claim(address _dest) external {
-        require(tokenPayments[_dest] !=0, "not enought tokens");
-        FDLTTokenInterfaceContract.mintTokenTo(_dest,tokenPayments[_dest]);
+        require(tokenPayments[_dest] != 0, "not enought tokens");
+        FDLTTokenInterfaceContract.mintTokenTo(_dest, tokenPayments[_dest]);
         tokenPayments[_dest] = 0;
         emit Claimed(_dest, address(token));
     }

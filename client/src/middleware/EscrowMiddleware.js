@@ -35,7 +35,7 @@ const EscrowMiddleware = (store) => (next) => (action) => {
           gas: 900000,
           from: account,
         });
-        // console.log(transaction);
+        console.log(transaction);
         // appeller token manager
       };
       confirm();

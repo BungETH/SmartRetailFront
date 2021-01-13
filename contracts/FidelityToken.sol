@@ -6,7 +6,7 @@ import "@openzeppelin/contracts/access/Ownable.sol";
 import "@openzeppelin/contracts/math/SafeMath.sol";
 
 contract FidelityToken is ERC20, Ownable {
-    constructor () ERC20("Fidelity", "FDLT") {
+    constructor () public ERC20("Fidelity", "FDLT") {
   
     }
 
