@@ -10,7 +10,7 @@ import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
   * @title FDLTToken 
   * @dev Token creator and distributor 
   */
-contract FDLTToken is ERC20 {
+contract FDLTToken is ERC20 , Ownable{
 
 	event Minted(address dest, uint amount, address tokenAddress);
 	/// @dev Standart ERC20 constructor from oppenzeppelin smartcontract library
@@ -21,7 +21,7 @@ contract FDLTToken is ERC20 {
 		* @param _dest The buyer address
 		* @param _amount The value of the purchase in wei
 		*/
-	function mintTokenTo(address _dest, uint _amount) public {
+	function mintTokenTo(address _dest, uint _amount) public onlyOwner {
 		_mint(_dest, _amount);
 		emit Minted(_dest, _amount, address(this));
 	}

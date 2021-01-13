@@ -1,6 +1,6 @@
 // contracts/SmartRetailEscrow.sol
 // SPDX-License-Identifier: MIT
-// Contract Natspec documentation here https://ipfs.io/ipfs/QmSjb6xNNUrztDBdjJFJ9cgmEMfuk9X6vTkBEaefNqiQo7
+// Contract Natspec documentation here https://ipfs.io/ipfs/QmPR6XfxE5siK2crKoLybpVucyk8C5jEbVtyeBZ41bsTVY
 
 pragma solidity 0.6.12;
 
@@ -14,23 +14,17 @@ import "./FDLTTokenManager.sol";
   * @title TokenManagerInterface
   * @dev Use asyncDeposit and claim from FDLTTokenManager.sol 
   */
-contract FDLTTokenManagerInterface {
-	function asyncDeposit(address dest, uint256 amount) external{}
-	function claim(address dest) external {}
+interface FDLTTokenManagerInterface {
+	function asyncDeposit(address dest, uint256 amount) external;
+	function claim(address dest) external ;
 }
 
 /** @author The SmartRetail Team
   * @title SmartRetailEscrow
   */
 contract SmartRetailEscrow is Ownable, ReentrancyGuard { 
-	Escrow private escrow;
-	FDLTTokenManager private manager;
-	FDLTTokenManagerInterface private tokenManagerContract;
-
-	event FundSendToContract(string contractMessage, FDLTTokenManager FDLTTokenManagerContract,  uint orderId, address seller, address buyer, uint amount ,State state);
-	event FundSendToSeller(string sellerMessage,  uint orderId);
-
-	mapping(uint => Order) private listOrders;
+    
+	enum State { AWAITING_PAYMENT, AWAITING_DELIVERY, PAID}
 	
 	struct Order {
 		address payable seller;
@@ -38,17 +32,24 @@ contract SmartRetailEscrow is Ownable, ReentrancyGuard {
 		uint amount;
 		State state;
 	} 
+    	
+	Escrow private escrow;
+	FDLTTokenManager private manager;
+	FDLTTokenManagerInterface private tokenManagerContract;
 
-	enum State { AWAITING_PAYMENT, AWAITING_DELIVERY, PAID}
+	event FundSendToContract(string contractMessage, FDLTTokenManager FDLTTokenManagerContract,  uint orderId, address seller, address buyer, uint amount ,State state);
+	event FundSendToSeller(string sellerMessage,  uint orderId);
 
+	mapping(uint => Order) public listOrders;
+	
   /// @dev Creates new escrow contract and a new instance of the FDLTTokenManager smart contract for current order
 	constructor() ReentrancyGuard() public {
-        escrow = new Escrow();
-        manager = new FDLTTokenManager(); 
+		escrow = new Escrow();
+		manager = new FDLTTokenManager(); 
 		tokenManagerContract = FDLTTokenManagerInterface(address(manager));
-    }
+	}
 
-	receive() external payable {}
+	functionreceive() external payable {}
 
 	/**
 	  * @dev Receives payments from buyer address and keep it in an escrow, the _value param's unit must be in wei
@@ -78,8 +79,7 @@ contract SmartRetailEscrow is Ownable, ReentrancyGuard {
 	function confirmDelivery(uint _orderId) external nonReentrant() {
 		require(listOrders[_orderId].state != State.PAID, "order is already paid");
 		require(listOrders[_orderId].state == State.AWAITING_DELIVERY, "You cannot confirm until deposit first");
-		// require(listOrders[_orderId].amount == escrow.depositsOf(listOrders[_orderId].seller), "incorrect order value");
-		require(listOrders[_orderId].buyer == msg.sender, "caller is not the buyer");
+		require(listOrders[_orderId].buyer == msg.sender, "caller is not the the buyer");
 
 		escrow.withdraw(listOrders[_orderId].seller);
 		// todo function convert orderAmount to tokenAmount
@@ -107,6 +107,6 @@ contract SmartRetailEscrow is Ownable, ReentrancyGuard {
 	  * @return @param test
 	  */
 	function getDepositsOf() public view returns(uint){
-			return escrow.depositsOf(msg.sender);
+		return escrow.depositsOf(msg.sender);
 	}
 }
