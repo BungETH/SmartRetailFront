@@ -49,7 +49,7 @@ contract SmartRetailEscrow is Ownable, ReentrancyGuard {
 		tokenManagerContract = FDLTTokenManagerInterface(address(manager));
 	}
 
-	functionreceive() external payable {}
+	receive() external payable {}
 
 	/**
 	  * @dev Receives payments from buyer address and keep it in an escrow, the _value param's unit must be in wei
