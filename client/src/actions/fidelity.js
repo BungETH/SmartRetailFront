@@ -88,7 +88,7 @@ export const sendProduct = (productId, price) => (dispatch) => {
         dispatch(storeProductPriceInWei(ethAmountInWei));
 
         dispatch(storeProductPriceInDollars(productId, price));
-        dispatch(storeTransactionParams("0xC96822B34c7F892B09A39F080B2659105af00146", ethAmountInWei));
+        dispatch(storeTransactionParams("0x4c0FeD497BC2868E1010C8eC8bEfcfCd3013601b", ethAmountInWei));
         dispatch(sendTransaction());
         dispatch(sendBalance(35));
       },
