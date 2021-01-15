@@ -53,7 +53,7 @@ const Marketplace = ({
               {title}
             </Typography>
             <Typography variant="body2" color="textSecondary" component="p">
-              {description}
+              {description.length <= 95 ? description : description.slice(1, 95) +'...'}
             </Typography>
           </CardContent>
         </CardActionArea>
