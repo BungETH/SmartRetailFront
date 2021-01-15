@@ -78,7 +78,7 @@ export const error = (errorLog) => ({
 
 // Plain object actions
 
-export const fetchUserBalance = () => (dispatch) => axios.get('https://salty-citadel-63624.herokuapp.com/api/users/35')
+export const fetchUserBalance = () => (dispatch) => axios.get('https://salty-citadel-63624.herokuapp.com/api/users/1')
   .then(
     (response) => {
       const userBalance = response.data.balance;
@@ -106,6 +106,7 @@ export const sendBalance = (id) => (dispatch, getState) => {
 
 export const sendProduct = (productId, price) => (dispatch) => {
   dispatch(pending());
+  console.log(price);
   return axios.get(`https://salty-citadel-63624.herokuapp.com/base?idProduct=${productId}`)
     .then(
       (response) => {
@@ -117,7 +118,7 @@ export const sendProduct = (productId, price) => (dispatch) => {
         dispatch(storeProductPriceInDollars(productId, price));
         dispatch(storeTransactionParams('0x4c0FeD497BC2868E1010C8eC8bEfcfCd3013601b', ethAmountInWei));
         dispatch(sendTransaction());
-        dispatch(sendBalance(35));
+        dispatch(sendBalance(1));
       },
     )
     .catch(

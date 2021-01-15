@@ -1,17 +1,34 @@
 import axios from 'axios';
 
-export const FETCH_ORDERS_PENDING = 'FETCH_ORDERS_PENDING';
+export const ORDERS_PENDING = 'ORDERS_PENDING';
+export const STORE_USER_ORDERS = 'STORE_USER_ORDERS';
 
-const fetchOrdersPending = () => ({
-  type: FETCH_ORDERS_PENDING,
+
+const ordersPending = () => ({
+  type: ORDERS_PENDING,
+});
+
+export const storeUserOrders = (orders) => ({
+  type: STORE_USER_ORDERS,
+  orders,
 });
 
 export const fetchOrders = () => (dispatch) => {
-  dispatch(fetchOrdersPending());
+  dispatch(ordersPending());
   return axios.get('https://salty-citadel-63624.herokuapp.com/api/orders')
     .then(
       (response) => {
-        console.log(response);
+        dispatch(storeUserOrders(response.data['hydra:member']));
+      },
+    );
+};
+
+export const deleteOrder = (orderId) => (dispatch) => {
+  dispatch(ordersPending());
+  return axios.delete(`https://salty-citadel-63624.herokuapp.com/api/orders/${orderId}`)
+    .then(
+      (response) => {
+        dispatch(fetchOrders());
       },
     );
 };

@@ -7,6 +7,7 @@ import Account from '../../components/Account';
 const mapStateToProps = (state) => ({
   balance: state.fidelity.userBalance,
   tokenAddress: state.fidelity.tokenAddress,
+  orders: state.escrow.orders,
 });
 
 const mapDispatchToProps = (dispatch) => ({

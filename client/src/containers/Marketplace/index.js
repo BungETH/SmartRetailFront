@@ -11,8 +11,8 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
 
-  sendProduct: (productPrice) => {
-    dispatch(sendProduct(productPrice));
+  sendProduct: (productId, price) => {
+    dispatch(sendProduct(productId, price));
   },
   sendBalance: (id) => {
     dispatch(sendBalance(id));

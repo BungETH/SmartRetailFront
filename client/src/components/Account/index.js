@@ -10,6 +10,7 @@ import Orders from '../../containers/Account/Orders';
 
 const Account = ({
   drizzle,
+  orders,
   fetchOrders,
   balance,
   claimTokens,
@@ -44,8 +45,7 @@ const Account = ({
       color: 'white',
     },
   });
-  console.log(drizzle);
- 
+
   useEffect(() => {
     fetchOrders();
   }, []);

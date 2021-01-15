@@ -41,7 +41,6 @@ const Marketplace = ({
   });
 
   const classes = useStyles();
-
   return (
     <div>
       <Card className={classes.homeCards}>
