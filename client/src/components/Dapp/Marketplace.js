@@ -24,61 +24,57 @@ const Marketplace = ({
     homeCards: {
       width: 345,
       height: 500,
-      margin: '4em',
-      marginTop: '5em',
+      margin: '5em 4em 1em 4em',
     },
     media: {
-      height: 240,
+      height: 400,
     },
-    price: {
-      paddingLeft: '1em',
+    outCard_container: {
+      display: 'flex',
+      flexWrap: 'wrap',
+      justifyContent: 'space-around',
+      alignItems: 'baseline',
+    },
+    typo: {
+      fontSize: '2em',
     },
   });
 
-  
   const classes = useStyles();
-  
+
   return (
     <div>
-      <Card raised className={classes.homeCards}>
+      <Card className={classes.homeCards}>
         <CardActionArea>
           <CardMedia
             className={classes.media}
             image={img}
-            title="Contemplative Reptile"
+            title="products"
           />
           <CardContent>
             <Typography gutterBottom variant="h5" component="h2">
               {title}
             </Typography>
-            <Typography variant="body2" color="textSecondary" component="p">
-              {description}
-            </Typography>
           </CardContent>
         </CardActionArea>
-        <CardActions className={classes.actions}>
-          <Button
-            size="small"
-            color="primary"
-            onClick={() => sendProduct(productId, price)}
-          >
-            Buy
-          </Button>
-          <Button size="small" color="primary">
-            <Link to="/product">
-              Show details
-            </Link>
-          </Button>
-          <Typography
-            className={classes.price}
-            variant="h4"
-            color="primary"
-            component="p"
-          >
-            {price} $
-          </Typography>
-        </CardActions>
       </Card>
+      <div className={classes.outCard_container}>
+        <Button
+          className={classes.typo}
+          variant="contained"
+          color="primary"
+          onClick={() => sendProduct(productId, price)}
+        >
+          Buy
+        </Button>
+        <Typography
+          variant="h4"
+          color="primary"
+          component="p"
+        >
+          {price} $
+        </Typography>
+      </div>
     </div>
   );
 };

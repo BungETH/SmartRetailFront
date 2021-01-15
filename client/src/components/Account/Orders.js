@@ -56,9 +56,7 @@ const Orders = ({
   drizzle,
 }) => {
   const classes = useStyles();
-  const state = drizzle.drizzle.store.getState();
-  const ordersList = [];
-  
+
   return (
     <div className={classes.root}>
       {orders[0].orderId !== 0 && (

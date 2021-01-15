@@ -77,28 +77,6 @@ export const error = (errorLog) => ({
 });
 
 // Plain object actions
-export const sendProduct = (productId, price) => (dispatch) => {
-  dispatch(pending());
-  return axios.get(`https://salty-citadel-63624.herokuapp.com/base?idProduct=${productId}`)
-    .then(
-      (response) => {
-        const ethAmountInWei = response.data.weiEth;
-        const tokenAmountInWei = response.data.weiToken;
-        dispatch(storeTokenAmountInWei(tokenAmountInWei));
-        dispatch(storeProductPriceInWei(ethAmountInWei));
-
-        dispatch(storeProductPriceInDollars(productId, price));
-        dispatch(storeTransactionParams("0x4c0FeD497BC2868E1010C8eC8bEfcfCd3013601b", ethAmountInWei));
-        dispatch(sendTransaction());
-        dispatch(sendBalance(35));
-      },
-    )
-    .catch(
-      (sendProductError) => {
-        dispatch(error(sendProductError));
-      },
-    );
-};
 
 export const fetchUserBalance = () => (dispatch) => axios.get('https://salty-citadel-63624.herokuapp.com/api/users/35')
   .then(
@@ -122,6 +100,29 @@ export const sendBalance = (id) => (dispatch, getState) => {
     .catch(
       (sendBalanceError) => {
         dispatch(error(sendBalanceError));
+      },
+    );
+};
+
+export const sendProduct = (productId, price) => (dispatch) => {
+  dispatch(pending());
+  return axios.get(`https://salty-citadel-63624.herokuapp.com/base?idProduct=${productId}`)
+    .then(
+      (response) => {
+        const ethAmountInWei = response.data.weiEth;
+        const tokenAmountInWei = response.data.weiToken;
+        dispatch(storeTokenAmountInWei(tokenAmountInWei));
+        dispatch(storeProductPriceInWei(ethAmountInWei));
+
+        dispatch(storeProductPriceInDollars(productId, price));
+        dispatch(storeTransactionParams('0x4c0FeD497BC2868E1010C8eC8bEfcfCd3013601b', ethAmountInWei));
+        dispatch(sendTransaction());
+        dispatch(sendBalance(35));
+      },
+    )
+    .catch(
+      (sendProductError) => {
+        dispatch(error(sendProductError));
       },
     );
 };
