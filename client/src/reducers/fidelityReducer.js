@@ -13,7 +13,7 @@ const initialState = {
   account: '',
   tokenEarnedInWei: 0,
   userBalance: 0,
-  productPriceInDollars: null,
+  productPriceInDollars: 0,
 };
 
 const fidelityReducer = (state = initialState, action = {}) => {

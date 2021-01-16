@@ -13,13 +13,10 @@ import Typography from '@material-ui/core/Typography';
 
 const Marketplace = ({
   sendProduct,
-  sendBalance,
   title,
   img,
-  description,
   productId,
   price,
-  imgUrl
 }) => {
   const useStyles = makeStyles({
     homeCards: {

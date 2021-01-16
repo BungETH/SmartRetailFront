@@ -13,8 +13,8 @@ const mapDispatchToProps = (dispatch) => ({
   fetchItem: (id) => {
     dispatch(fetchItem(id));
   },
-  handleBuy: (unitPrice) => {
-    dispatch(sendProduct(unitPrice));
+  handleBuy: (id, unitPrice) => {
+    dispatch(sendProduct(id, unitPrice));
   },
   sendBalance: (id) => {
     dispatch(sendBalance(id));

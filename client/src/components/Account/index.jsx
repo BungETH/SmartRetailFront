@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import React from 'react';
+import React, { useEffect } from 'react';
 
 import { makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
@@ -10,6 +10,8 @@ import Orders from '../../containers/Account/Orders';
 
 const Account = ({
   drizzle,
+  orders,
+  fetchOrders,
   balance,
   claimTokens,
   tokenAddress,
@@ -43,6 +45,10 @@ const Account = ({
       color: 'white',
     },
   });
+
+  useEffect(() => {
+    fetchOrders();
+  }, []);
 
   const classes = useStyles();
   const handleClaim = () => {

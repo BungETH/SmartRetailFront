@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/core/styles';
 import Accordion from '@material-ui/core/Accordion';
@@ -11,7 +11,7 @@ import Divider from '@material-ui/core/Divider';
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    width: '100%',
+    width: '80%',
     alignSelf: 'center',
   },
   content: {
@@ -52,20 +52,22 @@ const useStyles = makeStyles((theme) => ({
 const Orders = ({
   orders,
   sendConfirmationDelivery,
-  status,
-  drizzle,
+  deleteOrder,
+  fetchOrders,
 }) => {
   const classes = useStyles();
-  const state = drizzle.drizzle.store.getState();
-  const ordersList = [];
-  
+
+  useEffect(() => {
+    fetchOrders();
+  }, []);
+
   return (
     <div className={classes.root}>
-      {orders[0].orderId !== 0 && (
+      {orders !== null && (
         orders.map((order) => (
           <Accordion
-            key={order.orderId}
-            TransitionProps={{ unmountOnExit: true }}
+            key={order.id}
+
           >
             <AccordionSummary
               expandIcon={<ExpandMoreIcon />}
@@ -74,36 +76,53 @@ const Orders = ({
             >
               <div className={classes.column}>
                 <Typography className={classes.heading}>Command number</Typography>
-                <Typography className={classes.secondaryHeading}>{order.orderId}</Typography>
-              </div>
-              <div className={classes.column}>
-                <Typography className={classes.heading}>seller</Typography>
-                <Typography className={classes.secondaryHeading}>{order.seller.slice(0, 10)}{order.seller.length > 10 && ('...')}</Typography>
+                <Typography className={classes.secondaryHeading}>{order.referenceId}</Typography>
               </div>
               <div className={classes.column}>
                 <Typography className={classes.heading}>price</Typography>
-                <Typography className={classes.secondaryHeading}>{order.amount.slice(0, 10)}{order.amount.length > 10 && ('...')}</Typography>
+                <Typography className={classes.secondaryHeading}>{order.price}</Typography>
               </div>
               <div className={classes.column}>
                 <Typography className={classes.heading}>status</Typography>
-                {order.state === '1' && (
-                <Typography className={classes.secondaryHeading}>awaiting delivery</Typography>
-                )}
-                {status === 'success' && (
-                <Typography className={classes.secondaryHeading}>Paied</Typography>
-                )}
+                <Typography className={classes.secondaryHeading}>{order.status}</Typography>
               </div>
             </AccordionSummary>
             <Divider />
             <AccordionActions>
-              <Button size="small">Cancel</Button>
+              {order.status === 'Payed' && (
               <Button
+                className={classes.order_button}
+                size="small"
+                variant="contained"
+                color="secondary"
+                onClick={() => deleteOrder(order.id)}
+              >
+                Delete order
+              </Button>
+              )}
+
+              {order.status === 'Awaiting payment' && (
+              <Button
+                className={classes.order_button}
                 size="small"
                 color="primary"
-                onClick={() => sendConfirmationDelivery(order.orderId)}
+                variant="contained"
+                onClick={() => sendConfirmationDelivery(order.referenceId, order.id)}
               >
                 Confirm Delivery
               </Button>
+              )}
+              {order.status !== 'Awaiting payment' && (
+              <Button
+                disabled
+                className={classes.order_button}
+                size="small"
+                color="primary"
+                variant="contained"
+              >
+                Payed
+              </Button>
+              )}
             </AccordionActions>
           </Accordion>
         )))}
@@ -113,14 +132,15 @@ const Orders = ({
 
 export default Orders;
 
-Orders.propTypes = {
+Orders.defaultProps = {
   orders: PropTypes.arrayOf(
     PropTypes.shape({
-      orderId: PropTypes.any.isRequired,
-      seller: PropTypes.string.isRequired,
-      amount: PropTypes.number.isRequired,
-      state: PropTypes.number.isRequired,
+      id: PropTypes.number.isRequired,
+      referenceId: PropTypes.number.isRequired,
+      price: PropTypes.number.isRequired,
+      status: PropTypes.string.isRequired,
+      userId: PropTypes.string.isRequired,
     }).isRequired,
-  ).isRequired,
+  ),
   sendConfirmationDelivery: PropTypes.func.isRequired,
 };

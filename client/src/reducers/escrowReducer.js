@@ -1,23 +1,20 @@
 import {
   FETCH_ESCROW_CONTRACT,
-  STORE_ORDERS,
 } from '../actions/escrow';
 import {
   STORE_PRODUCT_PRICE_IN_WEI,
   STORE_TRANSACTION_PARAMS,
 } from '../actions/fidelity';
+import {
+  STORE_USER_ORDERS,
+} from '../actions/orders';
 
 const initialState = {
   contract: {},
   sellerAddress: '',
   amountInWei: 0,
-  userOrders: [{
-    orderId: 0,
-    seller: '',
-    amount: 0,
-    state: 0,
-  }],
   status: '',
+  orders: null,
 };
 const escrowReducer = (state = initialState, action = {}) => {
   switch (action.type) {
@@ -33,34 +30,17 @@ const escrowReducer = (state = initialState, action = {}) => {
         ...state,
         amountInWei: action.price,
       };
-      
+
     case FETCH_ESCROW_CONTRACT:
       return {
         ...state,
         contract: action.contract,
       };
 
-    case STORE_ORDERS:
-      if (state.userOrders[0].orderId === 0) {
-        return {
-          ...state,
-          userOrders: [{
-            orderId: action.orderId,
-            seller: action.seller,
-            amount: action.amount,
-            state: action.state,
-          }],
-        };
-      }
+    case STORE_USER_ORDERS:
       return {
         ...state,
-        userOrders: [...state.userOrders, {
-          orderId: action.orderId,
-          buyer: action.buyer,
-          seller: action.seller,
-          amount: action.amount,
-          state: action.state,
-        }],
+        orders: action.orders,
       };
     default: return state;
   }
