@@ -5,7 +5,6 @@ import { Link } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardActionArea from '@material-ui/core/CardActionArea';
-import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
 import Button from '@material-ui/core/Button';
@@ -13,10 +12,8 @@ import Typography from '@material-ui/core/Typography';
 
 const Marketplace = ({
   sendProduct,
-  sendBalance,
   title,
   img,
-  description,
   productId,
   price,
 }) => {
@@ -32,11 +29,15 @@ const Marketplace = ({
     outCard_container: {
       display: 'flex',
       flexWrap: 'wrap',
-      justifyContent: 'space-around',
+      marginLeft: '4em',
       alignItems: 'baseline',
     },
     typo: {
-      fontSize: '2em',
+      marginRight: '6em',
+      padding: '0.2em 1em',
+    },
+    price: {
+      fontSize: '1.5em',
     },
   });
 
@@ -67,6 +68,7 @@ const Marketplace = ({
           Buy
         </Button>
         <Typography
+          className={classes.price}
           variant="h4"
           color="primary"
           component="p"

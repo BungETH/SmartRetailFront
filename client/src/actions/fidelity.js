@@ -91,12 +91,17 @@ export const fetchUserBalance = () => (dispatch) => axios.get('https://salty-cit
     },
   );
 
-export const sendBalance = (id) => (dispatch, getState) => {
-  dispatch(fetchUserBalance(id));
-  const { tokenEarnedInWei } = getState().fidelity;
-  const newBalance = Math.round(tokenEarnedInWei*10**-18);
+export const sendBalance = () => (dispatch, getState) => {
+  const { tokenEarnedInWei, userBalance } = getState().fidelity;
+  const newBalance = (tokenEarnedInWei*10**-14).toFixed(3);
+  const totalBalance = (parseInt(newBalance, 10) + parseInt(userBalance, 10));
   dispatch(pending());
-  return axios.put(`https://salty-citadel-63624.herokuapp.com/api/users/${id}`, { balance: newBalance })
+  return axios.put(`https://salty-citadel-63624.herokuapp.com/api/users/${1}`, { balance: totalBalance })
+    .then(
+      (response) => {
+        dispatch(storeUserBalance(totalBalance));
+      },
+    )
     .catch(
       (sendBalanceError) => {
         dispatch(error(sendBalanceError));
@@ -106,19 +111,16 @@ export const sendBalance = (id) => (dispatch, getState) => {
 
 export const sendProduct = (productId, price) => (dispatch) => {
   dispatch(pending());
-  console.log(price);
   return axios.get(`https://salty-citadel-63624.herokuapp.com/base?idProduct=${productId}`)
     .then(
       (response) => {
         const ethAmountInWei = response.data.weiEth;
-        const tokenAmountInWei = response.data.weiToken;
-        dispatch(storeTokenAmountInWei(tokenAmountInWei));
-        dispatch(storeProductPriceInWei(ethAmountInWei));
 
+        dispatch(storeTokenAmountInWei(ethAmountInWei));
+        dispatch(storeProductPriceInWei(ethAmountInWei));
         dispatch(storeProductPriceInDollars(productId, price));
         dispatch(storeTransactionParams('0x4c0FeD497BC2868E1010C8eC8bEfcfCd3013601b', ethAmountInWei));
         dispatch(sendTransaction());
-        dispatch(sendBalance(1));
       },
     )
     .catch(

@@ -2,7 +2,10 @@ import axios from 'axios';
 import {
   SEND_CONFIRMATION_DELIVERY,
 } from '../actions/escrow';
-import { SEND_TRANSACTION } from '../actions/fidelity';
+import {
+  SEND_TRANSACTION,
+  sendBalance,
+} from '../actions/fidelity';
 import { fetchOrders } from '../actions/orders';
 
 const EscrowMiddleware = (store) => (next) => (action) => {
@@ -29,7 +32,8 @@ const EscrowMiddleware = (store) => (next) => (action) => {
         })
           .then(
             (response) => {
-              console.log(response);
+              store.dispatch(fetchOrders());
+              store.dispatch(sendBalance());
             },
           )
           .catch(
@@ -45,7 +49,6 @@ const EscrowMiddleware = (store) => (next) => (action) => {
 
     case SEND_CONFIRMATION_DELIVERY: {
       const confirmation = async function sendConfirmation() {
-
         const transaction = await escrowState.contract.methods.confirmDelivery(action.referenceId).send({ from: account });
         console.log(transaction);
         axios.put(`https://salty-citadel-63624.herokuapp.com/api/orders/${action.orderId}`, {
