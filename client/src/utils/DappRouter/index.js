@@ -1,12 +1,13 @@
 import React from 'react';
 import {
   Switch,
-  Route,
+  Route
 } from 'react-router-dom';
 
 import Dapp from '../../containers/Dapp';
-import ProductDetails from '../../components/ProductDetails';
 import Account from '../../containers/Account';
+import ProductPage from '../../components/ProductDetails/ProductPage';
+
 
 const DappRouter = (drizzle) => (
 
@@ -21,10 +22,9 @@ const DappRouter = (drizzle) => (
         />
       </Route>
       <Route
-        exact
-        path="/product"
+        path="/product/:id"
       >
-        <ProductDetails />
+        <ProductPage />
       </Route>
       <Route
         exact

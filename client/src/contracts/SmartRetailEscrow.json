@@ -8348,12 +8348,12 @@
         }
       },
       "links": {},
-      "address": "0xA460eE21fc6A03F6c2c969F81cA4e602F76b8324",
-      "transactionHash": "0x8e384858d546eb9880a2db470a9486e9459d5dcc6368b6cc970736a9db75eb23"
+      "address": "0x67bf44c028085D8b3a5CDd659e434d8262254320",
+      "transactionHash": "0x75a3044ff8ba485fb6b70ead019d6028c8d832f0b125ecd3e7add430a9029ddf"
     }
   },
   "schemaVersion": "3.3.3",
-  "updatedAt": "2021-01-13T21:01:34.858Z",
+  "updatedAt": "2021-01-15T13:11:57.361Z",
   "networkType": "ethereum",
   "devdoc": {
     "author": "The SmartRetail Team",

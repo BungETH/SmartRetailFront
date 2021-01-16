@@ -1,10 +1,12 @@
 //npm import
-import React from "react";
+import React, { useEffect } from "react";
+import { useParams } from "react-router-dom";
+import PropTypes from "prop-types";
 import { makeStyles } from "@material-ui/core/styles";
 import Paper from "@material-ui/core/Paper";
-import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
 import ShoppingBasketTwoToneIcon from "@material-ui/icons/ShoppingBasket";
+import EuroSymbolTwoToneIcon from "@material-ui/icons/EuroSymbolTwoTone";
 //local import
 import "./product.scss";
 
@@ -14,17 +16,13 @@ const useStyles = makeStyles((theme) => ({
     flexWrap: "wrap",
     "& #image": {
       margin: theme.spacing(1),
-      width: theme.spacing(70),
-      height: theme.spacing(70),
-      borderRadius: theme.spacing(2),
     },
 
     "& #filled-read-only-input ": {
       margin: theme.spacing(2),
       width: theme.spacing(70),
-      heigth: theme.spacing(5),
-      borderRadius: theme.spacing(2),
-      fontSize: theme.spacing(4),
+      heigth: theme.spacing(15),
+      fontSize: theme.spacing(5),
     },
     "& #description": {
       margin: theme.spacing(1),
@@ -50,34 +48,33 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const ProductDetails = ({ producTitle, description, imgUrl }) => {
+const ProductDetails = ({ fetchItem, product, handleBuy }) => {
   const classes = useStyles();
+
+  let { id } = useParams();
+
+  useEffect(() => {
+    fetchItem(id);
+  }, []);
+
+  const { imgUrl, title, description, unitPrice } = product;
+  console.log(title);
 
   return (
     <div id="container" className={classes.root}>
       <Paper id="image" elevation={3}>
-        {imgUrl}
+        <img src={imgUrl} alt={title} />
       </Paper>
       <div id="decriptionField">
-        <TextField
-          id="filled-read-only-input"
-          defaultValue="Product Name"
-          InputProps={{
-            readOnly: true,
-          }}
-          variant="filled"
-        >
-          {producTitle}
-        </TextField>
+        <Paper id="filled-read-only-input" elevation={2}>
+          {title}
+        </Paper>
         <Paper id="description" elevation={0}>
-          Lorem ipsum dolor sit amet consectetur, adipisicing elit. A error
-          magni inventore explicabo pariatur nesciunt, blanditiis eum modi
-          repellat nam omnis, vero laborum corrupti rem fugit repudiandae
-          expedita ex. Cum?
+          {description}
         </Paper>
         <div className="price-wrap">
           <Paper id="price" elevation={3}>
-            Price
+            {unitPrice} <EuroSymbolTwoToneIcon />
           </Paper>
         </div>
         <div className="button-wrap">
@@ -87,6 +84,7 @@ const ProductDetails = ({ producTitle, description, imgUrl }) => {
             color="primary"
             startIcon={<ShoppingBasketTwoToneIcon />}
             disableElevation
+            onClick={() => handleBuy(id, unitPrice)}
           >
             Buy
           </Button>
@@ -94,5 +92,12 @@ const ProductDetails = ({ producTitle, description, imgUrl }) => {
       </div>
     </div>
   );
+};
+
+ProductDetails.propTypes = {
+  imgUrl: PropTypes.string.isRequired,
+  productTitle: PropTypes.string.isRequired,
+  productDescription: PropTypes.string.isRequired,
+  price: PropTypes.number.isRequired,
 };
 export default ProductDetails;

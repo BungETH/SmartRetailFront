@@ -66,7 +66,7 @@ const Marketplace = ({
             Buy
           </Button>
           <Button size="small" color="primary">
-            <Link to="/product">
+            <Link to={`/product/${productId}`}>
               Show details
             </Link>
           </Button>

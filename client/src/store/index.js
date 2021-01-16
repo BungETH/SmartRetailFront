@@ -8,9 +8,10 @@ import EscrowMiddleware from '../middleware/EscrowMiddleware';
 import fidelityReducer from '../reducers/fidelityReducer';
 import productsReducer from '../reducers/productsReducer';
 import escrowReducer from '../reducers/escrowReducer';
+import itemReducer from '../reducers/itemReducer';
 
 const appMiddlewares = [FidelityMiddleware, EscrowMiddleware, ReduxThunk];
-const appReducers = { fidelity: fidelityReducer, products: productsReducer, escrow: escrowReducer };
+const appReducers = { fidelity: fidelityReducer, products: productsReducer, escrow: escrowReducer, item: itemReducer };
 // create the store
 const store = generateStore({
   drizzleOptions,
