@@ -14,7 +14,7 @@ contract('SmartRetailEscrow', function (accounts) {
         SmartRetailEscrowInstance = await SmartRetailEscrow.new({from: admin});
     });
 
-    it("Workflow Buyer", async () => {
+    it("Deposit in escrow and create Order", async () => {
 
         resultPayment = await SmartRetailEscrowInstance.sendPayment(seller, amount, {from: buyer, value: amount });
         let amountDepositOfSeller = await SmartRetailEscrowInstance.getDepositsOf({from:seller});
@@ -23,12 +23,14 @@ contract('SmartRetailEscrow', function (accounts) {
         expect(amountDepositOfSeller).to.be.bignumber.equal(amount);
         expectEvent(resultPayment, 'FundSendToContract');
 
+    });
+
+    it("Confirm Order and allow tokens for buyers", async () => {
+
         resultDelivery = await SmartRetailEscrowInstance.confirmDelivery(orderId,{from:buyer});
         order = await SmartRetailEscrowInstance.listOrders(orderId);
 
         expect(order.state).to.be.bignumber.equal(new BN(2));
         expectEvent(resultDelivery, 'FundSendToSeller');
-
-    });
-    
+    }
 });
