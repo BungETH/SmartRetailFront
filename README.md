@@ -1,14 +1,18 @@
 # Smart Retail
 
 Smart Retail is an open source decentralized marketplace running on ropsten ethereum testnet.  
+
 Each purchase give right to token rewards, FDLTTokens that you can then add to your metamask portfolio.  
-The aim of Smart Retail is to allow all users of the platform to be rewarded for their actions with a token that can be used on the application.  
+
+The aim of Smart Retail is to allow all users of the platform to be rewarded for their actions with a token that can be used on the application. 
+
 This this the very early stage of the project so only essential features are availlable.  
  
 
 ## Installation
 
-Clone this repository.
+Clone this repository.  
+
 In the client root folder, run the application on [localhost:3000](http://localhost:3000) using :
 
 ```bash
@@ -21,10 +25,14 @@ In order to interact with the Dapp, you have to connect your metamask [metamask]
 [how to get eth on ropsten](https://faucet.metamask.io/)).  
 
 
-Choose an article and buy it, an order is then created visible from the account page.    
-An escrow contract keep the paid order amount until you click on "confirm delivery" button.    
+Choose an article and buy it, an order is then created visible from the account page.  
+
+An escrow contract keep the paid order amount until you click on "confirm delivery" button.  
+
 After confirm the seller address receive the full payment for corresponding order.  
+
 You have surely noticed that your token balance has increased following your purchase, you can now claim them using the claim button.  
+
 This will reveal the token address contract to [use](https://metamask.zendesk.com/hc/en-us/articles/360015489031-How-to-View-See-Your-Tokens-and-Custom-Tokens-in-Metamask) in metamask to recover your FDLTToken.
 
 ## Available Scripts
