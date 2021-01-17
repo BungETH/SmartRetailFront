@@ -7,6 +7,7 @@ import Paper from "@material-ui/core/Paper";
 import Button from "@material-ui/core/Button";
 import ShoppingBasketTwoToneIcon from "@material-ui/icons/ShoppingBasket";
 import EuroSymbolTwoToneIcon from "@material-ui/icons/EuroSymbolTwoTone";
+import CardMedia from "@material-ui/core/CardMedia";
 //local import
 import "./product.scss";
 
@@ -46,6 +47,9 @@ const useStyles = makeStyles((theme) => ({
       height: theme.spacing(6),
     },
   },
+  media: {
+    height: 504,
+  },
 }));
 
 const ProductDetails = ({ fetchItem, product, handleBuy }) => {
@@ -63,7 +67,7 @@ const ProductDetails = ({ fetchItem, product, handleBuy }) => {
   return (
     <div id="container" className={classes.root}>
       <Paper id="image" elevation={3}>
-        <img src={imgUrl} alt={title} />
+        <CardMedia className={classes.media} image={imgUrl} />
       </Paper>
       <div id="decriptionField">
         <Paper id="filled-read-only-input" elevation={2}>

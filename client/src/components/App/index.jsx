@@ -7,7 +7,8 @@ import store from '../../store';
 import drizzleOptions from '../../drizzleOptions';
 
 import DappRouter from '../../utils/DappRouter';
-import NavBar from '../NavBar';
+//import NavBar from '../NavBar';
+import NavApp from '../../containers/AppNav/NavApp';
 import Loading from '../ReactLoading/Loading';
 
 // It instanciate new drizzle object with our drizzleOptions
@@ -37,7 +38,8 @@ const App = ({ fetchCurrentAccount, currentAccount }) => {
           return initialized ? (
             <div className="app">
               <Router>
-                <NavBar currentAccount={currentAccount} />
+                { /*<NavBar currentAccount={currentAccount} />*/}
+                <NavApp />
                 <DappRouter drizzle={drizzle} currentAccount={currentAccount} />
               </Router>
             </div>
