@@ -49,12 +49,6 @@ module.exports = {
     network_id: "*",
     gas: 5000000       // Any network (default: 1337, jason:5777)
     },
-    ropsten: {
-      provider: function() {
-        return new HDWalletProvider('sort flush chief minor hello sign title faculty swap cart speak special', 'https://eth-ropsten.alchemyapi.io/v2/KvSgQpUlXWRVmTrra8kf4euTBRBBYddo')
-      }, 
-      network_id: 3
-    }
     // Another network with more advanced options...
     // advanced: {
     // port: 8777,             // Custom port
