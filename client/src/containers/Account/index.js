@@ -12,8 +12,8 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
 
-  fetchUserBalance: (id) => {
-    dispatch(fetchUserBalance(id));
+  fetchUserBalance: () => {
+    dispatch(fetchUserBalance());
   },
   claimTokens: () => {
     dispatch(claimTokens());

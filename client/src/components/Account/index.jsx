@@ -12,19 +12,25 @@ const Account = ({
   drizzle,
   orders,
   fetchOrders,
+  fetchUserBalance,
   balance,
   claimTokens,
   tokenAddress,
 }) => {
   const useStyles = makeStyles({
+    account_title: {
+      textAlign: 'center',
+      fontSize: '2em',
+      marginTop: '2em',
+      color: '#3f51b5',
+    },
     account_Paper: {
       backgroundColor: '#3f51b5',
       display: 'flex',
       flexDirection: 'column',
       margin: 'auto',
-      marginTop: '4em',
+      marginTop: '2em',
       width: '60vw',
-      height: '60vh',
     },
     account_buttons: {
       backgroundColor: 'white',
@@ -48,6 +54,7 @@ const Account = ({
 
   useEffect(() => {
     fetchOrders();
+    fetchUserBalance();
   }, []);
 
   const classes = useStyles();
@@ -57,6 +64,14 @@ const Account = ({
 
   return (
     <div>
+      <Typography
+        className={classes.account_title}
+        gutterBottom
+        variant="h5"
+        component="h1"
+      >
+        <p>My account</p>
+      </Typography>
       <Paper className={classes.account_Paper} elevation={2}>
         <Typography
           className={classes.account_text}
@@ -76,7 +91,7 @@ const Account = ({
           component="h2"
         >
           <p>Your balance :</p>
-          <p>{balance} FDLT</p>
+          <p>{(balance/1000)} FDLT</p>
         </Typography>
         <Button
           className={classes.account_buttons}

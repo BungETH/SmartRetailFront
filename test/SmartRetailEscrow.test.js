@@ -1,4 +1,4 @@
-const { BN } = require('@openzeppelin/test-helpers');
+const { BN,expectEvent } = require('@openzeppelin/test-helpers');
 const { expect } = require('chai');
 const SmartRetailEscrow = artifacts.require("SmartRetailEscrow");
 
@@ -14,44 +14,23 @@ contract('SmartRetailEscrow', function (accounts) {
         SmartRetailEscrowInstance = await SmartRetailEscrow.new({from: admin});
     });
 
-    it("SendPaymentToSeller", async () => {
+    it("Deposit in escrow and create Order", async () => {
 
-        await SmartRetailEscrowInstance.sendPayment(seller, amount, {from: buyer, value: amount });
+        resultPayment = await SmartRetailEscrowInstance.sendPayment(seller, amount, {from: buyer, value: amount });
         let amountDepositOfSeller = await SmartRetailEscrowInstance.getDepositsOf({from:seller});
+        let orderId = resultPayment.logs[0].args.orderId
 
         expect(amountDepositOfSeller).to.be.bignumber.equal(amount);
+        expectEvent(resultPayment, 'FundSendToContract');
 
     });
 
-    // it("Adminstrator should start proposal registration session", async () => {
+    it("Confirm Order and allow tokens for buyers", async () => {
 
-    //     let beforeStatus = await VotingInstance.currState();
-    //     expect(status[beforeStatus]).to.equal('RegisteringVoters');
+        resultDelivery = await SmartRetailEscrowInstance.confirmDelivery(orderId,{from:buyer});
+        order = await SmartRetailEscrowInstance.listOrders(orderId);
 
-    //     await VotingInstance.startProposalsSession({from: admin});
-
-    //     let afterStatus = await VotingInstance.currState();
-    //     expect(status[afterStatus]).to.equal('ProposalsRegistrationStarted');
-    // });
-        
-    // it("Voter should register a proposal", async () => {
-
-    //     await VotingInstance.addVoter(voter1, {from: admin});
-    //     await VotingInstance.addVoter(voter2, {from: admin});
-    //     await VotingInstance.addVoter(voter3, {from: admin});
-
-    //     await VotingInstance.startProposalsSession({from: admin});
-
-    //     let afterStatus = await VotingInstance.currState();
-    //     expect(status[afterStatus]).to.equal('ProposalsRegistrationStarted');
-
-    //     nbProposals = await VotingInstance.proposalId();
-
-    //     await VotingInstance.addProposal('aaa', {from: voter1});
-    //     await VotingInstance.addProposal('bbb', {from: voter2});
-    //     await VotingInstance.addProposal('ccc', {from: voter3});
-
-    //     expect(new BN(await VotingInstance.proposalId())).to.be.bignumber.above(new BN(nbProposals));
-    // });
-    
+        expect(order.state).to.be.bignumber.equal(new BN(2));
+        expectEvent(resultDelivery, 'FundSendToSeller');
+    }
 });

@@ -57,9 +57,9 @@ const Orders = ({
 }) => {
   const classes = useStyles();
 
-  useEffect(() => {
-    fetchOrders();
-  }, []);
+  // useEffect(() => {
+  //   fetchOrders();
+  // }, []);
 
   return (
     <div className={classes.root}>

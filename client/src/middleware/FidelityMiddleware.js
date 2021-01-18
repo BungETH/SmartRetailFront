@@ -14,6 +14,8 @@ const FidelityMiddleware = (store) => (next) => (action) => {
         })
           .then(
             (response) => {
+              // console.log(transaction);
+              console.log(response);
               store.dispatch(storeTokenAddress(response.events[0].address));
               store.dispatch(resetBalance());
             },
