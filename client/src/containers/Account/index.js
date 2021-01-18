@@ -2,7 +2,7 @@ import { connect } from 'react-redux';
 import { fetchUserBalance, claimTokens, resetBalance } from '../../actions/fidelity';
 import { fetchOrders } from '../../actions/orders';
 
-import Account from '../../components/Account';
+import Account from '../../components/Account/index.jsx';
 
 const mapStateToProps = (state) => ({
   balance: state.fidelity.userBalance,
