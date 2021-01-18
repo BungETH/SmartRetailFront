@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import PropTypes from "prop-types";
 import { usePromiseTracker } from "react-promise-tracker";
 // local import
-import Marketplace from "../../containers/Marketplace/index";
+import Marketplace from "../../containers/Marketplace";
 import Loading from "../ReactLoading/Loading";
 import "./dapp.scss";
 import AsideCategory from "../AsideCategory/AsideCategory";
