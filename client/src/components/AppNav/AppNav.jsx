@@ -128,7 +128,6 @@ const AppNav = ({ pendingDeliveryCount, fetchOrders, account }) => {
       open={isMenuOpen}
       onClose={handleMenuClose}
     >
-      {account}
       <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
       <Link to="/account">
         <MenuItem>My account</MenuItem>
@@ -192,13 +191,13 @@ const AppNav = ({ pendingDeliveryCount, fetchOrders, account }) => {
               inputProps={{ "aria-label": "search" }}
             />
           </div>
-          <Typography
-            className={classes.account}
-            variant="h6"
-            noWrap
-          >
-            {account}
-          </Typography>
+          <div className={classes.account}>
+            <Typography
+              variant="h6"
+            >
+              {account}
+            </Typography>
+          </div>
           <div className={classes.grow} />
           <div className={classes.sectionDesktop}>
             <IconButton
