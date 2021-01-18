@@ -58,6 +58,10 @@ const useStyles = makeStyles((theme) => ({
     alignItems: "center",
     justifyContent: "center",
   },
+  account: {
+    position: 'relative',
+    left: '42em',
+  },
   inputRoot: {
     color: "inherit",
   },
@@ -85,7 +89,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const AppNav = ({ pendingDeliveryCount, fetchOrders }) => {
+const AppNav = ({ pendingDeliveryCount, fetchOrders, account }) => {
   const classes = useStyles();
   useEffect(() => {
     fetchOrders();
@@ -124,6 +128,7 @@ const AppNav = ({ pendingDeliveryCount, fetchOrders }) => {
       open={isMenuOpen}
       onClose={handleMenuClose}
     >
+      {account}
       <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
       <Link to="/account">
         <MenuItem>My account</MenuItem>
@@ -187,6 +192,13 @@ const AppNav = ({ pendingDeliveryCount, fetchOrders }) => {
               inputProps={{ "aria-label": "search" }}
             />
           </div>
+          <Typography
+            className={classes.account}
+            variant="h6"
+            noWrap
+          >
+            {account}
+          </Typography>
           <div className={classes.grow} />
           <div className={classes.sectionDesktop}>
             <IconButton
