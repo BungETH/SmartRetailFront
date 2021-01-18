@@ -6,7 +6,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import Paper from "@material-ui/core/Paper";
 import Button from "@material-ui/core/Button";
 import ShoppingBasketTwoToneIcon from "@material-ui/icons/ShoppingBasket";
-import EuroSymbolTwoToneIcon from "@material-ui/icons/EuroSymbolTwoTone";
+import AttachMoneyIcon from '@material-ui/icons/AttachMoney';
 import CardMedia from "@material-ui/core/CardMedia";
 //local import
 import "./product.scss";
@@ -62,7 +62,6 @@ const ProductDetails = ({ fetchItem, product, handleBuy }) => {
   }, []);
 
   const { imgUrl, title, description, unitPrice } = product;
-  console.log(title);
 
   return (
     <div id="container" className={classes.root}>
@@ -78,7 +77,7 @@ const ProductDetails = ({ fetchItem, product, handleBuy }) => {
         </Paper>
         <div className="price-wrap">
           <Paper id="price" elevation={3}>
-            {unitPrice} <EuroSymbolTwoToneIcon />
+            {unitPrice} <AttachMoneyIcon fontSize="medium"/>
           </Paper>
         </div>
         <div className="button-wrap">

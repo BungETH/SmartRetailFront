@@ -1,0 +1,40 @@
+#container-slideshow {
+  position: relative;
+}
+#button-slideshow {
+  position: absolute;
+  top: 260px;
+  left: 150px;
+}
+
+#informations {
+  
+  display: flex;
+  flex-direction: row;
+  background-color: #3F51B5;
+}
+
+.item {
+  width: 466px;
+  height: 50px;
+  text-align: center;
+  line-height: 30px;
+  color: white;
+  padding-top: 25px;
+  
+}
+
+.item h4 {
+  font-size: 25px;
+  font-weight: bold;
+}
+
+.item p {
+  font-size: 18px;
+
+}
+
+.join {
+  width: 150px;
+  height: 50px;
+}

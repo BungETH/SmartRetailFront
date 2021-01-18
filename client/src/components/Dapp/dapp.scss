@@ -1,7 +1,13 @@
+.home {
+  display: flex;
+  padding-top: 30px;
+}
 .dapp{
 
   display: flex;
   flex-wrap: wrap;
+  margin-left: 60px;
+  
 
   .MuiCard-root{
     transition: all .1s ease-in-out !important;
@@ -9,4 +15,19 @@
         transform: scale(1.01) ;
       }
   }
+}
+
+.rating {
+  width: 350px;
+  height: 35px;
+  position: relative;
+  left: 80px;
+}
+
+.good {
+  color: #F9C922;
+}
+
+.bad {
+  color: grey;
 }

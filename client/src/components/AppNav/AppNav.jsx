@@ -17,7 +17,9 @@ import AccountCircle from "@material-ui/icons/AccountCircle";
 import NotificationsIcon from "@material-ui/icons/Notifications";
 import MoreIcon from "@material-ui/icons/MoreVert";
 
+
 //local import
+import TabNav from "./TabNav";
 
 const useStyles = makeStyles((theme) => ({
   grow: {
@@ -95,8 +97,6 @@ const AppNav = ({ pendingDeliveryCount, fetchOrders }) => {
 
   const menuId = "primary-search-account-menu";
 
-  
-
   const handleProfileMenuOpen = (event) => {
     setAnchorEl(event.currentTarget);
   };
@@ -156,7 +156,6 @@ const AppNav = ({ pendingDeliveryCount, fetchOrders }) => {
     </Menu>
   );
 
-  
   return (
     <div className={classes.grow}>
       <AppBar position="static">
@@ -169,9 +168,12 @@ const AppNav = ({ pendingDeliveryCount, fetchOrders }) => {
           >
             <MenuIcon />
           </IconButton>
-          <Typography className={classes.title} variant="h6" noWrap>
-            Smart Retail
-          </Typography>
+          <Link to="/">
+            <Typography className={classes.title} variant="h6" noWrap>
+              Smart Retail
+            </Typography>
+          </Link>
+
           <div className={classes.search}>
             <div className={classes.searchIcon}>
               <SearchIcon />
@@ -193,7 +195,12 @@ const AppNav = ({ pendingDeliveryCount, fetchOrders }) => {
               }`}
               color="inherit"
             >
-              <Badge badgeContent={pendingDeliveryCount ? pendingDeliveryCount : '...'} color="secondary">
+              <Badge
+                badgeContent={
+                  pendingDeliveryCount ? pendingDeliveryCount : "..."
+                }
+                color="secondary"
+              >
                 <NotificationsIcon />
               </Badge>
             </IconButton>
@@ -223,6 +230,7 @@ const AppNav = ({ pendingDeliveryCount, fetchOrders }) => {
       </AppBar>
       {renderMobileMenu}
       {renderMenu}
+      <TabNav />
     </div>
   );
 };
