@@ -6,7 +6,7 @@ import AppNav from "../../components/AppNav/AppNav";
 import { fetchOrders } from '../../actions/orders';
 
 const mapStateToProps = (state) => ({
-  pendingDeliveryCount: 3/*state.escrow.orders.filter(x => x.status == "Awaiting payment").length*/
+  pendingDeliveryCount: state.escrow.orders
 });
 
 const mapDispatchToProps = (dispatch) => ({

@@ -190,14 +190,14 @@ const AppNav = ({ pendingDeliveryCount, fetchOrders }) => {
           <div className={classes.grow} />
           <div className={classes.sectionDesktop}>
             <IconButton
-              aria-label={`You have ${pendingDeliveryCount} pending ${
-                pendingDeliveryCount >= 2 ? "deliveries" : "delivery"
+              aria-label={pendingDeliveryCount === null ? `Waiting for orders informations` : `You have ${pendingDeliveryCount.filter(order => order.status === "Awaiting payment").length} pending ${
+                pendingDeliveryCount.filter(order => order.status === "Awaiting payment").length >= 2 ? "deliveries" : "delivery"
               }`}
               color="inherit"
             >
               <Badge
                 badgeContent={
-                  pendingDeliveryCount ? pendingDeliveryCount : "..."
+                  pendingDeliveryCount === null ? "..." : pendingDeliveryCount.filter(order => order.status === "Awaiting payment").length
                 }
                 color="secondary"
               >
