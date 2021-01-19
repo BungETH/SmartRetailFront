@@ -1,27 +1,18 @@
-import React, { useEffect } from "react";
-import PropTypes from "prop-types";
-import { usePromiseTracker } from "react-promise-tracker";
+import React, { useEffect } from 'react';
+import PropTypes from 'prop-types';
+import { usePromiseTracker } from 'react-promise-tracker';
 // local import
-import Marketplace from "../../containers/Marketplace/index";
-import Loading from "../ReactLoading/Loading";
-import "./dapp.scss";
-import AsideCategory from "../AsideCategory/AsideCategory";
-import SlideShow from "../SlideShow/SlideShow";
-
+import Marketplace from '../../containers/Marketplace';
+import Loading from '../ReactLoading/Loading';
+import './dapp.scss';
+import AsideCategory from '../AsideCategory/AsideCategory';
+import SlideShow from '../SlideShow/SlideShow';
 
 const Dapp = ({
-  drizzle,
-  fetchFidelityContract,
   fetchProducts,
-  fetchEscrowContract,
   products,
 }) => {
-  const fidelityContract = drizzle.drizzle.options.contracts[1];
-  const escrowContract = drizzle.drizzle.contracts.SmartRetailEscrow;
-
   useEffect(() => {
-    fetchFidelityContract(fidelityContract);
-    fetchEscrowContract(escrowContract);
     fetchProducts();
   }, []);
 

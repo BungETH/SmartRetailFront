@@ -58,6 +58,10 @@ const useStyles = makeStyles((theme) => ({
     alignItems: "center",
     justifyContent: "center",
   },
+  account: {
+    position: 'relative',
+    left: '42em',
+  },
   inputRoot: {
     color: "inherit",
   },
@@ -85,7 +89,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const AppNav = ({ pendingDeliveryCount, fetchOrders }) => {
+const AppNav = ({ pendingDeliveryCount, fetchOrders, account }) => {
   const classes = useStyles();
   useEffect(() => {
     fetchOrders();
@@ -186,6 +190,13 @@ const AppNav = ({ pendingDeliveryCount, fetchOrders }) => {
               }}
               inputProps={{ "aria-label": "search" }}
             />
+          </div>
+          <div className={classes.account}>
+            <Typography
+              variant="h6"
+            >
+              {account}
+            </Typography>
           </div>
           <div className={classes.grow} />
           <div className={classes.sectionDesktop}>

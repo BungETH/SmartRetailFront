@@ -37,7 +37,7 @@ const fidelityReducer = (state = initialState, action = {}) => {
     case STORE_USER_BALANCE:
       return {
         ...state,
-        userBalance: state.userBalance + action.balance,
+        userBalance: action.balance,
       };
     case STORE_TOKEN_ADDRESS:
       return {

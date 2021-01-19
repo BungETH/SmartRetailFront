@@ -1,4 +1,4 @@
-import PropTypes from "prop-types";
+import PropTypes from 'prop-types';
 import React, { useEffect } from 'react';
 import { DrizzleContext } from '@drizzle/react-plugin';
 import { Drizzle } from '@drizzle/store';
@@ -6,11 +6,10 @@ import { BrowserRouter as Router } from 'react-router-dom';
 import store from '../../store';
 import drizzleOptions from '../../drizzleOptions';
 
-import DappRouter from '../../utils/DappRouter';
-//import NavBar from '../NavBar';
+import DappRouter from '../../containers/Utils/DappRouter';
 import NavApp from '../../containers/AppNav/NavApp';
 import Loading from '../ReactLoading/Loading';
-import Footer from "../Footer/Footer";
+import Footer from '../Footer/Footer';
 import '../Footer/footer.scss';
 // It instanciate new drizzle object with our drizzleOptions
 const drizzle = new Drizzle(drizzleOptions, store);
@@ -39,8 +38,7 @@ const App = ({ fetchCurrentAccount, currentAccount }) => {
           return initialized ? (
             <div className="app">
               <Router>
-                { /*<NavBar currentAccount={currentAccount} />*/}
-                <NavApp />
+                <NavApp account={currentAccount} />
                 <DappRouter drizzle={drizzle} currentAccount={currentAccount} />
               </Router>
               <Footer />
