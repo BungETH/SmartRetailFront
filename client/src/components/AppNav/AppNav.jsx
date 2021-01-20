@@ -30,6 +30,8 @@ const useStyles = makeStyles((theme) => ({
   },
   title: {
     display: "none",
+    fontStyle: 'italic',
+    overflow: 'inherit',
     [theme.breakpoints.up("sm")]: {
       display: "block",
     },
@@ -63,7 +65,7 @@ const useStyles = makeStyles((theme) => ({
   },
   connect_button: {
     color: '#ffffff',
-    borderColor: '#ffffff',
+    border: '2px solid #ffffff',
     '&:hover': {
       backgroundColor: 'white',
       color: '#3f51b5',
@@ -206,7 +208,7 @@ const AppNav = ({
             <MenuIcon />
           </IconButton>
           <Link to="/">
-            <Typography className={classes.title} variant="h6" noWrap>
+            <Typography className={classes.title} variant="h5" noWrap>
               Smart Retail
             </Typography>
           </Link>

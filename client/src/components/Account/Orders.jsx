@@ -103,7 +103,6 @@ const Orders = ({
               <div className={classes.column}>
                 <img
                   className={classes.avatar}
-                  // variant="square"
                   alt="product miniature"
                   src={order.miniature}
                 />
