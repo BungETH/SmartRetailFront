@@ -1,4 +1,4 @@
-//npm import
+// npm import
 import React from "react";
 import MenuList from "@material-ui/core/MenuList";
 import MenuItem from "@material-ui/core/MenuItem";
@@ -10,8 +10,6 @@ import DevicesIcon from "@material-ui/icons/Devices";
 import WatchIcon from "@material-ui/icons/Watch";
 import FavoriteBorderIcon from "@material-ui/icons/FavoriteBorder";
 import ChildCareIcon from "@material-ui/icons/ChildCare";
-import SportsIcon from "@material-ui/icons/Sports";
-import HomeIcon from "@material-ui/icons/Home";
 import Toolbar from "@material-ui/core/Toolbar";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
 import IconButton from "@material-ui/core/IconButton";
@@ -62,20 +60,20 @@ const AsideCategory = () => {
             <ListItemIcon>
               <LocalMallIcon fontSize="small" />
             </ListItemIcon>
-            <Typography variant="inherit">Clothing</Typography>
+            <Typography variant="inherit">Technology</Typography>
           </MenuItem>
           <MenuItem>
             <ListItemIcon>
               <DevicesIcon fontSize="small" />
             </ListItemIcon>
-            <Typography variant="inherit">Electronics</Typography>
+            <Typography variant="inherit">Design</Typography>
           </MenuItem>
           <MenuItem>
             <ListItemIcon>
               <WatchIcon fontSize="small" />
             </ListItemIcon>
             <Typography variant="inherit" noWrap>
-              Watches
+              Art
             </Typography>
           </MenuItem>
           <MenuItem>
@@ -83,7 +81,7 @@ const AsideCategory = () => {
               <FavoriteBorderIcon fontSize="small" />
             </ListItemIcon>
             <Typography variant="inherit" noWrap>
-              Health and Beauty
+              Ecology
             </Typography>
           </MenuItem>
           <MenuItem>
@@ -91,23 +89,7 @@ const AsideCategory = () => {
               <ChildCareIcon fontSize="small" />
             </ListItemIcon>
             <Typography variant="inherit" noWrap>
-              Kids and Babies
-            </Typography>
-          </MenuItem>
-          <MenuItem>
-            <ListItemIcon>
-              <SportsIcon fontSize="small" />
-            </ListItemIcon>
-            <Typography variant="inherit" noWrap>
-              Sports
-            </Typography>
-          </MenuItem>
-          <MenuItem>
-            <ListItemIcon>
-              <HomeIcon fontSize="small" />
-            </ListItemIcon>
-            <Typography variant="inherit" noWrap>
-              Home and Garden
+              Game
             </Typography>
           </MenuItem>
         </MenuList>

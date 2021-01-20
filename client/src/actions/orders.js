@@ -23,6 +23,7 @@ export const fetchOrders = () => (dispatch) => {
   return axios.get('https://salty-citadel-63624.herokuapp.com/api/orders')
     .then(
       (response) => {
+        console.log(response.data['hydra:member']);
         dispatch(storeUserOrders(response.data['hydra:member']));
       },
     )

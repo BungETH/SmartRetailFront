@@ -19,9 +19,9 @@ const Dapp = ({
   const { promiseInProgress } = usePromiseTracker();
   return (
     <div className="home">
-      <div className="aside">
+      {/* <div className="aside">
         <AsideCategory />
-      </div>
+      </div> */}
       <div className="dapp">
         <SlideShow />
         {promiseInProgress ? (

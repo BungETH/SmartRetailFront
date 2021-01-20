@@ -28,6 +28,7 @@ const EscrowMiddleware = (store) => (next) => (action) => {
           referenceId: parseInt(values.orderId, 10),
           price: productPriceInDollars,
           status: 'Awaiting payment',
+          miniature: 'https://ksr-ugc.imgix.net/assets/030/946/610/ee323b090b2017a9445a728ec08883ad_original.jpg?ixlib=rb-2.1.0&w=680&fit=max&v=1602307434&auto=format&frame=1&q=92&s=2aebaa3c5ac552d945ba59049c369ab7',
           userId: '/api/users/3',
         })
           .then(
@@ -52,7 +53,7 @@ const EscrowMiddleware = (store) => (next) => (action) => {
         const transaction = await escrowState.contract.methods.confirmDelivery(action.referenceId).send({ from: account });
         console.log(transaction);
         axios.put(`https://salty-citadel-63624.herokuapp.com/api/orders/${action.orderId}`, {
-          status: 'Payed',
+          status: 'Paied',
         })
           .then(
             (response) => {

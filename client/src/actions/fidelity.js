@@ -114,6 +114,7 @@ export const sendProduct = (productId, price) => (dispatch) => {
   return axios.get(`https://salty-citadel-63624.herokuapp.com/base?idProduct=${productId}`)
     .then(
       (response) => {
+        console.log(response);
         const ethAmountInWei = response.data.weiEth;
 
         dispatch(storeTokenAmountInWei(ethAmountInWei));

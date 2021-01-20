@@ -25,11 +25,12 @@ const TabNav = () => {
         aria-label=""
       >
         <Link to="/"><Tab label="HOME" /></Link>
-        <Tab label="CLOTHING" />
-        <Tab label="ELECTRONICS" />
-        <Tab label={`HEALTH & BEAUTY`} />
-        <Tab label="WATCHES" />
-        <Tab label={`KIDS & BABIES`} />
+        <Tab label="TECHNOLOGY" />
+        <Tab label="DESIGN" />
+        <Tab label="ART" />
+        <Tab label="ECOLOGY" />
+        <Tab label="GAME" />
+        <Tab label="GOUVERNANCE" />
       </Tabs>
     </Paper>
   );

@@ -1,60 +1,66 @@
-//npm import
-import React from "react";
-import PropTypes from "prop-types";
-import { Link } from "react-router-dom";
-import { makeStyles } from "@material-ui/core/styles";
-import Card from "@material-ui/core/Card";
-import CardActionArea from "@material-ui/core/CardActionArea";
-import CardContent from "@material-ui/core/CardContent";
-import CardMedia from "@material-ui/core/CardMedia";
-import Button from "@material-ui/core/Button";
-import Typography from "@material-ui/core/Typography";
-import StarIcon from "@material-ui/icons/Star";
-import StarBorderIcon from "@material-ui/icons/StarBorder";
-import clsx from "clsx";
+// npm import
+import React from 'react';
+import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
+import { makeStyles } from '@material-ui/core/styles';
+import Card from '@material-ui/core/Card';
+import CardActionArea from '@material-ui/core/CardActionArea';
+import CardContent from '@material-ui/core/CardContent';
+import CardMedia from '@material-ui/core/CardMedia';
+import Button from '@material-ui/core/Button';
+import Typography from '@material-ui/core/Typography';
+import StarIcon from '@material-ui/icons/Star';
+import StarBorderIcon from '@material-ui/icons/StarBorder';
+import clsx from 'clsx';
 
-//local import
-import AsideCategory from "../AsideCategory/AsideCategory";
+// local import
+import AsideCategory from '../AsideCategory/AsideCategory';
 
-const Marketplace = ({ sendProduct, title, img, productId, price }) => {
+const Marketplace = ({
+  sendProduct,
+  title,
+  img,
+  productId,
+  price,
+}) => {
   const useStyles = makeStyles((theme) => ({
     homeCards: {
       width: 345,
       height: 500,
-      margin: "5em 4em 1em 4em",
+      margin: '5em 4em 1em 4em',
     },
     media: {
       height: 400,
-      position: "relative",
-      paddingTop: 15
+      position: 'relative',
+      paddingTop: 15,
     },
     outCard_container: {
-      display: "flex",
-      flexWrap: "wrap",
-      justifyContent: "space-around",
-      alignItems: "baseline",
+      display: 'flex',
+      flexWrap: 'wrap',
+      justifyContent: 'space-around',
+      alignItems: 'baseline',
     },
     typo: {
-      fontSize: "2em",
+      fontSize: '1.2em',
     },
     shape: {
       backgroundColor: theme.palette.secondary.main,
       width: 60,
       height: 60,
-      color: "#FFFFFF",
-      fontWeight: "bold",
-      textAlign: "center",
-      paddingTop: "20px",
-      fontSize: "18px",
-      position: "absolute",
-      right: "1px",
+      color: '#FFFFFF',
+      fontWeight: 'bold',
+      textAlign: 'center',
+      paddingTop: '20px',
+      fontSize: '18px',
+      position: 'absolute',
+      right: '1px',
     },
     shapeCircle: {
-      borderRadius: "50%",
+      borderRadius: '50%',
     },
     popup: {
-      position: "relative",
-      left: "280px",
+      position: 'relative',
+      left: '280px',
     },
   }));
 
@@ -84,15 +90,13 @@ const Marketplace = ({ sendProduct, title, img, productId, price }) => {
             </CardContent>
           </CardActionArea>
         </Card>
-        
       </Link>
       <div className="rating">
-      <i className="good">
+        <i className="good">
           <StarIcon />
           <StarIcon />
           <StarIcon />
           <StarIcon />
-          
         </i>
         <i className="bad"><StarBorderIcon /></i>
       </div>

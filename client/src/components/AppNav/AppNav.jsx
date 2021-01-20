@@ -16,9 +16,9 @@ import SearchIcon from "@material-ui/icons/Search";
 import AccountCircle from "@material-ui/icons/AccountCircle";
 import NotificationsIcon from "@material-ui/icons/Notifications";
 import MoreIcon from "@material-ui/icons/MoreVert";
+import Button from '@material-ui/core/Button';
 
-
-//local import
+// local import
 import TabNav from "./TabNav";
 
 const useStyles = makeStyles((theme) => ({
@@ -58,9 +58,24 @@ const useStyles = makeStyles((theme) => ({
     alignItems: "center",
     justifyContent: "center",
   },
-  account: {
+  not_connected: {
+    marginLeft: '20em',
+  },
+  connect_button: {
+    color: '#ffffff',
+    borderColor: '#ffffff',
+    '&:hover': {
+      backgroundColor: 'white',
+      color: '#3f51b5',
+    },
+  },
+  connected: {
     position: 'relative',
-    left: '42em',
+    left: '26em',
+  },
+  welcome: {
+    fontSize: '1.5em',
+    fontWeight: 'bold',
   },
   inputRoot: {
     color: "inherit",
@@ -89,11 +104,29 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const AppNav = ({ pendingDeliveryCount, fetchOrders, account }) => {
+const AppNav = ({
+  pendingDeliveryCount,
+  fetchOrders,
+  fetchCurrentAccount,
+  currentAccount
+}) => {
   const classes = useStyles();
+
+  const connect = async function getAccount() {
+    const accounts = await window.ethereum.enable();
+    fetchCurrentAccount(accounts[0]);
+  }
+  window.ethereum.on('accountsChanged', () => {
+    connect();
+  });
+
   useEffect(() => {
     fetchOrders();
   }, []);
+
+  // useEffect(() => {
+  //   connect();
+  // }, [currentAccount]);
   const [anchorEl, setAnchorEl] = useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = useState(null);
   const isMenuOpen = Boolean(anchorEl);
@@ -191,13 +224,27 @@ const AppNav = ({ pendingDeliveryCount, fetchOrders, account }) => {
               inputProps={{ "aria-label": "search" }}
             />
           </div>
-          <div className={classes.account}>
-            <Typography
-              variant="h6"
-            >
-              {account}
-            </Typography>
-          </div>
+          {currentAccount === '' && (
+            <div className={classes.not_connected}>
+              <Button
+                className={classes.connect_button}
+                variant="outlined"
+                onClick={() => connect()}
+              >
+                Connect with metamask
+              </Button>
+            </div>
+          )}
+          {currentAccount && (
+            <div className={classes.connected}>
+              <Typography
+                className={classes.account}
+                variant="h6"
+              >
+                <span className={classes.welcome}>Welcome :</span> {currentAccount}
+              </Typography>
+            </div>
+          )}
           <div className={classes.grow} />
           <div className={classes.sectionDesktop}>
             <IconButton

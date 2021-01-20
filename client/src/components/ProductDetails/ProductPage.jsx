@@ -1,7 +1,7 @@
-//npm import
+// npm import
 import React from 'react';
 
-//local import
+// local import
 import DetailsProduct from '../../containers/ProductDetails/DetailsProduct';
 
 const ProductPage = () => {
@@ -9,7 +9,7 @@ const ProductPage = () => {
     <div>
       <DetailsProduct />
     </div>
-  )
-}
+  );
+};
 
 export default ProductPage;

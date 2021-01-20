@@ -21,7 +21,7 @@ const Account = ({
     account_title: {
       textAlign: 'center',
       fontSize: '2em',
-      marginTop: '2em',
+      marginTop: '1em',
       color: '#3f51b5',
     },
     account_Paper: {
@@ -30,7 +30,7 @@ const Account = ({
       flexDirection: 'column',
       margin: 'auto',
       marginTop: '2em',
-      width: '60vw',
+      width: '40vw',
     },
     account_buttons: {
       backgroundColor: 'white',
@@ -42,7 +42,7 @@ const Account = ({
       fontSize: '2em',
       fontWeight: 'bold',
       color: 'white',
-      marginTop: '2em',
+      marginTop: '1em',
       marginBottom: 0,
     },
     account_address: {

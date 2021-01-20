@@ -5,6 +5,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import Paper from "@material-ui/core/Paper";
 import Button from "@material-ui/core/Button";
 import CardMedia from '@material-ui/core/CardMedia';
+import Typography from "@material-ui/core/Typography";
 //local import
 import "./slideshow.scss"
 
@@ -15,35 +16,59 @@ const useStyles = makeStyles((theme) => ({
     display: "flex",
     flexWrap: "wrap",
     "& > *": {
-      
       width: theme.spacing(175),
-      height: theme.spacing(50),
+      height: theme.spacing(80),
+      justifyContent: 'center',
     },
   },
-  
   media: {
-    width: theme.spacing(175),
-    height: theme.spacing(50),
+    // width: theme.spacing(175),
+    width: '100%',
+    height: '80vh',
+  },
+  img_text: {
+    color: 'white',
+    fontSize: 'bolder',
+    position: 'absolute',
+    left: '-2em',
+    top: '-1em',
   },
   informations: {
-    width: theme.spacing(175),
-    height: theme.spacing(15),
-  }
+    position: 'relative',
+    display: 'flex',
+    justifyContent: 'space-evenly',
+    width: '100%',
+    height: theme.spacing(13),
+    backgroundColor: 'transparent',
+    fontStyle: 'italic',
+  },
 }));
 const SlideShow = () => {
   const classes = useStyles();
   return (
     <div className={classes.root} id="container-slideshow">
-      <Paper elevation={1}><CardMedia className={classes.media} image="https://www.vip.virginia.gov/media/vipvirginiagov/images/events/wingemtwo.jpg"/></Paper>
-      <div className={classes.rootButton} id="button-slideshow">
+      <img
+        className={classes.media}
+        alt="futuristic"
+        src="https://koozarch.ams3.digitaloceanspaces.com/2018/10/05_a662_w17_oluhill_04_03_car-roundabout.jpg"
+      />
+      <div id="button-slideshow">
+        <Typography
+          className={classes.img_text}
+          gutterBottom
+          variant="h3"
+          component="h2"
+        >
+          Spread innovation
+        </Typography>
         <Button className="join" variant="contained" color="secondary">
-          JOIN NOW
+          Discover post-crowdfunding innovations
         </Button>
       </div>
       <div id="informations" className={classes.informations}>
-        <div className="item"><h4>Money Back</h4><p>10 Days Money Back Guarentee</p></div>
-        <div className="item"><h4>Free Shipping</h4><p>Shipping on orders over 99$</p></div>
-        <div className="item"><h4>Special Sale</h4><p>Extra 5$ off on all items</p></div>
+        <div className="item"><h4>Reward</h4><p>Get free FDLT tokens for each purchase</p></div>
+        <div className="item"><h4>Crypto & Fiat paiements</h4><p>Choose your way to pay</p></div>
+        <div className="item"><h4>Vote</h4><p>Submit and vote for the products you have chosen</p></div>
       </div>
     </div>
   );

@@ -40,7 +40,7 @@ const fetchItemError = (error) => ({
 
 // Asynchronous actions
 
-//Asynchronous Action to retrieve products list
+// Asynchronous Action to retrieve products list
 export const fetchProducts = () => {
   return (dispatch) => {
     dispatch(fetchProductsPending());

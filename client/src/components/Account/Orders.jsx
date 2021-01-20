@@ -1,28 +1,42 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/core/styles';
 import Accordion from '@material-ui/core/Accordion';
 import AccordionSummary from '@material-ui/core/AccordionSummary';
+import Avatar from '@material-ui/core/Avatar';
 import AccordionActions from '@material-ui/core/AccordionActions';
 import Typography from '@material-ui/core/Typography';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import Button from '@material-ui/core/Button';
-import Divider from '@material-ui/core/Divider';
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    width: '80%',
+    width: '90%',
+    marginTop: '2em',
     alignSelf: 'center',
   },
   content: {
     margin: '6px 0',
   },
-  heading: {
-    fontSize: theme.typography.pxToRem(15),
+  head: {
+    width: '80%',
+    display: 'flex',
+    justifyContent: 'space-between',
+    color: 'white',
+  },
+  head_title: {
+    marginLeft: '2em',
   },
   secondaryHeading: {
-    fontSize: theme.typography.pxToRem(15),
-    color: theme.palette.text.secondary,
+    fontSize: theme.typography.pxToRem(17),
+    color: '#3f51b5',
+  },
+  avatar: {
+    position: 'relative',
+    left: '-0.5em',
+    width: '3em',
+    height: '2em',
+    fontSize: '1.5em',
   },
   icon: {
     verticalAlign: 'bottom',
@@ -34,7 +48,8 @@ const useStyles = makeStyles((theme) => ({
   },
   column: {
     width: '20%',
-    flexBasis: '33.33%',
+    flexBasis: '45.33%',
+    color: '#3f51b5',
   },
   helper: {
     borderLeft: `2px solid ${theme.palette.divider}`,
@@ -53,21 +68,22 @@ const Orders = ({
   orders,
   sendConfirmationDelivery,
   deleteOrder,
-  fetchOrders,
 }) => {
   const classes = useStyles();
-
-  // useEffect(() => {
-  //   fetchOrders();
-  // }, []);
+  console.log(orders);
 
   return (
     <div className={classes.root}>
+      <div className={classes.head}>
+        <Typography className={classes.head_title}>N°</Typography>
+        <Typography className={classes.head_title}>Price</Typography>
+        <Typography className={classes.head_title}>Product</Typography>
+        <Typography className={classes.head_title}>Status</Typography>
+      </div>
       {orders !== null && (
         orders.map((order) => (
           <Accordion
             key={order.id}
-
           >
             <AccordionSummary
               expandIcon={<ExpandMoreIcon />}
@@ -75,21 +91,29 @@ const Orders = ({
               id="panel1c-header"
             >
               <div className={classes.column}>
-                <Typography className={classes.heading}>Command number</Typography>
-                <Typography className={classes.secondaryHeading}>{order.referenceId}</Typography>
+                <Typography className={classes.secondaryHeading}>
+                  {order.referenceId}
+                </Typography>
               </div>
               <div className={classes.column}>
-                <Typography className={classes.heading}>price</Typography>
-                <Typography className={classes.secondaryHeading}>{order.price}</Typography>
+                <Typography className={classes.secondaryHeading}>
+                  {order.price} $
+                </Typography>
               </div>
               <div className={classes.column}>
-                <Typography className={classes.heading}>status</Typography>
+                <img
+                  className={classes.avatar}
+                  // variant="square"
+                  alt="product miniature"
+                  src={order.miniature}
+                />
+              </div>
+              <div className={classes.column}>
                 <Typography className={classes.secondaryHeading}>{order.status}</Typography>
               </div>
             </AccordionSummary>
-            <Divider />
             <AccordionActions>
-              {order.status === 'Payed' && (
+              {order.status === 'Paied' && (
               <Button
                 className={classes.order_button}
                 size="small"
@@ -100,7 +124,6 @@ const Orders = ({
                 Delete order
               </Button>
               )}
-
               {order.status === 'Awaiting payment' && (
               <Button
                 className={classes.order_button}
@@ -120,7 +143,7 @@ const Orders = ({
                 color="primary"
                 variant="contained"
               >
-                Payed
+                Paied
               </Button>
               )}
             </AccordionActions>
