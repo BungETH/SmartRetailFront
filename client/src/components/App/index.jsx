@@ -10,7 +10,9 @@ import DappRouter from '../../containers/Utils/DappRouter';
 import NavApp from '../../containers/AppNav/NavApp';
 import Loading from '../ReactLoading/Loading';
 import Footer from '../Footer/Footer';
-import '../Footer/footer.scss';
+import'../Footer/footer.scss';
+
+
 // It instanciate new drizzle object with our drizzleOptions
 const drizzle = new Drizzle(drizzleOptions, store);
 
@@ -40,8 +42,8 @@ const App = ({ fetchCurrentAccount, currentAccount }) => {
               <Router>
                 <NavApp account={currentAccount} />
                 <DappRouter drizzle={drizzle} currentAccount={currentAccount} />
+                <Footer />
               </Router>
-              <Footer />
             </div>
           ) : (
             <Loading type="cylon" color="#357EDD" />

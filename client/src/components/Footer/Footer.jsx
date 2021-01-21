@@ -6,6 +6,7 @@ import PhoneAndroidIcon from "@material-ui/icons/PhoneAndroid";
 import MailOutlineIcon from "@material-ui/icons/MailOutline";
 //local import
 
+
 const Footer = () => {
   return (
     <div className="footer">

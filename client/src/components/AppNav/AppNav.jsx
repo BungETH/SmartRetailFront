@@ -17,7 +17,6 @@ import AccountCircle from "@material-ui/icons/AccountCircle";
 import NotificationsIcon from "@material-ui/icons/Notifications";
 import MoreIcon from "@material-ui/icons/MoreVert";
 
-
 //local import
 import TabNav from "./TabNav";
 
@@ -59,8 +58,8 @@ const useStyles = makeStyles((theme) => ({
     justifyContent: "center",
   },
   account: {
-    position: 'relative',
-    left: '42em',
+    position: "relative",
+    left: "42em",
   },
   inputRoot: {
     color: "inherit",
@@ -89,7 +88,12 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const AppNav = ({ pendingDeliveryCount, fetchOrders, account }) => {
+const AppNav = ({
+  pendingDeliveryCount,
+  fetchOrders,
+  account,
+  handleIconClick,
+}) => {
   const classes = useStyles();
   useEffect(() => {
     fetchOrders();
@@ -128,7 +132,9 @@ const AppNav = ({ pendingDeliveryCount, fetchOrders, account }) => {
       open={isMenuOpen}
       onClose={handleMenuClose}
     >
-      <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
+      <Link to="/profile">
+        <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
+      </Link>
       <Link to="/account">
         <MenuItem>My account</MenuItem>
       </Link>
@@ -192,29 +198,44 @@ const AppNav = ({ pendingDeliveryCount, fetchOrders, account }) => {
             />
           </div>
           <div className={classes.account}>
-            <Typography
-              variant="h6"
-            >
-              {account}
-            </Typography>
+            <Typography variant="h6">{account}</Typography>
           </div>
           <div className={classes.grow} />
           <div className={classes.sectionDesktop}>
-            <IconButton
-              aria-label={pendingDeliveryCount === null ? `Waiting for orders informations` : `You have ${pendingDeliveryCount.filter(order => order.status === "Awaiting payment").length} pending ${
-                pendingDeliveryCount.filter(order => order.status === "Awaiting payment").length >= 2 ? "deliveries" : "delivery"
-              }`}
-              color="inherit"
-            >
-              <Badge
-                badgeContent={
-                  pendingDeliveryCount === null ? "..." : pendingDeliveryCount.filter(order => order.status === "Awaiting payment").length
+            <Link to={`/account/${account}`}>
+              <IconButton
+                aria-label={
+                  pendingDeliveryCount === null
+                    ? `Waiting for orders informations`
+                    : `You have ${
+                        pendingDeliveryCount.filter(
+                          (order) => order.status === "Awaiting payment"
+                        ).length
+                      } pending ${
+                        pendingDeliveryCount.filter(
+                          (order) => order.status === "Awaiting payment"
+                        ).length >= 2
+                          ? "deliveries"
+                          : "delivery"
+                      }`
                 }
-                color="secondary"
+                color="inherit"
               >
-                <NotificationsIcon />
-              </Badge>
-            </IconButton>
+                <Badge
+                  badgeContent={
+                    pendingDeliveryCount === null
+                      ? "..."
+                      : pendingDeliveryCount.filter(
+                          (order) => order.status === "Awaiting payment"
+                        ).length
+                  }
+                  color="secondary"
+                >
+                  <NotificationsIcon />
+                </Badge>
+              </IconButton>
+            </Link>
+
             <IconButton
               edge="end"
               aria-label="account of current user"
@@ -246,6 +267,8 @@ const AppNav = ({ pendingDeliveryCount, fetchOrders, account }) => {
   );
 };
 
-AppNav.propTypes = {};
+AppNav.propTypes = {
+  pendingDeliveryCount: PropTypes.arrayOf(PropTypes.object).isRequired,
+};
 
 export default AppNav;

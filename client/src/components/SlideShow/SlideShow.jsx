@@ -8,7 +8,6 @@ import CardMedia from '@material-ui/core/CardMedia';
 //local import
 import "./slideshow.scss"
 
-import zIndex from "@material-ui/core/styles/zIndex";
 
 const useStyles = makeStyles((theme) => ({
   root: {

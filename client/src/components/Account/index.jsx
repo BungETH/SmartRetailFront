@@ -1,16 +1,16 @@
-import PropTypes from 'prop-types';
-import React, { useEffect } from 'react';
+import PropTypes from "prop-types";
+import React, { useEffect } from "react";
+import { useParams } from "react-router-dom";
 
-import { makeStyles } from '@material-ui/core/styles';
-import Paper from '@material-ui/core/Paper';
-import Button from '@material-ui/core/Button';
-import Typography from '@material-ui/core/Typography';
+import { makeStyles } from "@material-ui/core/styles";
+import Paper from "@material-ui/core/Paper";
+import Button from "@material-ui/core/Button";
+import Typography from "@material-ui/core/Typography";
 
-import Orders from '../../containers/Account/Orders';
-
+import Orders from "../../containers/Account/Orders";
+import FilteredOrders from "../../containers/Account/FilteredOrders";
 const Account = ({
   drizzle,
-  orders,
   fetchOrders,
   fetchUserBalance,
   balance,
@@ -19,36 +19,37 @@ const Account = ({
 }) => {
   const useStyles = makeStyles({
     account_title: {
-      textAlign: 'center',
-      fontSize: '2em',
-      marginTop: '2em',
-      color: '#3f51b5',
+      textAlign: "center",
+      fontSize: "2em",
+      marginTop: "2em",
+      color: "#3f51b5",
     },
     account_Paper: {
-      backgroundColor: '#3f51b5',
-      display: 'flex',
-      flexDirection: 'column',
-      margin: 'auto',
-      marginTop: '2em',
-      width: '60vw',
+      backgroundColor: "#3f51b5",
+      display: "flex",
+      flexDirection: "column",
+      margin: "auto",
+      marginTop: "2em",
+      width: "60vw",
     },
     account_buttons: {
-      backgroundColor: 'white',
-      margin: '1em auto',
-      color: '#3f51b5',
+      backgroundColor: "white",
+      margin: "1em auto",
+      color: "#3f51b5",
     },
     account_text: {
-      textAlign: 'center',
-      fontSize: '2em',
-      fontWeight: 'bold',
-      color: 'white',
-      marginTop: '2em',
+      textAlign: "center",
+      fontSize: "2em",
+      fontWeight: "bold",
+      color: "white",
+      marginTop: "2em",
       marginBottom: 0,
     },
     account_address: {
-      textAlign: 'center',
-      fontWeight: 'bold',
-      color: 'white',
+      textAlign: "center",
+      fontWeight: "bold",
+      color: "white",
+      marginTop: "5%"
     },
   });
 
@@ -61,54 +62,96 @@ const Account = ({
   const handleClaim = () => {
     claimTokens();
   };
+  let { id } = useParams();
 
   return (
     <div>
-      <Typography
-        className={classes.account_title}
-        gutterBottom
-        variant="h5"
-        component="h1"
-      >
-        <p>My account</p>
-      </Typography>
-      <Paper className={classes.account_Paper} elevation={2}>
-        <Typography
-          className={classes.account_text}
-          gutterBottom
-          variant="h5"
-          component="h2"
-        >
-          <p>Pending delivery :</p>
-        </Typography>
-        <Orders
-          drizzle={drizzle}
-        />
-        <Typography
-          className={classes.account_text}
-          gutterBottom
-          variant="h5"
-          component="h2"
-        >
-          <p>Your balance :</p>
-          <p>{(balance/1000)} FDLT</p>
-        </Typography>
-        <Button
-          className={classes.account_buttons}
-          variant="contained"
-          onClick={handleClaim}
-        >
-          Claim tokens
-        </Button>
-        <Typography
-          className={classes.account_address}
-          gutterBottom
-          variant="h5"
-          component="h2"
-        >
-          <p>{tokenAddress}</p>
-        </Typography>
-      </Paper>
+      {id ? (
+        <>
+          <Typography
+            className={classes.account_title}
+            gutterBottom
+            variant="h5"
+            component="h1"
+          >
+            <p>Awaiting payment orders</p>
+          </Typography>
+          <Paper className={classes.account_Paper} elevation={2}>
+            <Typography
+              className={classes.account_text}
+              gutterBottom
+              variant="h5"
+              component="h2"
+            >
+              <p>Pending delivery :</p>
+            </Typography>
+
+            <FilteredOrders drizzle={drizzle} />
+
+            <Typography
+              className={classes.account_text}
+              gutterBottom
+              variant="h5"
+              component="h2"
+            ></Typography>
+
+            <Typography
+              className={classes.account_address}
+              gutterBottom
+              variant="h5"
+              component="h2"
+            ></Typography>
+          </Paper>
+        </>
+      ) : (
+        <>
+          <Typography
+            className={classes.account_title}
+            gutterBottom
+            variant="h5"
+            component="h1"
+          >
+            <p>My account</p>
+          </Typography>
+          <Paper className={classes.account_Paper} elevation={2}>
+            <Typography
+              className={classes.account_text}
+              gutterBottom
+              variant="h5"
+              component="h2"
+            >
+              <p>Pending delivery :</p>
+            </Typography>
+
+            <Orders drizzle={drizzle} />
+
+            <Typography
+              className={classes.account_text}
+              gutterBottom
+              variant="h5"
+              component="h2"
+            >
+              <p>Your balance :</p>
+              <p>{balance / 1000} FDLT</p>
+            </Typography>
+            <Button
+              className={classes.account_buttons}
+              variant="contained"
+              onClick={handleClaim}
+            >
+              Claim tokens
+            </Button>
+            <Typography
+              className={classes.account_address}
+              gutterBottom
+              variant="h5"
+              component="h2"
+            >
+              <p>{tokenAddress}</p>
+            </Typography>
+          </Paper>
+        </>
+      )}
     </div>
   );
 };

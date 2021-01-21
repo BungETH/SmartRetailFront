@@ -59,6 +59,7 @@ const ProductDetails = ({ fetchItem, product, handleBuy }) => {
 
   useEffect(() => {
     fetchItem(id);
+    console.log(id)
   }, []);
 
   const { imgUrl, title, description, unitPrice } = product;

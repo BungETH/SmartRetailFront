@@ -13,6 +13,7 @@ const mapDispatchToProps = (dispatch) => ({
   fetchOrders: () => {
     dispatch(fetchOrders())
   },
+ 
 })
 
 const NavApp = connect(mapStateToProps, mapDispatchToProps)(AppNav);
